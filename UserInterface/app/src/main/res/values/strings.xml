@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">UserInterface</string>
+    <string name="textView1">This is a text view</string>
+    <string name="button_click_me">Click me</string>
+    <string name="button_below">Below</string>
+    <string name="to">To</string>
+    <string name="message">Message</string>
+    <string name="send">send</string>
+    <string name="edit">Please type here</string>
+    <string name="email">Enter email address</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
+    <string name="milk">milk</string>
+    <string name="sugar">sugar</string>
+    <string name="caveman">caveman</string>
+    <string name="astronaut">astronaut</string>
+    <string-array name="spinner_entries">
+        <item>light</item>
+        <item>amber</item>
+        <item>brown</item>
+        <item>dark</item>
+    </string-array>
+</resources>
