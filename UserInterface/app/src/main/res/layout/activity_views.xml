@@ -12,61 +12,79 @@
     tools:context="com.hfad.userinterface.Views">
 
     <TextView
+        android:id="@+id/text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/textView1"
         android:textSize="14sp" />
 
     <EditText
+        android:id="@+id/edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/edit"
         android:inputType="text|textCapSentences|textAutoCorrect" />
 
     <Button
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_click_me" />
+        android:text="@string/button_click_me"
+        android:onClick="onButtonClicked" />
 
     <ToggleButton
+        android:id="@+id/toggle_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textOn="@string/on"
-        android:textOff="@string/off" />
+        android:textOff="@string/off"
+        android:onClick="onToggleButtonClicked" />
 
     <Switch
+        android:id="@+id/switch_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textOn="@string/on"
-        android:textOff="@string/off" />
+        android:textOff="@string/off"
+        android:onClick="onSwitchClicked" />
 
     <CheckBox
+        android:id="@+id/checkbox_milk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/milk" />
+        android:text="@string/milk"
+        android:onClick="onCheckboxClicked" />
 
     <CheckBox
+        android:id="@+id/checkbox_sugar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sugar" />
+        android:text="@string/sugar"
+        android:onClick="onCheckboxClicked" />
 
     <RadioGroup
+        android:id="@+id/radio_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <RadioButton
+            android:id="@+id/radio_caveman"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/caveman" />
+            android:text="@string/caveman"
+            android:onClick="onRadioButtonClicked" />
 
         <RadioButton
+            android:id="@+id/radio_astronaut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/astronaut" />
+            android:text="@string/astronaut"
+            android:onClick="onRadioButtonClicked" />
     </RadioGroup>
 
     <Spinner
+        android:id="@+id/spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:entries="@array/spinner_entries" />

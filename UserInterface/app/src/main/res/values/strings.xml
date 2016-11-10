@@ -14,6 +14,12 @@
     <string name="sugar">sugar</string>
     <string name="caveman">caveman</string>
     <string name="astronaut">astronaut</string>
+    <string name="starbuzz_logo">starbuzz_logo</string>
+    <string name="message_thanks">Thanks for choosing out awesome blend tea. How do you want it serving?</string>
+    <string name="cold">Cold</string>
+    <string name="hot">Hot</string>
+    <string name="temperature">Temperature</string>
+    <string name="lemon">Lemon</string>
     <string-array name="spinner_entries">
         <item>light</item>
         <item>amber</item>
