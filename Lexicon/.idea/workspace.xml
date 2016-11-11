@@ -2,49 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e13d2b8a-5a42-4183-8b47-0764a1c30ec2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../example/dist/example-0.1-py2.7.egg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../example/dist/example-0.1.tar.gz" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/skeleton.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Lexicon/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Lexicon/lexicon.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/Lexicon_tests.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/__init_.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../ThirteenthProgram/.idea/ThirteenthProgram.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../ThirteenthProgram/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../ThirteenthProgram/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../ThirteenthProgram/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../ThirteenthProgram/ex47/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../ThirteenthProgram/ex47/game.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../ThirteenthProgram/setup.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../ThirteenthProgram/tests/__init_.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../ThirteenthProgram/tests/ex47_tests.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../example/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../example/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../example/.idea/skeleton.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../example/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../example/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../example/NAME/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../example/bin/example.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../example/build/lib.linux-x86_64-2.7/NAME/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../example/build/scripts-2.7/example.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../example/example.egg-info/PKG-INFO" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../example/example.egg-info/SOURCES.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../example/example.egg-info/dependency_links.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../example/example.egg-info/requires.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../example/example.egg-info/top_level.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../example/setup.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../example/tests/NAME_tests.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../example/tests/__init_.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../skeleton/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../skeleton/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../skeleton/.idea/skeleton.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../skeleton/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../EleventhProgram/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../EleventhProgram/.idea/workspace.xml" />
     </list>
     <ignored path="skeleton.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -392,7 +350,14 @@
       <option name="project" value="LOCAL" />
       <updated>1478859045800</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="lexicon&#10;">
+      <created>1478870062882</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1478870062882</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -452,7 +417,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="skeleton&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="skeleton&#10;" />
+    <MESSAGE value="lexicon&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="lexicon&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
