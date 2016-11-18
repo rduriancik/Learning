@@ -59,4 +59,3 @@ if __name__ == "__main__":
     _input = raw_input("Enter text\n> ")
     result = scan(_input)
     print result
-    
