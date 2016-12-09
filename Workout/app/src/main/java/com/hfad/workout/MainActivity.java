@@ -4,16 +4,16 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements WorkoutListFragment.WorkoutListListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
 
-        WorkoutDetailFragment frag = (WorkoutDetailFragment)
-                getFragmentManager().findFragmentById(R.id.detail_fragment);
+    @Override
+    public void itemClicked(long id) {
 
-        frag.setWorkout(1);
     }
 }
