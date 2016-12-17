@@ -1,0 +1,14 @@
+$def with (foo)
+
+<html>
+<head>
+    <title>Foo-page template</title>
+</head>
+<body>
+<p>I'm just trying to create another template. Was it successful?</p>
+$if foo:
+    <p><span style="color: red; font-size: 2em;">$foo</span> </p>
+$else:
+    <p><span style="color: red; font-size: 2em;">No.</span> </p>
+</body>
+</html>
