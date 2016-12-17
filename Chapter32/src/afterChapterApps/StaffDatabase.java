@@ -12,6 +12,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.sql.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 /**
  * Created by robert on 17.12.2016.
  */
@@ -24,6 +30,7 @@ public class StaffDatabase extends Application {
     private TextField tfCity;
     private TextField tfState;
     private TextField tfTelephone;
+    private Connection connection;
 
     public static void main(String[] args) {
         launch(args);
@@ -31,6 +38,8 @@ public class StaffDatabase extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        initializeDB();
+
         GridPane pane = new GridPane();
         pane.setPadding(new Insets(5));
         pane.setHgap(5);
@@ -39,6 +48,7 @@ public class StaffDatabase extends Application {
         Label lbInfo = new Label("Staff Database");
         pane.add(lbInfo, 0, 0, 6, 1);
 
+        //TODO: obmedzit fieldy na urcity pocet znakov
         pane.add(new Label("ID"), 0, 1);
         tfId = new TextField();
         pane.add(tfId, 1, 1);
@@ -88,5 +98,105 @@ public class StaffDatabase extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Staff");
         primaryStage.show();
+
+        btClear.setOnAction(e -> {
+            try {
+                Statement statement = connection.createStatement();
+                statement.execute("DELETE FROM Staff");
+                lbInfo.setText("Staff database was deleted");
+            } catch (SQLException ex) {
+                lbInfo.setText(ex.getMessage());
+            }
+        });
+
+        btInsert.setOnAction(e -> {
+            try {
+                String id = tfId.getText();
+                if (id.isEmpty()) {
+                    lbInfo.setText("Invalid ID");
+                    return;
+                }
+                if (id.length() > 9) {
+                    lbInfo.setText("ID cannot be longer than 9 characters");
+                    return;
+                }
+
+
+                String lastName = tfLastName.getText();
+                if (lastName.isEmpty()) {
+                    lbInfo.setText("Invalid last name");
+                    return;
+                }
+
+                String firstName = tfFirstName.getText();
+                if (firstName.isEmpty()) {
+                    lbInfo.setText("Invalid first name");
+                    return;
+                }
+
+                String mi = tfMI.getText();
+                if (mi.isEmpty() || mi.length() != 1) {
+                    lbInfo.setText("Invalid MI");
+                    return;
+                }
+
+                String address = tfAddress.getText();
+                if (address.isEmpty()) {
+                    lbInfo.setText("Invalid address");
+                    return;
+                }
+
+                String city = tfCity.getText();
+                if (city.isEmpty()) {
+                    lbInfo.setText("Invalid city");
+                    return;
+                }
+
+                String state = tfState.getText();
+                if (state.isEmpty()) {
+                    lbInfo.setText("Invalid state");
+                    return;
+                }
+
+                String phone = tfTelephone.getText();
+                if (phone.isEmpty()) {
+                    lbInfo.setText("Invalid phone");
+                    return;
+                }
+
+                PreparedStatement statement = connection.prepareStatement
+                        ("INSERT INTO Staff VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                statement.setString(1, id);
+                statement.setString(2, lastName);
+                statement.setString(3, firstName);
+                statement.setString(4, mi);
+                statement.setString(5, address);
+                statement.setString(6, city);
+                statement.setString(7, state);
+                statement.setString(8, phone);
+
+                if (statement.executeUpdate() != 1) {
+                    lbInfo.setText("Insertion Error");
+                } else {
+                    lbInfo.setText("Insertion complete");
+                }
+            } catch (SQLException ex) {
+                lbInfo.setText(ex.getMessage());
+            } catch (NumberFormatException ex) {
+                lbInfo.setText("Invalid id");
+            }
+        });
+
+        //TODO: eventy pre ostatne buttony
+    }
+
+    private void initializeDB() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection
+                    ("jdbc:mysql://localhost/javabook", "scott", "tiger");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }
