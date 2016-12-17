@@ -1,6 +1,7 @@
 package afterChapterApps;
 
 import javafx.application.Application;
+import javafx.beans.property.StringProperty;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,6 +14,20 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.sql.*;
+
+/*
+    create table Staff (
+    id char(9) not null,
+    lastName varchar(15),
+    firstName varchar(15),
+    mi char(1),
+    address varchar(20),
+    city varchar(20),
+    state char(2),
+    telephone char(10),
+    primary key (id)
+    );
+ */
 
 /**
  * Created by robert on 17.12.2016.
@@ -47,37 +62,77 @@ public class StaffDatabase extends Application {
         //TODO: obmedzit fieldy na urcity pocet znakov
         pane.add(new Label("ID"), 0, 1);
         tfId = new TextField();
+        tfId.textProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue.length() > 9) {
+                ((StringProperty) observable).setValue(oldValue);
+            }
+        }));
         pane.add(tfId, 1, 1);
 
         pane.add(new Label("Last Name"), 0, 2);
         tfLastName = new TextField();
+        tfLastName.textProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue.length() > 15) {
+                ((StringProperty) observable).setValue(oldValue);
+            }
+        }));
         pane.add(tfLastName, 1, 2);
 
         pane.add(new Label("First Name"), 2, 2);
         tfFirstName = new TextField();
+        tfFirstName.textProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue.length() > 15) {
+                ((StringProperty) observable).setValue(oldValue);
+            }
+        }));
         pane.add(tfFirstName, 3, 2);
 
         pane.add(new Label("MI"), 4, 2);
         tfMI = new TextField();
         tfMI.setPrefColumnCount(1);
+        tfMI.textProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue.length() > 1) {
+                ((StringProperty) observable).setValue(oldValue);
+            }
+        }));
         pane.add(tfMI, 5, 2);
 
         pane.add(new Label("Address"), 0, 3);
         tfAddress = new TextField();
+        tfAddress.textProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue.length() > 20) {
+                ((StringProperty) observable).setValue(oldValue);
+            }
+        }));
         pane.add(tfAddress, 1, 3);
 
         pane.add(new Label("City"), 0, 4);
         tfCity = new TextField();
+        tfCity.textProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue.length() > 20) {
+                ((StringProperty) observable).setValue(oldValue);
+            }
+        }));
         pane.add(tfCity, 1, 4);
 
         Label lbState = new Label("State");
         pane.add(lbState, 2, 4);
         GridPane.setHalignment(lbState, HPos.CENTER);
         tfState = new TextField();
+        tfState.textProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue.length() > 2) {
+                ((StringProperty) observable).setValue(oldValue);
+            }
+        }));
         pane.add(tfState, 3, 4, 2, 1);
 
         pane.add(new Label("Telephone"), 0, 5);
         tfTelephone = new TextField();
+        tfTelephone.textProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue.length() > 10) {
+                ((StringProperty) observable).setValue(oldValue);
+            }
+        }));
         pane.add(tfTelephone, 1, 5);
 
         HBox buttons = new HBox(5);
