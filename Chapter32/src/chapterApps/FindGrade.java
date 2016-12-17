@@ -50,7 +50,7 @@ public class FindGrade extends Application {
     private void initializeDB() {
         try {
             // Load the JDBC driver
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             System.out.println("Driver loaded");
 
             // Establish a connection
