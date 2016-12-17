@@ -97,6 +97,7 @@ public class StaffDatabase extends Application {
 
         btClear.setOnAction(e -> {
             try {
+                clearFields(true);
                 Statement statement = connection.createStatement();
                 statement.execute("DELETE FROM Staff");
                 lbInfo.setText("Staff database was deleted");
@@ -107,17 +108,11 @@ public class StaffDatabase extends Application {
 
         btInsert.setOnAction(e -> {
             try {
-                //TODO: overit ci je cislo
                 String id = tfId.getText();
                 if (!isValidId(id)) {
                     lbInfo.setText("Invalid ID");
                     return;
                 }
-                if (id.length() > 9) {
-                    lbInfo.setText("ID cannot be longer than 9 characters");
-                    return;
-                }
-
 
                 String lastName = tfLastName.getText();
                 if (lastName.isEmpty()) {
@@ -176,15 +171,89 @@ public class StaffDatabase extends Application {
                     lbInfo.setText("Insertion Error");
                 } else {
                     lbInfo.setText("Insertion complete");
+                    clearFields(true);
                 }
             } catch (SQLException ex) {
                 lbInfo.setText(ex.getMessage());
             }
         });
 
-        //TODO: eventy pre ostatne buttony
         btUpdate.setOnAction(e -> {
             String id = tfId.getText();
+            if (!isValidId(id)) {
+                lbInfo.setText("Invalid ID");
+                return;
+            }
+
+            String lastName = tfLastName.getText();
+            if (lastName.isEmpty()) {
+                lbInfo.setText("Invalid last name");
+                return;
+            }
+
+            String firstName = tfFirstName.getText();
+            if (firstName.isEmpty()) {
+                lbInfo.setText("Invalid first name");
+                return;
+            }
+
+            String mi = tfMI.getText();
+            if (mi.isEmpty() || mi.length() != 1) {
+                lbInfo.setText("Invalid MI");
+                return;
+            }
+
+            String address = tfAddress.getText();
+            if (address.isEmpty()) {
+                lbInfo.setText("Invalid address");
+                return;
+            }
+
+            String city = tfCity.getText();
+            if (city.isEmpty()) {
+                lbInfo.setText("Invalid city");
+                return;
+            }
+
+            String state = tfState.getText();
+            if (state.isEmpty()) {
+                lbInfo.setText("Invalid state");
+                return;
+            }
+
+            String phone = tfTelephone.getText();
+            if (phone.isEmpty()) {
+                lbInfo.setText("Invalid phone");
+                return;
+            }
+
+            try {
+                PreparedStatement statement = connection.prepareStatement
+                        ("UPDATE Staff SET lastName = ?, firstName = ?, mi = ?, " +
+                                "address = ?, city = ?, state = ?, telephone = ? WHERE id = ?");
+                statement.setString(1, lastName);
+                statement.setString(2, firstName);
+                statement.setString(3, mi);
+                statement.setString(4, address);
+                statement.setString(5, city);
+                statement.setString(6, state);
+                statement.setString(7, phone);
+                statement.setString(8, id);
+
+                if (statement.executeUpdate() != 1) {
+                    lbInfo.setText("Update Error. ID was not found");
+                } else {
+                    lbInfo.setText("Update complete");
+                    clearFields(true);
+                }
+            } catch (SQLException ex) {
+                lbInfo.setText(ex.getMessage());
+            }
+        });
+
+        btView.setOnAction(e -> {
+            String id = tfId.getText();
+            clearFields(false);
             if (!isValidId(id)) {
                 lbInfo.setText("Invalid ID");
                 return;
@@ -198,7 +267,7 @@ public class StaffDatabase extends Application {
                     tfFirstName.setText(resultSet.getString("firstName"));
                     tfMI.setText(resultSet.getString("mi"));
                     tfAddress.setText(resultSet.getString("address"));
-                    tfCity.setText(resultSet.getString("address"));
+                    tfCity.setText(resultSet.getString("city"));
                     tfState.setText(resultSet.getString("state"));
                     tfTelephone.setText(resultSet.getString("telephone"));
                 } else {
@@ -207,10 +276,6 @@ public class StaffDatabase extends Application {
             } catch (SQLException ex) {
                 lbInfo.setText(ex.getMessage());
             }
-        });
-
-        btView.setOnAction(e -> {
-
         });
     }
 
@@ -229,12 +294,25 @@ public class StaffDatabase extends Application {
             return false;
         }
 
-        for(int i = 0; i < id.length(); ++i) {
+        for (int i = 0; i < id.length(); ++i) {
             if (!Character.isDigit(id.charAt(i))) {
                 return false;
             }
         }
 
         return true;
+    }
+
+    private void clearFields(boolean clearId) {
+        if (clearId) {
+            tfId.clear();
+        }
+        tfLastName.clear();
+        tfFirstName.clear();
+        tfAddress.clear();
+        tfMI.clear();
+        tfCity.clear();
+        tfState.clear();
+        tfTelephone.clear();
     }
 }
