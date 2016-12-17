@@ -12,11 +12,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-import java.sql.Statement;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * Created by robert on 17.12.2016.
@@ -111,8 +107,9 @@ public class StaffDatabase extends Application {
 
         btInsert.setOnAction(e -> {
             try {
+                //TODO: overit ci je cislo
                 String id = tfId.getText();
-                if (id.isEmpty()) {
+                if (!isValidId(id)) {
                     lbInfo.setText("Invalid ID");
                     return;
                 }
@@ -182,12 +179,39 @@ public class StaffDatabase extends Application {
                 }
             } catch (SQLException ex) {
                 lbInfo.setText(ex.getMessage());
-            } catch (NumberFormatException ex) {
-                lbInfo.setText("Invalid id");
             }
         });
 
         //TODO: eventy pre ostatne buttony
+        btUpdate.setOnAction(e -> {
+            String id = tfId.getText();
+            if (!isValidId(id)) {
+                lbInfo.setText("Invalid ID");
+                return;
+            }
+
+            try {
+                ResultSet resultSet = connection.createStatement()
+                        .executeQuery("SELECT * FROM Staff WHERE id = " + id);
+                if (resultSet.next()) {
+                    tfLastName.setText(resultSet.getString("lastName"));
+                    tfFirstName.setText(resultSet.getString("firstName"));
+                    tfMI.setText(resultSet.getString("mi"));
+                    tfAddress.setText(resultSet.getString("address"));
+                    tfCity.setText(resultSet.getString("address"));
+                    tfState.setText(resultSet.getString("state"));
+                    tfTelephone.setText(resultSet.getString("telephone"));
+                } else {
+                    lbInfo.setText("Staff member not found");
+                }
+            } catch (SQLException ex) {
+                lbInfo.setText(ex.getMessage());
+            }
+        });
+
+        btView.setOnAction(e -> {
+
+        });
     }
 
     private void initializeDB() {
@@ -198,5 +222,19 @@ public class StaffDatabase extends Application {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    private boolean isValidId(String id) {
+        if (id == null || id.isEmpty() || id.length() > 9) {
+            return false;
+        }
+
+        for(int i = 0; i < id.length(); ++i) {
+            if (!Character.isDigit(id.charAt(i))) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
