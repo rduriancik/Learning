@@ -4,7 +4,6 @@ package com.hfad.workout;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +74,7 @@ public class StopwatchFragment extends Fragment {
     }
 
     private void runTimer(View view) {
-        final TextView timeView = view.findViewById(R.id.time_view);
+        final TextView timeView = (TextView) view.findViewById(R.id.time_view);
         final Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
