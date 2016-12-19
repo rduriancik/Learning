@@ -1,3 +1,12 @@
+CREATE TABLE Course (
+courseId char(5),
+subjectId char(4) not null,
+courseNumber integer,
+title varchar(50) not null,
+numOfCredits integer,
+primary key (courseId)
+);
+
 CREATE TABLE Student (
 ssn char(9),
 firstName varchar(25),
@@ -9,6 +18,18 @@ phone char(11),
 zipCode char(5),
 deptId char(4),
 primary key (ssn)
+);
+
+CREATE TABLE Enrollment (
+ssn char(9),
+courseId char(5),
+dateRegistered date,
+grade char(1),
+primary key (ssn, courseId),
+foreign key (ssn) references
+Student(ssn),
+foreign key (courseId) references
+Course(courseId)
 );
 
 INSERT INTO Student VALUES (1, 'John', 'M', 'Doe', '1996-08-12', 'Oxford Street', '02342312342', '06585', 'BIO'),
