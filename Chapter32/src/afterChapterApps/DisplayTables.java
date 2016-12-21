@@ -7,18 +7,18 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.scene.control.*;
 
 import java.sql.*;
+import java.util.Formatter;
 
 /**
  * Created by robert on 21.12.2016.
  */
 public class DisplayTables extends Application {
-
     private Statement statement;
 
     public static void main(String[] args) {
@@ -49,33 +49,28 @@ public class DisplayTables extends Application {
         primaryStage.show();
 
         btShow.setOnAction(e -> {
-            String table = cbTables.getValue();
+            String tableName = cbTables.getValue();
             new Thread(() -> {
                 try {
-                    ResultSet resultSet = statement.executeQuery("SELECT * FROM " + table);
+                    ResultSet resultSet = statement.executeQuery("SELECT * FROM " + tableName);
                     ResultSetMetaData rsMetaData = resultSet.getMetaData();
+
+                    StringBuilder result = new StringBuilder();
+                    Formatter formatter = new Formatter(result);
 
                     String[] columnName = new String[rsMetaData.getColumnCount()];
                     for (int i = 1; i <= columnName.length; ++i) {
-                        columnName[i-1] = rsMetaData.getColumnName(i);
+                        columnName[i - 1] = rsMetaData.getColumnName(i);
+                        formatter.format("%20s\t", columnName[i - 1]);
                     }
+                    result.append('\n');
 
-                    StringBuilder result = new StringBuilder();
                     while (resultSet.next()) {
                         for (String aColumnName : columnName) {
-                            result.append(resultSet.getString(aColumnName));
-                            result.append('\t');
+                            formatter.format("%20s\t", resultSet.getObject(aColumnName));
                         }
                         result.append('\n');
                     }
-
-                    StringBuilder head = new StringBuilder();
-                    for (String aColumnName : columnName) {
-                        head.append(aColumnName);
-                        head.append('\t');
-                    }
-                    head.append('\n');
-                    result.insert(0, head);
 
                     Platform.runLater(() -> taInfo.setText(result.toString()));
                 } catch (SQLException ex) {
