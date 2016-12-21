@@ -19,7 +19,7 @@ import java.sql.*;
  */
 public class DisplayTables extends Application {
 
-    private PreparedStatement preparedStatement;
+    private Statement statement;
 
     public static void main(String[] args) {
         launch(args);
@@ -52,23 +52,30 @@ public class DisplayTables extends Application {
             String table = cbTables.getValue();
             new Thread(() -> {
                 try {
-                    preparedStatement.setString(1, table);
-                    ResultSet resultSet = preparedStatement.executeQuery();
+                    ResultSet resultSet = statement.executeQuery("SELECT * FROM " + table);
                     ResultSetMetaData rsMetaData = resultSet.getMetaData();
 
-                    StringBuilder result = new StringBuilder();
                     String[] columnName = new String[rsMetaData.getColumnCount()];
-                    for (int i = 0; i < columnName.length; ++i) {
-                        columnName[i] = rsMetaData.getColumnName(i);
+                    for (int i = 1; i <= columnName.length; ++i) {
+                        columnName[i-1] = rsMetaData.getColumnName(i);
                     }
 
+                    StringBuilder result = new StringBuilder();
                     while (resultSet.next()) {
-                        for (int i = 0; i < columnName.length; ++i) {
-                            result.append(resultSet.getString(columnName[i]) + "\t");
+                        for (String aColumnName : columnName) {
+                            result.append(resultSet.getString(aColumnName));
+                            result.append('\t');
                         }
-                        result.append("\n");
+                        result.append('\n');
                     }
 
+                    StringBuilder head = new StringBuilder();
+                    for (String aColumnName : columnName) {
+                        head.append(aColumnName);
+                        head.append('\t');
+                    }
+                    head.append('\n');
+                    result.insert(0, head);
 
                     Platform.runLater(() -> taInfo.setText(result.toString()));
                 } catch (SQLException ex) {
@@ -82,7 +89,7 @@ public class DisplayTables extends Application {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 Connection connection = DriverManager.getConnection
                         ("jdbc:mysql://localhost/javabook", "scott", "tiger");
-                preparedStatement = connection.prepareStatement("SELECT * FROM ?");
+                statement = connection.createStatement();
 
                 DatabaseMetaData dbMetaData = connection.getMetaData();
                 ResultSet resultSet = dbMetaData.getTables(null, null, "%",
