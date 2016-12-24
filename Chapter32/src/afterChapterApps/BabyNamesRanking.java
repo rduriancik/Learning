@@ -40,12 +40,13 @@ public class BabyNamesRanking {
 
         BufferedReader reader = null;
         try {
+            StringBuilder values = new StringBuilder();
+
             for (int i = 1; i <= 10; ++i) {
                 int year = 2000 + i;
                 String filename = String.format("babyNames/babynamesranking%d.txt", year);
                 reader = new BufferedReader(new FileReader(filename));
 
-                StringBuilder values = new StringBuilder();
                 Formatter formatter = new Formatter(values);
                 reader.lines().forEach(s -> {
                     String[] data = s.split("\\s+");
@@ -53,11 +54,11 @@ public class BabyNamesRanking {
                     formatter.format("(%d, \'%s\',\'F\',%d),", year, data[3], Integer.valueOf(data[4]));
                 });
 
-                values.setCharAt(values.length() - 1, ';');
-                statement.executeUpdate("INSERT INTO Babyname VALUES " + values.toString());
-
                 reader.close();
             }
+
+            values.setCharAt(values.length() - 1, ';');
+            statement.executeUpdate("INSERT INTO Babyname VALUES " + values.toString());
 
             reader = null;
         } catch (SQLException ex) {
