@@ -19,6 +19,7 @@ public class MainActivity extends Activity {
     private ShareActionProvider shareActionProvider;
     private String[] titles;
     private ListView drawerList;
+    private DrawerLayout drawerLayout;
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
@@ -33,10 +34,15 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         titles = getResources().getStringArray(R.array.titles);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerList = (ListView) findViewById(R.id.drawer);
         drawerList.setAdapter(new ArrayAdapter<String>
                 (this, android.R.layout.simple_list_item_activated_1, titles));
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+        if (savedInstanceState == null) {
+            selectItem(0);
+        }
     }
 
     @Override
@@ -93,10 +99,11 @@ public class MainActivity extends Activity {
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 
         transaction.commit();
+
+        // Set the action bar title
         setActionBarTitle(position);
 
         // Close the drawer
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(drawerList);
     }
 
