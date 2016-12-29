@@ -5,6 +5,10 @@
     <string name="title_activity_order">Create Order</string>
     <string name="action_share">Share</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="title_top">Top Fragment</string>
+
+    <string-array name="pizzas">
+        <item>Diavola</item>
+        <item>Funghi</item>
+    </string-array>
 </resources>
