@@ -2,6 +2,7 @@ package com.hfad.bitsandpizzas;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -23,6 +24,7 @@ public class MainActivity extends Activity {
     private ListView drawerList;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
+    private int currentPosition = 0;
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
@@ -64,8 +66,40 @@ public class MainActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
 
+        getFragmentManager().addOnBackStackChangedListener(
+                new FragmentManager.OnBackStackChangedListener() {
+                    @Override
+                    public void onBackStackChanged() {
+                        FragmentManager fragMan = getFragmentManager();
+                        Fragment fragment = fragMan.findFragmentByTag("visible_fragment");
+
+                        if (fragment instanceof TopFragment) {
+                            currentPosition = 0;
+                        }
+
+                        if (fragment instanceof PizzaFragment) {
+                            currentPosition = 1;
+                        }
+
+                        if (fragment instanceof PastaFragment) {
+                            currentPosition = 2;
+                        }
+
+                        if (fragment instanceof StoresFragment) {
+                            currentPosition = 3;
+                        }
+
+                        setActionBarTitle(currentPosition);
+                        drawerList.setItemChecked(currentPosition, true);
+                    }
+                }
+        );
+
         if (savedInstanceState == null) {
             selectItem(0);
+        } else {
+            currentPosition = savedInstanceState.getInt("position");
+            setActionBarTitle(currentPosition);
         }
     }
 
@@ -73,6 +107,12 @@ public class MainActivity extends Activity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         drawerToggle.syncState();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("position", currentPosition);
     }
 
     @Override
@@ -123,6 +163,7 @@ public class MainActivity extends Activity {
     }
 
     private void selectItem(int position) {
+        currentPosition = position;
         Fragment fragment;
 
         switch (position) {
@@ -141,7 +182,7 @@ public class MainActivity extends Activity {
         }
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_frame, fragment);
+        transaction.replace(R.id.content_frame, fragment, "visible_fragment");
         transaction.addToBackStack(null);
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 
