@@ -1,7 +1,7 @@
 import web
 
 urls = (
-    '/', 'index'
+    '/hello', 'Index'
 )
 
 app = web.application(urls, globals())
@@ -9,12 +9,15 @@ app = web.application(urls, globals())
 render = web.template.render('templates/')
 
 
-class index:
+class Index(object):
     def GET(self):
-        #greeting = "Hello World!"
-        #return render.index(greeting=greeting)
-        answer = "Yes"
-        return render.foo(foo = answer)
+        return render.hello_form()
+
+    def POST(self):
+        form = web.input(name="Nobody", greet="Hello")
+        greeting = "%s, %s" % (form.greet, form.name)
+
+        return render.index(greeting=greeting)
 
 
 if __name__ == "__main__":
