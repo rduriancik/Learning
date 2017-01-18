@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="org.glassfish.hk2.external:javax.inject:2.4.0-b09" type="repository">
+    <properties maven-id="org.glassfish.hk2.external:javax.inject:2.4.0-b09" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/javax.inject-2.4.0-b09.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
