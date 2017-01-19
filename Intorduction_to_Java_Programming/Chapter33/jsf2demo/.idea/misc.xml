@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="JsfProjectComponent">
+    <option name="viewSettings">
+      <JsfViewSettings>
+        <option name="converter" value="true" />
+        <option name="validator" value="true" />
+        <option name="renderer" value="true" />
+      </JsfViewSettings>
+    </option>
+  </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
       <profile-state>
