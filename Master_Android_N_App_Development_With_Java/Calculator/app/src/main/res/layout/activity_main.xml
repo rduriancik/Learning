@@ -225,4 +225,14 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/buttonDot"
         app:layout_constraintLeft_toRightOf="@+id/buttonDot" />
 
+    <Button
+        android:text="Neg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="103dp"
+        tools:layout_editor_absoluteX="309dp"
+        android:id="@+id/buttonNeg"
+        android:textSize="12sp"
+        android:minWidth="48dp" />
+
 </android.support.constraint.ConstraintLayout>
