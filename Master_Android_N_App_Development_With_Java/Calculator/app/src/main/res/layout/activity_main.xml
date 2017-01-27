@@ -221,8 +221,18 @@
         android:layout_marginStart="8dp"
         android:minWidth="48dp"
         android:text="Neg"
-        android:textSize="14sp"
+        android:textSize="12sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/buttonDivide"
         app:layout_constraintLeft_toRightOf="@+id/buttonDivide" />
+
+    <Button
+        android:id="@+id/buttonClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="48dp"
+        android:text="C"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonMultiply"
+        app:layout_constraintLeft_toLeftOf="@+id/buttonNeg" />
 
 </android.support.constraint.ConstraintLayout>

@@ -105,6 +105,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Button buttonClear = (Button) findViewById(R.id.buttonClear);
+        buttonClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pendingOperation = "=";
+                newNumber.setText("");
+                result.setText("");
+                operand1 = null;
+                displayOperation.setText(pendingOperation);
+            }
+        });
+
     }
 
     private void performOperation(Double value, String operation) {
@@ -146,7 +159,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         pendingOperation = savedInstanceState.getString(STATE_PENDING_OPERATION);
-        operand1 = savedInstanceState.getDouble(STATE_OPERAND1);
+        if (savedInstanceState.getBoolean(STATE_OPERAND1)) {
+            operand1 = savedInstanceState.getDouble(STATE_OPERAND1);
+        }
         displayOperation.setText(pendingOperation);
     }
 
@@ -154,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         outState.putString(STATE_PENDING_OPERATION, pendingOperation);
         if (operand1 != null) {
+            outState.putBoolean(STATE_OPERAND1, true);
             outState.putDouble(STATE_OPERAND1, operand1);
         }
         super.onSaveInstanceState(outState);
