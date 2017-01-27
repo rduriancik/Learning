@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+>
+<h:head>
+    <title>Guess Number</title>
+</h:head>
+<h:body>
+    <h:form>
+        <h:outputText value="Enter your guess: "/>
+        <h:inputText id="guessInputText" style="text-align: right; width: 50px"
+                     value="#{guessNumberJSFBean.guessString}"/>
+        <h:commandButton style="margin-left: 60px;" value="Guess"/>
+        <br/>
+        <h:outputText style="color: red" value="#{guessNumberJSFBean.response}"/>
+    </h:form>
+</h:body>
+</html>
