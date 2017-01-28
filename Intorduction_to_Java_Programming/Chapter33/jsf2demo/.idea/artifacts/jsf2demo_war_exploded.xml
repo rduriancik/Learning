@@ -7,6 +7,10 @@
         <element id="directory" name="classes">
           <element id="module-output" name="jsf2demo" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="mysql:mysql-connector-java:6.0.5" />
+          <element id="library" level="project" name="org.glassfish.hk2.external:javax.inject:2.4.0-b09" />
+        </element>
       </element>
     </root>
   </artifact>
