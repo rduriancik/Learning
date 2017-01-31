@@ -72,12 +72,13 @@ public class ParseApplications {
                         // Nothing else to do.
                 }
 
-                for (FeedEntry app : applications) {
-                    Log.d(TAG, "*******************");
-                    Log.d(TAG, app.toString());
-                }
-
                 eventType = xpp.next();
+            }
+
+
+            for (FeedEntry app : applications) {
+                Log.d(TAG, "*******************");
+                Log.d(TAG, app.toString());
             }
         } catch (Exception ex) {
             status = false;
