@@ -45,7 +45,7 @@ public class ParseApplications {
                 switch (eventType) {
                     case XmlPullParser.START_TAG:
 //                        Log.d(TAG, "parse: Starting tag for " + tagName);
-                        if ("entry".equalsIgnoreCase(tagName)) {
+                        if ("entry".equalsIgnoreCase(tagName) || "item".equalsIgnoreCase(tagName)) {
                             inEntry = true;
                             currentRecord = new FeedEntry();
                         }
@@ -61,10 +61,10 @@ public class ParseApplications {
 //                            Log.d(TAG, "parse: Title is " + title);
                         }
                         if (inEntry) {
-                            if ("entry".equalsIgnoreCase(tagName)) {
+                            if ("entry".equalsIgnoreCase(tagName) || "item".equalsIgnoreCase(tagName)) {
                                 applications.add(currentRecord);
                                 inEntry = false;
-                            } else if ("name".equalsIgnoreCase(tagName)) {
+                            } else if ("name".equalsIgnoreCase(tagName) || "album".equalsIgnoreCase(tagName)) {
                                 currentRecord.setName(textValue);
                             } else if ("artist".equalsIgnoreCase(tagName)) {
                                 currentRecord.setArtist(textValue);
@@ -72,7 +72,7 @@ public class ParseApplications {
                                 currentRecord.setReleaseDate(textValue);
                             } else if ("summary".equalsIgnoreCase(tagName)) {
                                 currentRecord.setSummary(textValue);
-                            } else if ("image".equalsIgnoreCase(tagName)) {
+                            } else if ("image".equalsIgnoreCase(tagName) || "coverart".equalsIgnoreCase(tagName)) {
                                 currentRecord.setImageURL(textValue);
                             }
                         }

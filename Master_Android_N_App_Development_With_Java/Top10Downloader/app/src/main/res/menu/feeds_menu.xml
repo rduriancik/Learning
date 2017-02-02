@@ -13,6 +13,9 @@
     <item
         android:title="Albums"
         android:id="@+id/mnuAlbums" />
+    <item
+        android:title="New Releases"
+        android:id="@+id/mnuNewReleases" />
     <group
         android:id="@+id/mnugrpLimit"
         android:checkableBehavior="single">

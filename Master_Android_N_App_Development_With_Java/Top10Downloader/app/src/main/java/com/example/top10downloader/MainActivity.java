@@ -77,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.mnuAlbums:
                 feedUrl = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topalbums/limit=%d/xml";
                 break;
+            case R.id.mnuNewReleases:
+                feedUrl = "http://ax.itunes.apple.com/WebObjects/MZStore.woa/wpa/MRSS/newreleases/limit=%d/rss.xml";
+                break;
             case R.id.mnu10:
             case R.id.mnu25:
                 if (!item.isChecked()) {
