@@ -7,7 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -20,9 +23,11 @@ public class FeedAdapter<T extends FeedEntry> extends ArrayAdapter {
     private final int layoutResource;
     private final LayoutInflater layoutInflater;
     private List<T> applications;
+    private final Context context;
 
     public FeedAdapter(Context context, int resource, List<T> applications) {
         super(context, resource);
+        this.context = context;
         this.layoutResource = resource;
         this.layoutInflater = LayoutInflater.from(context);
         this.applications = applications;
@@ -53,6 +58,9 @@ public class FeedAdapter<T extends FeedEntry> extends ArrayAdapter {
         viewHolder.tvName.setText(currentApp.getName());
         viewHolder.tvArtist.setText(currentApp.getArtist());
         viewHolder.tvSummary.setText(currentApp.getSummary());
+        Picasso.with(context)
+                .load(currentApp.getImageURL())
+                .into(viewHolder.ivImage);
 
         return convertView;
     }
@@ -61,11 +69,13 @@ public class FeedAdapter<T extends FeedEntry> extends ArrayAdapter {
         final TextView tvName;
         final TextView tvArtist;
         final TextView tvSummary;
+        final ImageView ivImage;
 
         ViewHolder(View view) {
             this.tvName = (TextView) view.findViewById(R.id.tvName);
             this.tvArtist = (TextView) view.findViewById(R.id.tvArtist);
             this.tvSummary = (TextView) view.findViewById(R.id.tvSummary);
+            this.ivImage = (ImageView) view.findViewById(R.id.ivImage);
         }
 
     }
