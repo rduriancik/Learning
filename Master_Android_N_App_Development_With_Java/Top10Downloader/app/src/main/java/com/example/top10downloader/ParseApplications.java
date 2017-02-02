@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class ParseApplications {
     private static final String TAG = "ParseApplications";
     private ArrayList<FeedEntry> applications;
+    private String title;
 
     public ParseApplications() {
         this.applications = new ArrayList<>();
@@ -22,10 +23,15 @@ public class ParseApplications {
         return applications;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public boolean parse(String xmlData) {
         boolean status = true;
         FeedEntry currentRecord = null;
         boolean inEntry = false;
+        boolean hasTitle = false;
         String textValue = "";
 
         try {
@@ -49,6 +55,11 @@ public class ParseApplications {
                         break;
                     case XmlPullParser.END_TAG:
 //                        Log.d(TAG, "parse: Ending tag for " + tagName);
+                        if (!hasTitle && "title".equalsIgnoreCase(tagName)) {
+                            title = textValue;
+                            hasTitle = true;
+//                            Log.d(TAG, "parse: Title is " + title);
+                        }
                         if (inEntry) {
                             if ("entry".equalsIgnoreCase(tagName)) {
                                 applications.add(currentRecord);

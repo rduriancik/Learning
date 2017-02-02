@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private ListView listApps;
+    private TextView tvTitle;
     private String feedUrl = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=%d/xml";
     private int feedLimit = 10;
     private String feedCachedUrl = "INVALIDATED";
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listApps = (ListView) findViewById(R.id.xmlListView);
+        tvTitle = (TextView) findViewById(R.id.tvTitle);
 
         if (savedInstanceState != null) {
             feedUrl = savedInstanceState.getString(STATE_URL);
@@ -70,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.mnuSongs:
                 feedUrl = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topsongs/limit=%d/xml";
+                break;
+            case R.id.mnuAlbums:
+                feedUrl = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topalbums/limit=%d/xml";
                 break;
             case R.id.mnu10:
             case R.id.mnu25:
@@ -121,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
             FeedAdapter<FeedEntry> feedAdapter = new FeedAdapter<>(MainActivity.this, R.layout.list_record,
                     parseApplications.getApplications());
             listApps.setAdapter(feedAdapter);
+            tvTitle.setText(parseApplications.getTitle());
         }
 
         @Override
