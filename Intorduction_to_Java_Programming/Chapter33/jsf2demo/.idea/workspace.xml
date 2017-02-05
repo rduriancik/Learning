@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68f86770-a91a-4d17-af3c-8128dcf28dd7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/jsf2demo/AddressRegistrationJSFBean.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/AddressRegistration.xhtml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/AddressStoredStatus.xhtml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/ConfirmAddress.xhtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -37,7 +33,7 @@
         <entry file="file://$PROJECT_DIR$/web/AddressRegistration.xhtml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="171">
-              <caret line="37" column="35" lean-forward="false" selection-start-line="37" selection-start-column="35" selection-end-line="37" selection-end-column="35" />
+              <caret line="36" column="35" lean-forward="false" selection-start-line="36" selection-start-column="35" selection-end-line="36" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -46,8 +42,8 @@
       <file leaf-file-name="ConfirmAddress.xhtml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/ConfirmAddress.xhtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="12" column="90" lean-forward="false" selection-start-line="12" selection-start-column="90" selection-end-line="12" selection-end-column="90" />
+            <state relative-caret-position="198">
+              <caret line="11" column="90" lean-forward="false" selection-start-line="11" selection-start-column="90" selection-end-line="11" selection-end-column="90" />
               <folding />
             </state>
           </provider>
@@ -56,8 +52,8 @@
       <file leaf-file-name="AddressStoredStatus.xhtml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/AddressStoredStatus.xhtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="12" column="93" lean-forward="false" selection-start-line="12" selection-start-column="93" selection-end-line="12" selection-end-column="93" />
+            <state relative-caret-position="198">
+              <caret line="11" column="93" lean-forward="false" selection-start-line="11" selection-start-column="93" selection-end-line="11" selection-end-column="93" />
               <folding />
             </state>
           </provider>
@@ -67,7 +63,7 @@
         <entry file="file://$PROJECT_DIR$/src/jsf2demo/AddressRegistrationJSFBean.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="81">
-              <caret line="119" column="33" lean-forward="true" selection-start-line="119" selection-start-column="33" selection-end-line="119" selection-end-column="33" />
+              <caret line="119" column="33" lean-forward="false" selection-start-line="119" selection-start-column="33" selection-end-line="119" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#788#789#0" expanded="true" />
@@ -108,10 +104,10 @@
                 <element signature="e#2012#2013#0" expanded="true" />
                 <element signature="e#2050#2051#0" expanded="true" />
                 <element signature="e#2080#2081#0" expanded="true" />
-                <element signature="e#4704#4705#0" expanded="true" />
-                <element signature="e#4733#4734#0" expanded="true" />
-                <marker date="1485686110011" expanded="true" signature="3723:3844" ph="INSERT INTO Address... " />
-                <marker date="1485686110011" expanded="true" signature="3723:3871" ph="INSERT INTO Address... " />
+                <element signature="e#4728#4729#0" expanded="true" />
+                <element signature="e#4757#4758#0" expanded="true" />
+                <marker date="1485687474635" expanded="true" signature="3735:3856" ph="INSERT INTO Address... " />
+                <marker date="1485687474635" expanded="true" signature="3735:3883" ph="INSERT INTO Address... " />
               </folding>
             </state>
           </provider>
@@ -951,7 +947,7 @@
       <workItem from="1485536218693" duration="378000" />
       <workItem from="1485615899878" duration="9085000" />
       <workItem from="1485627703379" duration="2224000" />
-      <workItem from="1485683294531" duration="4159000" />
+      <workItem from="1485683294531" duration="4243000" />
     </task>
     <task id="LOCAL-00001" summary="jsf2demo init">
       <created>1484771850113</created>
@@ -1009,11 +1005,18 @@
       <option name="project" value="LOCAL" />
       <updated>1485630214415</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="jsf2demo AddressRegistration">
+      <created>1485687479692</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1485687479692</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33912000" />
+    <option name="totallyTimeSpent" value="33996000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1920" height="1056" extended-state="6" />
@@ -1040,7 +1043,7 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2892473" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2892473" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26574174" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
@@ -1070,7 +1073,8 @@
     <MESSAGE value="jsf2demo GuessNumber" />
     <MESSAGE value="jsf2demo ValidateForm" />
     <MESSAGE value="jsf2demo DisplayStudents" />
-    <option name="LAST_COMMIT_MESSAGE" value="jsf2demo DisplayStudents" />
+    <MESSAGE value="jsf2demo AddressRegistration" />
+    <option name="LAST_COMMIT_MESSAGE" value="jsf2demo AddressRegistration" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1376,7 +1380,7 @@
     <entry file="file://$PROJECT_DIR$/src/jsf2demo/AddressRegistrationJSFBean.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
-          <caret line="119" column="33" lean-forward="true" selection-start-line="119" selection-start-column="33" selection-end-line="119" selection-end-column="33" />
+          <caret line="119" column="33" lean-forward="false" selection-start-line="119" selection-start-column="33" selection-end-line="119" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#788#789#0" expanded="true" />
@@ -1417,10 +1421,10 @@
             <element signature="e#2012#2013#0" expanded="true" />
             <element signature="e#2050#2051#0" expanded="true" />
             <element signature="e#2080#2081#0" expanded="true" />
-            <element signature="e#4704#4705#0" expanded="true" />
-            <element signature="e#4733#4734#0" expanded="true" />
-            <marker date="1485686110011" expanded="true" signature="3723:3844" ph="INSERT INTO Address... " />
-            <marker date="1485686110011" expanded="true" signature="3723:3871" ph="INSERT INTO Address... " />
+            <element signature="e#4728#4729#0" expanded="true" />
+            <element signature="e#4757#4758#0" expanded="true" />
+            <marker date="1485687474635" expanded="true" signature="3735:3856" ph="INSERT INTO Address... " />
+            <marker date="1485687474635" expanded="true" signature="3735:3883" ph="INSERT INTO Address... " />
           </folding>
         </state>
       </provider>
@@ -1428,23 +1432,23 @@
     <entry file="file://$PROJECT_DIR$/web/AddressRegistration.xhtml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
-          <caret line="37" column="35" lean-forward="false" selection-start-line="37" selection-start-column="35" selection-end-line="37" selection-end-column="35" />
+          <caret line="36" column="35" lean-forward="false" selection-start-line="36" selection-start-column="35" selection-end-line="36" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/ConfirmAddress.xhtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="90" lean-forward="false" selection-start-line="12" selection-start-column="90" selection-end-line="12" selection-end-column="90" />
+        <state relative-caret-position="198">
+          <caret line="11" column="90" lean-forward="false" selection-start-line="11" selection-start-column="90" selection-end-line="11" selection-end-column="90" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/AddressStoredStatus.xhtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="93" lean-forward="false" selection-start-line="12" selection-start-column="93" selection-end-line="12" selection-end-column="93" />
+        <state relative-caret-position="198">
+          <caret line="11" column="93" lean-forward="false" selection-start-line="11" selection-start-column="93" selection-end-line="11" selection-end-column="93" />
           <folding />
         </state>
       </provider>
