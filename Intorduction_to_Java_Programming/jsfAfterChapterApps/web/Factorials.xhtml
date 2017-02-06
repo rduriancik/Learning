@@ -6,11 +6,7 @@
 >
 <h:head>
     <title>Factorials</title>
-    <style>
-        table, th, td {
-            border: 1px solid black;
-        }
-    </style>
+    <h:outputStylesheet name="factorialsTable.css"/>
 </h:head>
 <h:body>
     <h:outputText value="#{factorialsBean.factorialTable}" escape="false"/>
