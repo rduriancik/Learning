@@ -76,9 +76,25 @@ class GetFlickrJsonData implements GetRawData.OnDownloadComplete {
                     String tags = jsonPhoto.getString("tags");
                     String photoUrl = jsonPhoto.getJSONObject("media").getString("m");
                     String link = photoUrl.replaceFirst("_m.", "_b.");
+
+                    Photo photoObject = new Photo(title, author, authorId, link, tags, photoUrl);
+                    mPhotoList.add(photoObject);
+
+                    Log.d(TAG, "onDownloadComplete " + photoObject.toString());
                 }
             } catch (JSONException ex) {
+                ex.printStackTrace();
+                Log.e(TAG, "onDownloadComplete: Error processing JSON data " + ex.getMessage());
+                status = DownloadStatus.FAILED_OR_EMPTY;
             }
         }
+
+        if (mCallBack != null) {
+            // now inform caller that processing is done - possibly returning null if there
+            // was an error
+            mCallBack.onDataAvailable(mPhotoList, status);
+        }
+
+        Log.d(TAG, "onDownloadComplete ends");
     }
 }
