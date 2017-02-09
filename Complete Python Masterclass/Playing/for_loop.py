@@ -51,7 +51,7 @@ for item in meal:
     if item == 'spam':
         nasty_food_item = item
         break
-else:  # if the loop comes to the end, this statement will be executed
+else:  # if the loop comes to the end, this statement is be executed
     print("I'll have a plate of that, then, please")
 
 if nasty_food_item:
