@@ -36,3 +36,23 @@ for i in range(1, 13):
         print("{1} times {0} is {2}".format(i, j, i * j), end="\t")
     # print("=======================")
     print()
+
+print()
+shopping_list = ["milk", "pasta", "eggs", "spam", "bread", "rice"]
+for item in shopping_list:
+    if item == 'spam':
+        continue
+    print("Buy " + item)
+
+print()
+meal = ["egg", "bacon", "spam", "sausages"]
+nasty_food_item = ''
+for item in meal:
+    if item == 'spam':
+        nasty_food_item = item
+        break
+else:  # if the loop comes to the end, this statement will be executed
+    print("I'll have a plate of that, then, please")
+
+if nasty_food_item:
+    print("Can't I have anything without spam in it")
