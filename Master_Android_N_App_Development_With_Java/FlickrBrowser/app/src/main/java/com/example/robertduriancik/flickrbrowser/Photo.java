@@ -1,10 +1,12 @@
 package com.example.robertduriancik.flickrbrowser;
 
+import java.io.Serializable;
+
 /**
  * Created by robert on 7.2.2017.
  */
 
-class Photo {
+class Photo implements Serializable {
     private String mTitle;
     private String mAuthor;
     private String mAuthorId;
