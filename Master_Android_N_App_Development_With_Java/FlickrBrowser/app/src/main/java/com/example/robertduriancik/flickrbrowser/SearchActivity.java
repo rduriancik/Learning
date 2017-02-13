@@ -57,6 +57,14 @@ public class SearchActivity extends BaseActivity {
             }
         });
 
+        mSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                finish();
+                return false;
+            }
+        });
+
         Log.d(TAG, "onCreateOptionsMenu: returned " + true);
         return true;
     }
