@@ -1,5 +1,7 @@
 package com.example.robertduriancik.sqlitetest;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +19,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        SQLiteDatabase sqLiteDatabase = getBaseContext().openOrCreateDatabase("sqlite-test-1.db", MODE_PRIVATE, null);
+        sqLiteDatabase.execSQL("CREATE TABLE contacts(name TEXT, phone INTEGER, email TEXT)");
+        sqLiteDatabase.execSQL("INSERT INTO contacts VALUE ('tim', 6456778, 'tim@email.com');");
+        sqLiteDatabase.execSQL("INSERT INTO contacts VALUE ('Fred', 12345, 'fred@email.com');");
+
+        Cursor query = sqLiteDatabase.rawQuery("SELECT * FROM contacts;", null);
+        if (query.moveToFirst()) {
+            String name = query.getString(0);
+            int phone = query.getInt(1);
+            String email = query.getString(2);
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
