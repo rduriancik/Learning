@@ -7,11 +7,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,16 +24,33 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         SQLiteDatabase sqLiteDatabase = getBaseContext().openOrCreateDatabase("sqlite-test-1.db", MODE_PRIVATE, null);
-        sqLiteDatabase.execSQL("CREATE TABLE contacts(name TEXT, phone INTEGER, email TEXT)");
-        sqLiteDatabase.execSQL("INSERT INTO contacts VALUE ('tim', 6456778, 'tim@email.com');");
-        sqLiteDatabase.execSQL("INSERT INTO contacts VALUE ('Fred', 12345, 'fred@email.com');");
+        String sql = "DROP TABLE IF EXISTS contacts;";
+        Log.d(TAG, "onCreate: sql is " + sql);
+        sqLiteDatabase.execSQL(sql);
+        sql = "CREATE TABLE contacts(name TEXT, phone INTEGER, email TEXT);";
+//        sql = "CREATE TABLE IF NOT EXISTS contacts(name TEXT, phone INTEGER, email TEXT);";
+        Log.d(TAG, "onCreate: sql is " + sql);
+        sqLiteDatabase.execSQL(sql);
+        sql = "INSERT INTO contacts VALUES ('tim', 6456778, 'tim@email.com');";
+        Log.d(TAG, "onCreate: sql is " + sql);
+        sqLiteDatabase.execSQL(sql);
+        sql = "INSERT INTO contacts VALUES ('Fred', 12345, 'fred@email.com');";
+        Log.d(TAG, "onCreate: sql is " + sql);
+        sqLiteDatabase.execSQL(sql);
 
         Cursor query = sqLiteDatabase.rawQuery("SELECT * FROM contacts;", null);
         if (query.moveToFirst()) {
-            String name = query.getString(0);
-            int phone = query.getInt(1);
-            String email = query.getString(2);
+            do {
+                String name = query.getString(0);
+                int phone = query.getInt(1);
+                String email = query.getString(2);
+                Log.d(TAG, "onCreate: Name = " + name + " phone = " + phone + " email = " + email);
+                Toast.makeText(this, "Name = " + name + " phone = " + phone + " email = " + email, Toast.LENGTH_SHORT).show();
+            } while (query.moveToNext());
         }
+
+        query.close();
+        sqLiteDatabase.close();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
