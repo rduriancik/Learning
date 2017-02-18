@@ -1,10 +1,12 @@
 package com.example.robertduriancik.contentproviderexample;
 
+import android.Manifest;
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -20,6 +22,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private ListView contactNames;
+    private static final int REQUEST_CODE_READ_CONTACTS = 1;
+    private static boolean READ_CONTACTS_GRANTED = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         contactNames = (ListView) findViewById(R.id.contact_names);
+
+        int hasReadContactPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS);
+        Log.d(TAG, "onCreate: checkSelfPermission = " + hasReadContactPermission);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +53,9 @@ public class MainActivity extends AppCompatActivity {
                 if (cursor != null) {
                     List<String> contacts = new ArrayList<String>();
                     while (cursor.moveToNext()) {
-                        contacts.add(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME_PRIMARY)));
+                        String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME_PRIMARY));
+                        Log.d(TAG, "onClick: " + name + " " + cursor.getPosition());
+                        contacts.add(name);
                     }
                     cursor.close();
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, R.layout.contact_detail, R.id.name, contacts);
@@ -55,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "fab onClick: ends");
             }
         });
+
+        Log.d(TAG, "onCreate: ends");
     }
 
     @Override
