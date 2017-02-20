@@ -55,4 +55,37 @@ print('=' * 40)
 for i in range(3, 40, 3):
     print(i)
 
-print(my_range == range(3, 40, 3))
+print(my_range == range(3, 40, 3))  # True
+
+print()
+
+print(range(0, 5, 2) == range(0, 6, 2))  # True
+print(list(range(0, 5, 2)))
+print(list(range(0, 6, 2)))
+
+print()
+
+r = range(0, 100)
+print(r)
+
+for i in r[::-2]:
+    print(i)
+
+print('=' * 50)
+for i in range(99, 0, -2):
+    print(i)
+
+print('=' * 50)
+print(range(0, 100)[::-2] == range(99, 0, -2))  # True
+
+for i in range(0, 100, -2):  # Doesn't work 0 - 2 = -2 - 2 = -4
+    print(i)
+
+print()
+
+backString = "egaugnal lufrewop yrev a si nohtyP"
+print(backString[::-1])
+
+r = range(0, 10)
+for i in r[::-1]:
+    print(i)
