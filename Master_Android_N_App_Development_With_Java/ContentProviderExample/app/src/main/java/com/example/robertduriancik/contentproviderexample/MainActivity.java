@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private ListView contactNames;
     private static final int REQUEST_CODE_READ_CONTACTS = 1;
-    private static boolean READ_CONTACTS_GRANTED = false;
+    //    private static boolean READ_CONTACTS_GRANTED = false;
     private FloatingActionButton fab = null;
 
     @Override
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (hasReadContactPermission == PackageManager.PERMISSION_GRANTED) {
             Log.d(TAG, "onCreate: permission granted");
-            READ_CONTACTS_GRANTED = true;
+//            READ_CONTACTS_GRANTED = true;
         } else {
             Log.d(TAG, "onCreate: requesting permission");
             ActivityCompat.requestPermissions(this, new String[]{READ_CONTACTS}, REQUEST_CODE_READ_CONTACTS);
@@ -59,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "fab onClick: starts");
-                if (READ_CONTACTS_GRANTED) {
+//                if (READ_CONTACTS_GRANTED) {
+                if (ContextCompat.checkSelfPermission(MainActivity.this, READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
                     String[] projection = {ContactsContract.Contacts.DISPLAY_NAME_PRIMARY};
                     ContentResolver contentResolver = getContentResolver();
                     Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // Permission was granted
                     Log.d(TAG, "onRequestPermissionsResult: permission granted");
-                    READ_CONTACTS_GRANTED = true;
+//                    READ_CONTACTS_GRANTED = true;
                 } else {
                     // Permission denied, disable the functionality that depends on this permission.
                     Log.d(TAG, "onRequestPermissionsResult: permission refused");
