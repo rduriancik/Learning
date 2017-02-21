@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -46,11 +45,15 @@ public class MainActivity extends AppCompatActivity {
         int hasReadContactPermission = ContextCompat.checkSelfPermission(this, READ_CONTACTS);
         Log.d(TAG, "onCreate: checkSelfPermission = " + hasReadContactPermission);
 
-        if (hasReadContactPermission == PackageManager.PERMISSION_GRANTED) {
-            Log.d(TAG, "onCreate: permission granted");
-//            READ_CONTACTS_GRANTED = true;
-        } else {
-            Log.d(TAG, "onCreate: requesting permission");
+//        if (hasReadContactPermission == PackageManager.PERMISSION_GRANTED) {
+//            Log.d(TAG, "onCreate: permission granted");
+////            READ_CONTACTS_GRANTED = true;
+//        } else {
+//            Log.d(TAG, "onCreate: requesting permission");
+//            ActivityCompat.requestPermissions(this, new String[]{READ_CONTACTS}, REQUEST_CODE_READ_CONTACTS);
+//        }
+        if (hasReadContactPermission != PackageManager.PERMISSION_GRANTED) {
+            Log.d(TAG, "onCreate: requesting permissions");
             ActivityCompat.requestPermissions(this, new String[]{READ_CONTACTS}, REQUEST_CODE_READ_CONTACTS);
         }
 
@@ -81,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                         contactNames.setAdapter(adapter);
                     }
                 } else {
-                    Snackbar.make(view, "This app can't display your Contacts records unless you grant access", Snackbar.LENGTH_INDEFINITE)
+                    Snackbar.make(view, "This app can't display your Contacts records unless you...", Snackbar.LENGTH_INDEFINITE)
                             .setAction("Grant Access", new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
@@ -111,25 +114,25 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: ends");
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Log.d(TAG, "onRequestPermissionsResult: starts");
-        switch (requestCode) {
-            case REQUEST_CODE_READ_CONTACTS: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // Permission was granted
-                    Log.d(TAG, "onRequestPermissionsResult: permission granted");
-//                    READ_CONTACTS_GRANTED = true;
-                } else {
-                    // Permission denied, disable the functionality that depends on this permission.
-                    Log.d(TAG, "onRequestPermissionsResult: permission refused");
-                }
-//                fab.setEnabled(READ_CONTACTS_GRANTED);
-            }
-        }
-        Log.d(TAG, "onRequestPermissionsResult: ends");
-    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        Log.d(TAG, "onRequestPermissionsResult: starts");
+//        switch (requestCode) {
+//            case REQUEST_CODE_READ_CONTACTS: {
+//                // If request is cancelled, the result arrays are empty.
+//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    // Permission was granted
+//                    Log.d(TAG, "onRequestPermissionsResult: permission granted");
+////                    READ_CONTACTS_GRANTED = true;
+//                } else {
+//                    // Permission denied, disable the functionality that depends on this permission.
+//                    Log.d(TAG, "onRequestPermissionsResult: permission refused");
+//                }
+////                fab.setEnabled(READ_CONTACTS_GRANTED);
+//            }
+//        }
+//        Log.d(TAG, "onRequestPermissionsResult: ends");
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
