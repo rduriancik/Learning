@@ -10,7 +10,7 @@ import android.util.Log;
  * <p>
  * Basic database class for the application.
  * <p>
- * The only class that should use this is AppProvider.
+ * The only class that should use this is {@link AppProvider}.
  */
 
 class AppDatabase extends SQLiteOpenHelper {
@@ -48,11 +48,11 @@ class AppDatabase extends SQLiteOpenHelper {
         String sSQL;  // Use a string variable to facilitate logging
 //        sSQL = "CREATE TABLE Tasks (_id INTEGER PRIMARY KEY NOT NULL, Name TEXT NOT NULL," +
 //                " Description TEXT, SortOrder INTEGER, CategoryID INTEGER);";
-        sSQL = "CREATE TABLE " + TaskContract.TABLE_NAME + " ("
-                + TaskContract.Columns._ID + " INTEGER PRIMARY KEY NOT NULL, "
-                + TaskContract.Columns.TASKS_NAME + " TEXT NOT NULL, "
-                + TaskContract.Columns.TASKS_DESCRIPTION + " TEXT, "
-                + TaskContract.Columns.TASKS_SORTORDER + " INTEGER);";
+        sSQL = "CREATE TABLE " + TasksContract.TABLE_NAME + " ("
+                + TasksContract.Columns._ID + " INTEGER PRIMARY KEY NOT NULL, "
+                + TasksContract.Columns.TASKS_NAME + " TEXT NOT NULL, "
+                + TasksContract.Columns.TASKS_DESCRIPTION + " TEXT, "
+                + TasksContract.Columns.TASKS_SORTORDER + " INTEGER);";
         Log.d(TAG, sSQL);
         sqLiteDatabase.execSQL(sSQL);
 

@@ -6,7 +6,7 @@ import android.provider.BaseColumns;
  * Created by robert on 22.2.2017.
  */
 
-public class TaskContract {
+public class TasksContract {
     static final String TABLE_NAME = "Tasks";
 
     // Tasks fields
