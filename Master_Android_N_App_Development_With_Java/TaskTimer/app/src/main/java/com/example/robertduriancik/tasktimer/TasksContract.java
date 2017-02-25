@@ -1,12 +1,18 @@
 package com.example.robertduriancik.tasktimer;
 
+import android.content.ContentUris;
+import android.net.Uri;
 import android.provider.BaseColumns;
+
+import static com.example.robertduriancik.tasktimer.AppProvider.CONTENT_AUTHORITY;
+import static com.example.robertduriancik.tasktimer.AppProvider.CONTENT_AUTHORITY_URI;
 
 /**
  * Created by robert on 22.2.2017.
  */
 
 public class TasksContract {
+
     static final String TABLE_NAME = "Tasks";
 
     // Tasks fields
@@ -19,5 +25,21 @@ public class TasksContract {
         private Columns() {
             // Private constructor to prevent instantiation
         }
+    }
+
+    /**
+     * The URI to access the Tasks table
+     */
+    public static final Uri CONTENT_URI = Uri.withAppendedPath(CONTENT_AUTHORITY_URI, TABLE_NAME);
+
+    static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd." + CONTENT_AUTHORITY + "." + TABLE_NAME;
+    static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd." + CONTENT_AUTHORITY + "." + TABLE_NAME;
+
+    static Uri buildTaskUri(long taskId) {
+        return ContentUris.withAppendedId(CONTENT_URI, taskId);
+    }
+
+    static long getTaskId(Uri uri) {
+        return ContentUris.parseId(uri);
     }
 }
