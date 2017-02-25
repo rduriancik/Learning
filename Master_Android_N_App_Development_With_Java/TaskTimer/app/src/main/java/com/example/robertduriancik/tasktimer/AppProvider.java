@@ -107,13 +107,62 @@ public class AppProvider extends ContentProvider {
     @Nullable
     @Override
     public String getType(Uri uri) {
-        return null;
+        final int match = sUriMatcher.match(uri);
+        switch (match) {
+            case TASKS:
+                return TasksContract.CONTENT_TYPE;
+            case TASKS_ID:
+                return TasksContract.CONTENT_ITEM_TYPE;
+//            case TIMINGS:
+//                return TimingsContract.CONTENT_TYPE;
+//            case TIMINGS_ID:
+//                return TimingsContract.CONTENT_ITEM_TYPE;
+//            case TASK_DURATIONS:
+//                return DurationsContract.CONTENT_TYPE;
+//            case TASK_DURATIONS_ID:
+//                return DurationsContract.CONTENT_ITEM_TYPE;
+            default:
+                throw new IllegalArgumentException("Unknown Uri: " + uri);
+        }
     }
 
     @Nullable
     @Override
     public Uri insert(Uri uri, ContentValues contentValues) {
-        return null;
+        Log.d(TAG, "Entering insert, called with Uri: " + uri);
+        final int match = sUriMatcher.match(uri);
+        Log.d(TAG, "match is " + match);
+
+        final SQLiteDatabase db;
+
+        Uri returnUri;
+        long recordId;
+        switch (match) {
+            case TASKS:
+                db = mOpenHelper.getWritableDatabase();
+                recordId = db.insert(TasksContract.TABLE_NAME, null, contentValues);
+                if (recordId >= 0) {
+                    returnUri = TasksContract.buildTaskUri(recordId);
+                } else {
+                    throw new android.database.SQLException("Failed to insert into " + uri.toString());
+                }
+                break;
+            case TIMINGS:
+//                db = mOpenHelper.getWritableDatabase();
+//                recordId = db.insert(TimingsContract.TABLE_NAME, null, contentValues);
+//                if (recordId >= 0) {
+//                    returnUri = TimingsContract.buildTimingUri(recordId);
+//                } else {
+//                    throw new android.database.SQLException("Failed to insert into " + uri.toString());
+//                }
+//                break;
+            default:
+                throw new IllegalArgumentException("Uknown Uri: " + uri);
+        }
+
+        Log.d(TAG, "Exiting insert, returning " + returnUri);
+
+        return returnUri;
     }
 
     @Override

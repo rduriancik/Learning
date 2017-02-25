@@ -1,11 +1,13 @@
 package com.example.robertduriancik.tasktimer;
 
-import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentResolver;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,8 +22,26 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        AppDatabase appDatabase = AppDatabase.getInstance(this);
-        final SQLiteDatabase db = appDatabase.getReadableDatabase();
+        String[] projection = {TasksContract.Columns.TASKS_NAME, TasksContract.Columns.TASKS_DESCRIPTION};
+        ContentResolver contentResolver = getContentResolver();
+
+        Cursor cursor = contentResolver.query(TasksContract.CONTENT_URI,
+                projection,
+                null,
+                null,
+                TasksContract.Columns.TASKS_NAME);
+
+        if (cursor != null) {
+            Log.d(TAG, "onCreate: number of rows: " + cursor.getCount());
+            while (cursor.moveToNext()) {
+                for (int i = 0; i < cursor.getColumnCount(); ++i) {
+                    Log.d(TAG, "onCreate: " + cursor.getColumnName(i) + ": " + cursor.getString(i));
+                }
+                Log.d(TAG, "onCreate: ===============================");
+            }
+            cursor.close();
+
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
