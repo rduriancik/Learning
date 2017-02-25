@@ -18,6 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <provider
+            android:name="com.example.robertduriancik.tasktimer.AppProvider"
+            android:authorities="com.example.robertduriancik.tasktimer.provider"
+            android:exported="false"/>
     </application>
 
 </manifest>
