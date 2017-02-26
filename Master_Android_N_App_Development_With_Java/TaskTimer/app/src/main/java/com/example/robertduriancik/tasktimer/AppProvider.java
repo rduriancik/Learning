@@ -214,6 +214,48 @@ public class AppProvider extends ContentProvider {
 
     @Override
     public int delete(Uri uri, String s, String[] strings) {
-        return 0;
+        Log.d(TAG, "delete: update called with uri: " + uri);
+        final int match = sUriMatcher.match(uri);
+        Log.d(TAG, "delete: match is " + match);
+
+        final SQLiteDatabase db;
+        int count;
+
+        String selectionCriteria;
+        switch (match) {
+            case TASKS:
+                db = mOpenHelper.getWritableDatabase();
+                count = db.delete(TasksContract.TABLE_NAME, s, strings);
+                break;
+            case TASKS_ID:
+                db = mOpenHelper.getWritableDatabase();
+                long taskId = TasksContract.getTaskId(uri);
+                selectionCriteria = TasksContract.Columns._ID + " = " + taskId;
+
+                if (s != null && s.length() > 0) {
+                    selectionCriteria += " AND (" + s + ")";
+                }
+                count = db.delete(TasksContract.TABLE_NAME, selectionCriteria, strings);
+                break;
+//            case TIMINGS:
+//                db = mOpenHelper.getWritableDatabase();
+//                count = db.delete(TimingsContract.TABLE_NAME, s, strings);
+//                break;
+//            case TIMINGS_ID:
+//                db = mOpenHelper.getWritableDatabase();
+//                long timingsId = TimingsContract.getTaskId(uri);
+//                selectionCriteria = TimingsContract.Columns._ID + " = " + timingsId;
+//
+//                if (s != null && s.length() > 0) {
+//                    selectionCriteria += " AND (" + s + ")";
+//                }
+//                count = db.delete(TimingsContract.TABLE_NAME, selectionCriteria, strings);
+//                break;
+            default:
+                throw new IllegalArgumentException("Unknown uri: " + uri);
+        }
+
+        Log.d(TAG, "Exiting delete, returning " + count);
+        return count;
     }
 }
