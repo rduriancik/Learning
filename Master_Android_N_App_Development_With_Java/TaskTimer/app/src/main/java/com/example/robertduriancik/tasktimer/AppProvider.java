@@ -167,7 +167,49 @@ public class AppProvider extends ContentProvider {
 
     @Override
     public int update(Uri uri, ContentValues contentValues, String s, String[] strings) {
-        return 0;
+        Log.d(TAG, "update: update called with uri: " + uri);
+        final int match = sUriMatcher.match(uri);
+        Log.d(TAG, "update: match is " + match);
+
+        final SQLiteDatabase db;
+        int count;
+
+        String selectionCriteria;
+        switch (match) {
+            case TASKS:
+                db = mOpenHelper.getWritableDatabase();
+                count = db.update(TasksContract.TABLE_NAME, contentValues, s, strings);
+                break;
+            case TASKS_ID:
+                db = mOpenHelper.getWritableDatabase();
+                long taskId = TasksContract.getTaskId(uri);
+                selectionCriteria = TasksContract.Columns._ID + " = " + taskId;
+
+                if (s != null && s.length() > 0) {
+                    selectionCriteria += " AND (" + s + ")";
+                }
+                count = db.update(TasksContract.TABLE_NAME, contentValues, selectionCriteria, strings);
+                break;
+//            case TIMINGS:
+//                db = mOpenHelper.getWritableDatabase();
+//                count = db.update(TimingsContract.TABLE_NAME, contentValues, s, strings);
+//                break;
+//            case TIMINGS_ID:
+//                db = mOpenHelper.getWritableDatabase();
+//                long timingsId = TimingsContract.getTaskId(uri);
+//                selectionCriteria = TimingsContract.Columns._ID + " = " + timingsId;
+//
+//                if (s != null && s.length() > 0) {
+//                    selectionCriteria += " AND (" + s + ")";
+//                }
+//                count = db.update(TimingsContract.TABLE_NAME, contentValues, selectionCriteria, strings);
+//                break;
+            default:
+                throw new IllegalArgumentException("Unknown uri: " + uri);
+        }
+
+        Log.d(TAG, "Exiting update, returning " + count);
+        return count;
     }
 
     @Override
