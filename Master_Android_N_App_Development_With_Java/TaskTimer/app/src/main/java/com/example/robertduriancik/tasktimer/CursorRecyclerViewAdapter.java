@@ -39,12 +39,8 @@ class CursorRecyclerViewAdapter extends RecyclerView.Adapter<CursorRecyclerViewA
         Log.d(TAG, "onBindViewHolder: starts");
         if (mCursor == null || mCursor.getCount() == 0) {
             Log.d(TAG, "onBindViewHolder: providing instructions");
-            holder.name.setText("Instructions");
-            holder.description.setText("Use the add button (+) in the toolbar above to create new tasks." +
-                    "\n\nTasks with lower sort orders will be placed higher up the list." +
-                    "Tasks with the same sort order will be sorted alphabetically." +
-                    "\n\nTapping a task will start the timer for that task (and will stop the timer for any previous task that was being timed)." +
-                    "\n\nEach task has Edit and Delete buttons if you want to change the details or remove the task.");
+            holder.name.setText(R.string.instructions_heading);
+            holder.description.setText(R.string.instructions);
 
             holder.deleteButton.setVisibility(View.GONE);
             holder.editButton.setVisibility(View.GONE);
