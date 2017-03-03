@@ -24,7 +24,12 @@ class CursorRecyclerViewAdapter extends RecyclerView.Adapter<CursorRecyclerViewA
 
     @Override
     public int getItemCount() {
-        return 0;
+        Log.d(TAG, "getItemCount: starts");
+        if (mCursor == null || mCursor.getCount() == 0) {
+            return 1; // fib, because we populate a single ViewHolder with instructions
+        } else {
+            return mCursor.getCount();
+        }
     }
 
     @Override
