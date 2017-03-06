@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -64,7 +65,7 @@ public class AppProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Cursor query(Uri uri, String[] strings, String s, String[] strings1, String s1) {
+    public Cursor query(@NonNull Uri uri, String[] strings, String s, String[] strings1, String s1) {
         Log.d(TAG, "query: called with URI " + uri);
         final int match = sUriMatcher.match(uri);
         Log.d(TAG, "query: match is " + match);
@@ -101,12 +102,17 @@ public class AppProvider extends ContentProvider {
         }
 
         SQLiteDatabase db = mOpenHelper.getReadableDatabase();
-        return queryBuilder.query(db, strings, s, strings1, null, null, s1);
+        // return queryBuilder.query(db, strings, s, strings1, null, null, s1);
+        Cursor cursor = queryBuilder.query(db, strings, s, strings1, null, null, s1);
+        Log.d(TAG, "query: " + cursor.getCount());
+
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
+        return cursor;
     }
 
     @Nullable
     @Override
-    public String getType(Uri uri) {
+    public String getType(@NonNull Uri uri) {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case TASKS:
@@ -128,7 +134,7 @@ public class AppProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Uri insert(Uri uri, ContentValues contentValues) {
+    public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
         Log.d(TAG, "Entering insert, called with Uri: " + uri);
         final int match = sUriMatcher.match(uri);
         Log.d(TAG, "match is " + match);
@@ -160,13 +166,21 @@ public class AppProvider extends ContentProvider {
                 throw new IllegalArgumentException("Uknown Uri: " + uri);
         }
 
+
+        if (recordId >= 0) {
+            // something was inserted
+            Log.d(TAG, "insert: Setting notifyChanged with " + uri);
+            getContext().getContentResolver().notifyChange(uri, null);
+        } else {
+            Log.d(TAG, "insert: nothing inserted");
+        }
         Log.d(TAG, "Exiting insert, returning " + returnUri);
 
         return returnUri;
     }
 
     @Override
-    public int update(Uri uri, ContentValues contentValues, String s, String[] strings) {
+    public int update(@NonNull Uri uri, ContentValues contentValues, String s, String[] strings) {
         Log.d(TAG, "update: update called with uri: " + uri);
         final int match = sUriMatcher.match(uri);
         Log.d(TAG, "update: match is " + match);
@@ -208,12 +222,19 @@ public class AppProvider extends ContentProvider {
                 throw new IllegalArgumentException("Unknown uri: " + uri);
         }
 
+        if (count > 0) {
+            // something was updated
+            Log.d(TAG, "update: Setting notifyChange with " + uri);
+            getContext().getContentResolver().notifyChange(uri, null);
+        } else {
+            Log.d(TAG, "update: nothing updated");
+        }
         Log.d(TAG, "Exiting update, returning " + count);
         return count;
     }
 
     @Override
-    public int delete(Uri uri, String s, String[] strings) {
+    public int delete(@NonNull Uri uri, String s, String[] strings) {
         Log.d(TAG, "delete: update called with uri: " + uri);
         final int match = sUriMatcher.match(uri);
         Log.d(TAG, "delete: match is " + match);
@@ -253,6 +274,14 @@ public class AppProvider extends ContentProvider {
 //                break;
             default:
                 throw new IllegalArgumentException("Unknown uri: " + uri);
+        }
+
+        if (count > 0) {
+            // something was deleted
+            Log.d(TAG, "delete: Setting notifyChange with " + uri);
+            getContext().getContentResolver().notifyChange(uri, null);
+        } else {
+            Log.d(TAG, "detele: nothing deleted");
         }
 
         Log.d(TAG, "Exiting delete, returning " + count);
