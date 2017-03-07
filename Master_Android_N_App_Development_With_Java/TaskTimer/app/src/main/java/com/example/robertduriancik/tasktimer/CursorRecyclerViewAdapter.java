@@ -79,10 +79,14 @@ class CursorRecyclerViewAdapter extends RecyclerView.Adapter<CursorRecyclerViewA
 
                     switch (v.getId()) {
                         case R.id.tli_edit:
-                            mListener.onEditClick(task);
+                            if (mListener != null) {
+                                mListener.onEditClick(task);
+                            }
                             break;
                         case R.id.tli_delete:
-                            mListener.onDeleteClick(task);
+                            if (mListener != null) {
+                                mListener.onDeleteClick(task);
+                            }
                             break;
                         default:
                             Log.d(TAG, "onClick: found unexpected button id");
