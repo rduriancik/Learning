@@ -32,7 +32,7 @@ class CursorRecyclerViewAdapter extends RecyclerView.Adapter<CursorRecyclerViewA
 
     @Override
     public int getItemCount() {
-        Log.d(TAG, "getItemCount: starts");
+//        Log.d(TAG, "getItemCount: starts");
         if (mCursor == null || mCursor.getCount() == 0) {
             return 1; // fib, because we populate a single ViewHolder with instructions
         } else {
@@ -42,14 +42,14 @@ class CursorRecyclerViewAdapter extends RecyclerView.Adapter<CursorRecyclerViewA
 
     @Override
     public TaskViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Log.d(TAG, "onCreateViewHolder: new view requested");
+//        Log.d(TAG, "onCreateViewHolder: new view requested");
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_list_items, parent, false);
         return new TaskViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(TaskViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: starts");
+//        Log.d(TAG, "onBindViewHolder: starts");
         if (mCursor == null || mCursor.getCount() == 0) {
             Log.d(TAG, "onBindViewHolder: providing instructions");
             holder.name.setText(R.string.instructions_heading);
@@ -75,7 +75,7 @@ class CursorRecyclerViewAdapter extends RecyclerView.Adapter<CursorRecyclerViewA
             View.OnClickListener buttonListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d(TAG, "onClick: starts");
+//                    Log.d(TAG, "onClick: starts");
 
                     switch (v.getId()) {
                         case R.id.tli_edit:
@@ -93,8 +93,8 @@ class CursorRecyclerViewAdapter extends RecyclerView.Adapter<CursorRecyclerViewA
                             throw new IllegalArgumentException("found unexpected button id");
                     }
 
-                    Log.d(TAG, "onClick: button with id " + v.getId());
-                    Log.d(TAG, "onClick: task name is " + task.getName());
+//                    Log.d(TAG, "onClick: button with id " + v.getId());
+//                    Log.d(TAG, "onClick: task name is " + task.getName());
                 }
             };
 
@@ -140,7 +140,7 @@ class CursorRecyclerViewAdapter extends RecyclerView.Adapter<CursorRecyclerViewA
 
         public TaskViewHolder(View itemView) {
             super(itemView);
-            Log.d(TAG, "TaskViewHolder: starts");
+//            Log.d(TAG, "TaskViewHolder: starts");
 
             this.deleteButton = (ImageButton) itemView.findViewById(R.id.tli_delete);
             this.description = (TextView) itemView.findViewById(R.id.tli_description);

@@ -14,7 +14,7 @@ class Task implements Serializable {
     private final String mDescription;
     private final int mSortOrder;
 
-    public Task(long id, String description, String name, int sortOrder) {
+    public Task(long id, String name, String description, int sortOrder) {
         m_Id = id;
         mDescription = description;
         mName = name;
