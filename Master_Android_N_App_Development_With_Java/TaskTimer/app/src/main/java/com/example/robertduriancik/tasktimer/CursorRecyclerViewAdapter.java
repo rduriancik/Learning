@@ -16,10 +16,18 @@ import android.widget.TextView;
 class CursorRecyclerViewAdapter extends RecyclerView.Adapter<CursorRecyclerViewAdapter.TaskViewHolder> {
     private static final String TAG = "CursorRecyclerViewAdapt";
     private Cursor mCursor;
+    private OnTaskClickListener mListener;
 
-    public CursorRecyclerViewAdapter(Cursor cursor) {
+    interface OnTaskClickListener {
+        void onEditClick(Task task);
+
+        void onDeleteClick(Task task);
+    }
+
+    public CursorRecyclerViewAdapter(Cursor cursor, OnTaskClickListener listener) {
         Log.d(TAG, "CursorRecyclerViewAdapter: constructor called");
         mCursor = cursor;
+        mListener = listener;
     }
 
     @Override
@@ -53,10 +61,41 @@ class CursorRecyclerViewAdapter extends RecyclerView.Adapter<CursorRecyclerViewA
             if (!mCursor.moveToPosition(position)) {
                 throw new IllegalStateException("Couldn't move cursor to position " + position);
             }
-            holder.name.setText(mCursor.getString(mCursor.getColumnIndex(TasksContract.Columns.TASKS_NAME)));
-            holder.description.setText(mCursor.getString(mCursor.getColumnIndex(TasksContract.Columns.TASKS_DESCRIPTION)));
+
+            final Task task = new Task(mCursor.getLong(mCursor.getColumnIndex(TasksContract.Columns._ID)),
+                    mCursor.getString(mCursor.getColumnIndex(TasksContract.Columns.TASKS_NAME)),
+                    mCursor.getString(mCursor.getColumnIndex(TasksContract.Columns.TASKS_DESCRIPTION)),
+                    mCursor.getInt(mCursor.getColumnIndex(TasksContract.Columns.TASKS_SORTORDER)));
+
+            holder.name.setText(task.getName());
+            holder.description.setText(task.getDescription());
             holder.editButton.setVisibility(View.VISIBLE); // TODO add on click listener
             holder.deleteButton.setVisibility(View.VISIBLE); // TODO add on click listener
+
+            View.OnClickListener buttonListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG, "onClick: starts");
+
+                    switch (v.getId()) {
+                        case R.id.tli_edit:
+                            mListener.onEditClick(task);
+                            break;
+                        case R.id.tli_delete:
+                            mListener.onDeleteClick(task);
+                            break;
+                        default:
+                            Log.d(TAG, "onClick: found unexpected button id");
+                            throw new IllegalArgumentException("found unexpected button id");
+                    }
+
+                    Log.d(TAG, "onClick: button with id " + v.getId());
+                    Log.d(TAG, "onClick: task name is " + task.getName());
+                }
+            };
+
+            holder.editButton.setOnClickListener(buttonListener);
+            holder.deleteButton.setOnClickListener(buttonListener);
         }
     }
 
