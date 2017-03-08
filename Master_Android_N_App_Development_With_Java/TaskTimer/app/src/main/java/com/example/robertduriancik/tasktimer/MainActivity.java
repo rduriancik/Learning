@@ -2,6 +2,8 @@ package com.example.robertduriancik.tasktimer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -14,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements CursorRecyclerVie
     // Whether or not the activity is in 2-pane mode
     // i.e. running in landscape on a tablet
     private boolean mTwoPane = false;
+
     private static final String ADD_EDIT_FRAGMENT = "AddEditFragment";
 
     @Override
@@ -23,7 +26,11 @@ public class MainActivity extends AppCompatActivity implements CursorRecyclerVie
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        if (findViewById(R.id.task_details_container) != null) {
+            // The detail container view will be present only in the large-screen layouts (res/values-land and res/values-sw600cp).
+            // If this view is present, then the activity should be in two-pane mode.
+            mTwoPane = true;
+        }
     }
 
     @Override
@@ -73,6 +80,16 @@ public class MainActivity extends AppCompatActivity implements CursorRecyclerVie
         if (mTwoPane) {
             Log.d(TAG, "taskEditRequest: in 2-pane mode (tablet)");
 
+            AddEditActivityFragment fragment = new AddEditActivityFragment();
+
+            Bundle arguments = new Bundle();
+            arguments.putSerializable(Task.class.getSimpleName(), task);
+            fragment.setArguments(arguments);
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.task_details_container, fragment);
+            fragmentTransaction.commit();
         } else {
             Log.d(TAG, "taskEditRequest: in single-pane mode (phone)");
             // in single-pane mode, start the detail activity for the selected item id.
