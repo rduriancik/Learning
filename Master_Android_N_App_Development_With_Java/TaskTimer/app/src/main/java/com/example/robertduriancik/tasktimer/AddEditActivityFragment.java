@@ -138,6 +138,10 @@ public class AddEditActivityFragment extends Fragment {
                 }
 
                 Log.d(TAG, "onClick: Done editing");
+
+                if (mSaveListener != null) {
+                    mSaveListener.onSaveClicked();
+                }
             }
         });
 
