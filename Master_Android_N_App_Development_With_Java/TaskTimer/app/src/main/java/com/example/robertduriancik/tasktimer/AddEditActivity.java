@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-public class AddEditActivity extends AppCompatActivity {
+public class AddEditActivity extends AppCompatActivity implements AddEditActivityFragment.OnSaveClicked {
     private static final String TAG = "AddEditActivity";
 
     @Override
@@ -31,4 +31,8 @@ public class AddEditActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onSaveClicked() {
+        finish();
+    }
 }
