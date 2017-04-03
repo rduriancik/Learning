@@ -11,7 +11,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity implements CursorRecyclerViewAdapter.OnTaskClickListener,
-        AddEditActivityFragment.OnSaveClicked {
+        AddEditActivityFragment.OnSaveClicked,
+        AppDialog.DialogEvents {
     private static final String TAG = "MainActivity";
 
     // Whether or not the activity is in 2-pane mode
@@ -125,5 +126,20 @@ public class MainActivity extends AppCompatActivity implements CursorRecyclerVie
                 startActivity(detailIntent);
             }
         }
+    }
+
+    @Override
+    public void onPositiveDialogResult(int dialogId, Bundle args) {
+        Log.d(TAG, "onPositiveDialogResult: called");
+    }
+
+    @Override
+    public void onNegativeDialogResult(int dialogId, Bundle args) {
+        Log.d(TAG, "onNegativeDialogResult: called");
+    }
+
+    @Override
+    public void onDialogCancelled(int dialogId) {
+        Log.d(TAG, "onDialogCancelled: called");
     }
 }
