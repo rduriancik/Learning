@@ -82,7 +82,7 @@ public class AddEditActivityFragment extends Fragment {
                 Log.d(TAG, "onCreateView: Task details found, editing...");
                 mNameTextView.setText(task.getName());
                 mDescriptionTextView.setText(task.getDescription());
-                mSortOrderTextView.setText(Integer.toString(task.getSortOrder()));
+                mSortOrderTextView.setText(String.valueOf(task.getSortOrder()));
                 mMode = FragmentEditMode.EDIT;
             } else {
                 mMode = FragmentEditMode.ADD;

@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements CursorRecyclerVie
 
     private static final String ADD_EDIT_FRAGMENT = "AddEditFragment";
     public static final int DELETE_DIALOG_ID = 1;
+    public static final int CANCEL_EDIT_DIALOG_ID = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,5 +145,26 @@ public class MainActivity extends AppCompatActivity implements CursorRecyclerVie
     @Override
     public void onDialogCancelled(int dialogId) {
         Log.d(TAG, "onDialogCancelled: called");
+    }
+
+    @Override
+    public void onBackPressed() {
+        Log.d(TAG, "onBackPressed: called");
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        AddEditActivityFragment fragment = (AddEditActivityFragment) fragmentManager.findFragmentById(R.id.task_details_container);
+        if (fragment == null || fragment.canClose()) {
+            super.onBackPressed();
+        } else {
+            // show dialog to get confirmation to quit editing
+            AppDialog dialog = new AppDialog();
+            Bundle args = new Bundle();
+            args.putInt(AppDialog.DIALOG_ID, CANCEL_EDIT_DIALOG_ID);
+            args.putString(AppDialog.DIALOG_MESSAGE, getString(R.string.cancelEditDiag_message));
+            args.putInt(AppDialog.DIALOG_POSITIVE_RID, R.string.cancelEditDiag_positive_caption);
+            args.putInt(AppDialog.DIALOG_NEGATIVE_RID, R.string.cancelEditDiag_negative_caption);
+
+            dialog.setArguments(args);
+            dialog.show(getFragmentManager(), null);
+        }
     }
 }
