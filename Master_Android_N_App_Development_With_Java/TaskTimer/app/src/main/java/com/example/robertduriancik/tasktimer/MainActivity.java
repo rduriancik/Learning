@@ -19,9 +19,8 @@ public class MainActivity extends AppCompatActivity implements CursorRecyclerVie
     // i.e. running in landscape on a tablet
     private boolean mTwoPane = false;
 
-    private static final String ADD_EDIT_FRAGMENT = "AddEditFragment";
-    public static final int DELETE_DIALOG_ID = 1;
-    public static final int CANCEL_EDIT_DIALOG_ID = 2;
+    public static final int DIALOG_ID_DELETE = 1;
+    public static final int DIALOG_ID_CANCEL_EDIT = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements CursorRecyclerVie
 
         AppDialog appDialog = new AppDialog();
         Bundle args = new Bundle();
-        args.putInt(AppDialog.DIALOG_ID, DELETE_DIALOG_ID);
+        args.putInt(AppDialog.DIALOG_ID, DIALOG_ID_DELETE);
         args.putString(AppDialog.DIALOG_MESSAGE, getString(R.string.deldiag_message, task.getId(), task.getName()));
         args.putInt(AppDialog.DIALOG_POSITIVE_RID, R.string.deldiag_positive_caption);
 
@@ -158,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements CursorRecyclerVie
             // show dialog to get confirmation to quit editing
             AppDialog dialog = new AppDialog();
             Bundle args = new Bundle();
-            args.putInt(AppDialog.DIALOG_ID, CANCEL_EDIT_DIALOG_ID);
+            args.putInt(AppDialog.DIALOG_ID, DIALOG_ID_CANCEL_EDIT);
             args.putString(AppDialog.DIALOG_MESSAGE, getString(R.string.cancelEditDiag_message));
             args.putInt(AppDialog.DIALOG_POSITIVE_RID, R.string.cancelEditDiag_positive_caption);
             args.putInt(AppDialog.DIALOG_NEGATIVE_RID, R.string.cancelEditDiag_negative_caption);
