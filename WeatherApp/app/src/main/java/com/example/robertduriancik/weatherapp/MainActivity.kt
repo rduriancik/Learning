@@ -2,7 +2,8 @@ package com.example.robertduriancik.weatherapp
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
 
@@ -10,6 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        message.text = "Hello Kotlin!"
+        val forecastList = findViewById(R.id.forecast_list) as RecyclerView
+        forecastList.layoutManager = LinearLayoutManager(this)
     }
 }
