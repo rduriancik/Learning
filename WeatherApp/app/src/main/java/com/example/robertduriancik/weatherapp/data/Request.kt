@@ -1,4 +1,4 @@
-package com.example.robertduriancik.weatherapp
+package com.example.robertduriancik.weatherapp.data
 
 import android.util.Log
 import java.net.URL

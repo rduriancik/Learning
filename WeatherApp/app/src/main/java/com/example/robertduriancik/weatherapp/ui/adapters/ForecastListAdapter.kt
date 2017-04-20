@@ -1,4 +1,4 @@
-package com.example.robertduriancik.weatherapp.adapters
+package com.example.robertduriancik.weatherapp.ui.adapters
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
