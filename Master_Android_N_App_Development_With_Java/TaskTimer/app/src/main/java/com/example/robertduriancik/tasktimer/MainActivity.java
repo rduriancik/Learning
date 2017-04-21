@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import static com.example.robertduriancik.tasktimer.AppDialog.DIALOG_ID;
+
 public class MainActivity extends AppCompatActivity implements CursorRecyclerViewAdapter.OnTaskClickListener,
         AddEditActivityFragment.OnSaveClicked,
         AppDialog.DialogEvents {
@@ -91,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements CursorRecyclerVie
 
         AppDialog appDialog = new AppDialog();
         Bundle args = new Bundle();
-        args.putInt(AppDialog.DIALOG_ID, DIALOG_ID_DELETE);
+        args.putInt(DIALOG_ID, DIALOG_ID_DELETE);
         args.putString(AppDialog.DIALOG_MESSAGE, getString(R.string.deldiag_message, task.getId(), task.getName()));
         args.putInt(AppDialog.DIALOG_POSITIVE_RID, R.string.deldiag_positive_caption);
 
@@ -131,14 +133,30 @@ public class MainActivity extends AppCompatActivity implements CursorRecyclerVie
     @Override
     public void onPositiveDialogResult(int dialogId, Bundle args) {
         Log.d(TAG, "onPositiveDialogResult: called");
-        Long taskId = args.getLong("TaskId");
-        if (BuildConfig.DEBUG && taskId == 0) throw new AssertionError("Task ID is zero");
-        getContentResolver().delete(TasksContract.buildTaskUri(taskId), null, null);
+        switch (dialogId) {
+            case DIALOG_ID_DELETE:
+                Long taskId = args.getLong("TaskId");
+                if (BuildConfig.DEBUG && taskId == 0) throw new AssertionError("Task ID is zero");
+                getContentResolver().delete(TasksContract.buildTaskUri(taskId), null, null);
+                break;
+            case DIALOG_ID_CANCEL_EDIT:
+                // no action required
+                break;
+        }
+
     }
 
     @Override
     public void onNegativeDialogResult(int dialogId, Bundle args) {
         Log.d(TAG, "onNegativeDialogResult: called");
+        switch (dialogId) {
+            case DIALOG_ID_DELETE:
+                // no action required
+                break;
+            case DIALOG_ID_CANCEL_EDIT:
+                finish();
+                break;
+        }
     }
 
     @Override
@@ -157,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements CursorRecyclerVie
             // show dialog to get confirmation to quit editing
             AppDialog dialog = new AppDialog();
             Bundle args = new Bundle();
-            args.putInt(AppDialog.DIALOG_ID, DIALOG_ID_CANCEL_EDIT);
+            args.putInt(DIALOG_ID, DIALOG_ID_CANCEL_EDIT);
             args.putString(AppDialog.DIALOG_MESSAGE, getString(R.string.cancelEditDiag_message));
             args.putInt(AppDialog.DIALOG_POSITIVE_RID, R.string.cancelEditDiag_positive_caption);
             args.putInt(AppDialog.DIALOG_NEGATIVE_RID, R.string.cancelEditDiag_negative_caption);
