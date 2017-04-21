@@ -1,4 +1,4 @@
-package com.example.robertduriancik.weatherapp.domain
+package com.example.robertduriancik.weatherapp.domain.model
 
 /**
  * Created by robert-ntb on 4/21/17.
