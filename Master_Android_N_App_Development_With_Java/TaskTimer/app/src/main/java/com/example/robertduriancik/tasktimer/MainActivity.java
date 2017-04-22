@@ -2,6 +2,7 @@ package com.example.robertduriancik.tasktimer;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -94,12 +95,21 @@ public class MainActivity extends AppCompatActivity implements CursorRecyclerVie
     public void showAboutDialog() {
         @SuppressLint("InflateParams") View messageView = getLayoutInflater().inflate(R.layout.about, null, false);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setView(messageView);
 
-        mDialog = builder.create();
+        mDialog = builder.setView(messageView)
+                .setTitle(R.string.app_name)
+                .setIcon(R.mipmap.ic_launcher)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (mDialog != null && mDialog.isShowing()) {
+                            mDialog.dismiss();
+                        }
+                    }
+                })
+                .create();
         mDialog.setCanceledOnTouchOutside(true);
-        mDialog.setTitle(R.string.app_name);
-        mDialog.setIcon(R.mipmap.ic_launcher);
+
 
         TextView textView = (TextView) messageView.findViewById(R.id.about_version);
         textView.setText("v" + BuildConfig.VERSION_NAME);
@@ -207,6 +217,14 @@ public class MainActivity extends AppCompatActivity implements CursorRecyclerVie
 
             dialog.setArguments(args);
             dialog.show(getFragmentManager(), null);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
         }
     }
 }
