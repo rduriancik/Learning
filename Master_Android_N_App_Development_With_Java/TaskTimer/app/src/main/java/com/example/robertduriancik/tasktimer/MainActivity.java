@@ -2,8 +2,10 @@ package com.example.robertduriancik.tasktimer;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static com.example.robertduriancik.tasktimer.AppDialog.DIALOG_ID;
 
@@ -113,6 +116,23 @@ public class MainActivity extends AppCompatActivity implements CursorRecyclerVie
 
         TextView textView = (TextView) messageView.findViewById(R.id.about_version);
         textView.setText("v" + BuildConfig.VERSION_NAME);
+
+        final TextView about_url = (TextView) messageView.findViewById(R.id.about_url);
+        if (about_url != null) {
+            about_url.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    String s = ((TextView) v).getText().toString();
+                    intent.setData(Uri.parse(s));
+                    try {
+                        startActivity(intent);
+                    } catch (ActivityNotFoundException e) {
+                        Toast.makeText(MainActivity.this, "No browser application found, cannot visit world-wide-web", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
 
         mDialog.show();
     }
