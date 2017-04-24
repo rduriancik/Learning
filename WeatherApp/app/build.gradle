@@ -37,4 +37,7 @@ dependencies {
 
     // Gson
     compile 'com.google.code.gson:gson:2.8.0'
+
+    // Picasso
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
