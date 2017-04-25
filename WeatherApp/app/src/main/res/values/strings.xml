@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+    <string name="forecast_item_icon_content_description">Icon showing the weather situation at given day</string>
 </resources>
