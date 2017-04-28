@@ -1,6 +1,7 @@
 package com.example.robertduriancik.weatherapp.ui
 
 import android.app.Application
+import com.example.robertduriancik.weatherapp.ui.utils.DelegatesExt
 
 /**
  * Created by robert-ntb on 4/28/17.
@@ -8,8 +9,7 @@ import android.app.Application
 
 class App : Application() {
     companion object {
-        private var instance: Application? = null
-        fun instance() = instance!!
+        var instance: App by DelegatesExt.notNullSingelValue()
     }
 
     override fun onCreate() {
