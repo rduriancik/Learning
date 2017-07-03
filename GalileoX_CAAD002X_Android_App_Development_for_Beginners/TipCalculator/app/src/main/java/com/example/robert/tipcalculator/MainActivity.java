@@ -31,11 +31,21 @@ public class MainActivity extends AppCompatActivity {
     private static final float DEFAULT_TIP_PERCENTAGE = 15;
     private static final float EXCELLENT_TIP_PERCENTAGE = 20;
 
+    public static final String KEY_PERCENTAGE = "percentage";
+    public static final String KEY_TIP_TOTAL = "tip_total";
+    public static final String KEY_FINAL_BILL_AMOUNT = "final_bill_amount";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        if (savedInstanceState != null) {
+            percentage = savedInstanceState.getFloat(KEY_PERCENTAGE);
+            tipTotal = savedInstanceState.getFloat(KEY_TIP_TOTAL);
+            finalBillAmount = savedInstanceState.getFloat(KEY_FINAL_BILL_AMOUNT);
+        }
 
         setTipValues();
     }
@@ -83,5 +93,13 @@ public class MainActivity extends AppCompatActivity {
 
         tipTotal = (totalBillAmount * percentage) / 100;
         finalBillAmount = totalBillAmount + tipTotal;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putFloat(KEY_PERCENTAGE, percentage);
+        outState.putFloat(KEY_TIP_TOTAL, tipTotal);
+        outState.putFloat(KEY_FINAL_BILL_AMOUNT, finalBillAmount);
+        super.onSaveInstanceState(outState);
     }
 }
