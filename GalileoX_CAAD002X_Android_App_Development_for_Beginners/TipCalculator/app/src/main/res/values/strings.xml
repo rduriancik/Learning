@@ -3,10 +3,13 @@
 
     <string name="main.msg.billamount">Bill amount</string>
     <string name="main.hint.billamount">Enter Bill Amount Here</string>
-    <string name="main.msg.serviceration">Service Rating</string>
+    <string name="main.msg.servicerating">Service Rating</string>
     <string name="main.msg.tippercent">%s%% Tip Percent</string>
     <string name="main.msg.tiptotal">$%s Tip Total</string>
     <string name="main.msg.billtotal">Bill Total</string>
     <string name="main.msg.billtotalresult">$%s</string>
+    <string name="regular_service">Regular service</string>
+    <string name="good_service">Good Service</string>
+    <string name="excellent_service">Excellent Service</string>
 
 </resources>
