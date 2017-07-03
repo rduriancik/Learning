@@ -59,7 +59,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/activity_image_buttons"
             android:layout_weight="1"
-            android:background="@color/colorBlue"
+            android:backgroundTint="@color/colorBlue"
             android:contentDescription="@string/regular_service"
             android:src="@drawable/emoticon_sad" />
 
@@ -68,7 +68,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/activity_image_buttons"
             android:layout_weight="1"
-            android:background="@color/colorBlue"
+            android:backgroundTint="@color/colorBlue"
             android:contentDescription="@string/good_service"
             android:src="@drawable/emoticon_happy" />
 
@@ -77,7 +77,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/activity_image_buttons"
             android:layout_weight="1"
-            android:background="@color/colorBlue"
+            android:backgroundTint="@color/colorBlue"
             android:contentDescription="@string/excellent_service"
             android:src="@drawable/emoticon" />
 
@@ -114,6 +114,7 @@
         android:showDividers="middle">
 
         <TextView
+            android:id="@+id/tvTipPercent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_vertical_margin"
@@ -124,6 +125,7 @@
             android:textColor="@color/colorWhite" />
 
         <TextView
+            android:id="@+id/tvTipAmount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_vertical_margin"
