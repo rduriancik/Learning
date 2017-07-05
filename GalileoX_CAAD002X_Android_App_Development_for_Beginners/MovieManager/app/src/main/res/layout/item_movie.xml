@@ -33,6 +33,7 @@
             android:layout_marginTop="@dimen/activity_small_margin"
             android:layout_toEndOf="@+id/ivMovieImage"
             android:layout_toRightOf="@+id/ivMovieImage"
+            android:layout_centerVertical="true"
             android:maxLength="20"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@android:color/black"
