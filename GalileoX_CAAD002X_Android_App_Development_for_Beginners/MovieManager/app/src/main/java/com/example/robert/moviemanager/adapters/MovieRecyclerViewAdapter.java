@@ -1,6 +1,7 @@
 package com.example.robert.moviemanager.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.robert.moviemanager.R;
+import com.example.robert.moviemanager.activities.MovieDetailActivity;
 import com.example.robert.moviemanager.models.Movie;
 import com.squareup.picasso.Picasso;
 
@@ -55,7 +57,7 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
         return mMovies.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.ivMovieImage)
         ImageView ivMovieImage;
         @BindView(R.id.tvTitle)
@@ -68,6 +70,16 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            final Movie movie = mMovies.get(getAdapterPosition());
+
+            Intent intent = new Intent(mContext, MovieDetailActivity.class);
+            intent.putExtra(Movie.class.getSimpleName(), movie);
+            mContext.startActivity(intent);
         }
     }
 }
