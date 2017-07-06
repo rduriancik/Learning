@@ -38,4 +38,31 @@ public class MainActivityTest {
         String expectedText = "115.0";
         onView(withId(R.id.totalAmount)).check(matches(withText(expectedText)));
     }
+
+    @Test
+    public void tipTotalAmount20Percent() {
+        onView(withId(R.id.input_billAmount)).perform(typeText(BILL_AMOUNT), closeSoftKeyboard());
+        onView(withId(R.id.button_tip_20)).perform(click());
+
+        String expectedText = "120.0";
+        onView(withId(R.id.totalAmount)).check(matches(withText(expectedText)));
+    }
+
+    @Test
+    public void tipTotalAmount30Percent() {
+        onView(withId(R.id.input_billAmount)).perform(typeText(BILL_AMOUNT), closeSoftKeyboard());
+        onView(withId(R.id.button_tip_30)).perform(click());
+
+        String expectedText = "130.0";
+        onView(withId(R.id.totalAmount)).check(matches(withText(expectedText)));
+    }
+
+    @Test
+    public void tipTotalAmount40Percent() {
+        onView(withId(R.id.input_billAmount)).perform(typeText(BILL_AMOUNT), closeSoftKeyboard());
+        onView(withId(R.id.button_tip_40)).perform(click());
+
+        String expectedText = "140.0";
+        onView(withId(R.id.totalAmount)).check(matches(withText(expectedText)));
+    }
 }
