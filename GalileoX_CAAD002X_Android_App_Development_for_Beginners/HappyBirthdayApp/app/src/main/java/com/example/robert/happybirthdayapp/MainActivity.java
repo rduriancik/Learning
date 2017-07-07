@@ -2,22 +2,32 @@ package com.example.robert.happybirthdayapp;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     private static final int READ_CONTACTS_PERMISSION_REQUEST = 1;
+    private static final int CONTACT_LOADER_ID = 90;
+
+    private SimpleCursorAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +45,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        setupCursorAdapter();
+        ListView lvContacts = (ListView) findViewById(R.id.lvContacts);
+        lvContacts.setAdapter(mAdapter);
+
         getPermissionToReadUserContacts();
+    }
+
+    private void setupCursorAdapter() {
+        String[] uiBindFrom = {
+                ContactsContract.Contacts.DISPLAY_NAME,
+                ContactsContract.Contacts.PHOTO_URI};
+
+        int[] uiBindTo = {R.id.tvName, R.id.ivImage};
+
+        mAdapter = new SimpleCursorAdapter(this,
+                R.layout.contacts_list_item,
+                null,
+                uiBindFrom,
+                uiBindTo,
+                0);
+
     }
 
     private void getPermissionToReadUserContacts() {
@@ -62,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadingContacts() {
-        Log.d(TAG, "We have permission to load the contacts");
+        getSupportLoaderManager().initLoader(CONTACT_LOADER_ID, new Bundle(), contactsLoader);
     }
 
     @Override
@@ -86,4 +116,32 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private LoaderManager.LoaderCallbacks<Cursor> contactsLoader = new LoaderManager.LoaderCallbacks<Cursor>() {
+        @Override
+        public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+            String[] projectionFields = {
+                    ContactsContract.Contacts._ID,
+                    ContactsContract.Contacts.DISPLAY_NAME,
+                    ContactsContract.Contacts.PHOTO_URI
+            };
+
+            return new CursorLoader(MainActivity.this,
+                    ContactsContract.Contacts.CONTENT_URI,
+                    projectionFields,
+                    null,
+                    null,
+                    null);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+            mAdapter.swapCursor(data);
+        }
+
+        @Override
+        public void onLoaderReset(Loader<Cursor> loader) {
+            mAdapter.swapCursor(null);
+        }
+    };
 }
