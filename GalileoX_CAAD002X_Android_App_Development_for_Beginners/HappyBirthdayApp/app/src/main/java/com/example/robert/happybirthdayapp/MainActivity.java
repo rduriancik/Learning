@@ -116,7 +116,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_about_me) {
+            loadAboutMe();
             return true;
         }
 
@@ -200,5 +201,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
 
         return email;
+    }
+
+    public void loadAboutMe() {
+        Intent loadAboutMe = new Intent(MainActivity.this, AboutMeActivity.class);
+        startActivity(loadAboutMe);
     }
 }
