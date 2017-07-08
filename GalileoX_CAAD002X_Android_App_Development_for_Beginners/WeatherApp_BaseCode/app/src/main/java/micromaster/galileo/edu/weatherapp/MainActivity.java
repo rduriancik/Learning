@@ -48,12 +48,15 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(WeatherResponse weatherResponse) {
-            WeatherData data = weatherResponse.getWeatherData();
-            pressure.setText(String.format(Locale.getDefault(), "%.2f", data.getPressure()));
-            countryName.setText(data.getDisplayLocation().getCityName());
-            temperature.setText(data.getTemp());
-            humidity.setText(data.getHumidity());
-            weather.setText(data.getWeather());
+
+            if (weatherResponse != null) {
+                WeatherData data = weatherResponse.getWeatherData();
+                pressure.setText(String.format(Locale.getDefault(), "%.2f", data.getPressure()));
+                countryName.setText(data.getDisplayLocation().getCityName());
+                temperature.setText(data.getTemp());
+                humidity.setText(data.getHumidity());
+                weather.setText(data.getWeather());
+            }
         }
 
         @Override
