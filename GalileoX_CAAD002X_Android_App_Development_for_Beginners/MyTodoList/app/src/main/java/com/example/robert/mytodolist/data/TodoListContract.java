@@ -15,7 +15,7 @@ public class TodoListContract {
     public static final String CONTENT_AUTHORITY = "robert.example.com";
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
-    private static final String PATH_TODO = "todo";
+    public static final String PATH_TODO = "todo";
 
     public static final class TodoEntry implements BaseColumns {
         public static final String TABLE_NAME = "todo";
