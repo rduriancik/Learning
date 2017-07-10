@@ -2,10 +2,13 @@ package com.example.robert.mytodolist;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+
+import com.example.robert.mytodolist.service.TodoListService;
 
 /**
  * Created by robert on 9.7.2017.
@@ -31,7 +34,9 @@ public class AddTaskDialogFragment extends DialogFragment {
         builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                Intent intent = new Intent(getContext(), TodoListService.class);
+                intent.putExtra(TodoListService.EXTRA_TASK_DESCRIPTION, "");
+                getActivity().startService(intent);
             }
         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
