@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import com.example.robertduriancik.weatherapp.R
 import com.example.robertduriancik.weatherapp.domain.model.Forecast
 import com.example.robertduriancik.weatherapp.domain.model.ForecastList
-import com.example.robertduriancik.weatherapp.ui.utils.ctx
+import com.example.robertduriancik.weatherapp.extensions.ctx
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_forecast.view.*
+import java.text.DateFormat
+import java.util.*
 
 /**
  * Created by robert-ntb on 4/20/17.
@@ -37,7 +39,7 @@ class ForecastListAdapter(val weekForecast: ForecastList,
         fun bindForecast(forecast: Forecast) {
             with(forecast) {
                 Picasso.with(itemView.ctx).load(iconUrl).into(itemView.icon)
-                itemView.date.text = date
+                itemView.date.text = convertDate(date)
                 itemView.description.text = description
                 itemView.maxTemperature.text = "$high"
                 itemView.minTemperature.text = "$low"
@@ -45,5 +47,9 @@ class ForecastListAdapter(val weekForecast: ForecastList,
             }
         }
 
+        private fun convertDate(date: Long): String {
+            val df = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault())
+            return df.format(date)
+        }
     }
 }

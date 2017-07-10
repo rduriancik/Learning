@@ -1,4 +1,4 @@
-package com.example.robertduriancik.weatherapp.data
+package com.example.robertduriancik.weatherapp.data.server
 
 /**
  * Created by robert-ntb on 4/21/17.
