@@ -1,5 +1,6 @@
 package com.example.robertduriancik.weatherapp.data.db
 
+import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.example.robertduriancik.weatherapp.ui.App
 import org.jetbrains.anko.db.*
@@ -8,8 +9,8 @@ import org.jetbrains.anko.db.*
  * Created by robert-ntb on 4/28/17.
  */
 
-class ForecastDbHelper() : ManagedSQLiteOpenHelper(App.instance,
-        ForecastDbHelper.DB_NAME, null, ForecastDbHelper.DB_VERSION) {
+class ForecastDbHelper(ctx: Context = App.instance) :
+        ManagedSQLiteOpenHelper(ctx, ForecastDbHelper.DB_NAME, null, ForecastDbHelper.DB_VERSION) {
 
     companion object {
         val DB_NAME = "forecast.db"
