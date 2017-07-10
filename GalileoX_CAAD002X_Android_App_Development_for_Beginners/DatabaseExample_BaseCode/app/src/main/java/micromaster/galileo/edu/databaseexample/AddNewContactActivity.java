@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import micromaster.galileo.edu.databaseexample.database.DataBaseDAO;
 import micromaster.galileo.edu.databaseexample.model.Contact;
 
 public class AddNewContactActivity extends AppCompatActivity {
@@ -17,10 +18,15 @@ public class AddNewContactActivity extends AppCompatActivity {
     private EditText emailEditText;
     private EditText phoneNumberEditText;
 
+    private DataBaseDAO mDataBaseDAO;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_contact);
+
+        mDataBaseDAO = new DataBaseDAO(this);
+        mDataBaseDAO.open();
 
         //Get EditText references
         nameEditText = (EditText) findViewById(R.id.input_name);
@@ -42,9 +48,9 @@ public class AddNewContactActivity extends AppCompatActivity {
         });
     }
 
-    //TODO: Save the instance of Contact to the database
     private void createNewContact(String name, String lastName, String email, String phoneNumber) {
         Contact contact = new Contact(name, lastName, email, phoneNumber);
+        mDataBaseDAO.addContact(contact);
         clearEditText();
     }
 
@@ -55,4 +61,9 @@ public class AddNewContactActivity extends AppCompatActivity {
         phoneNumberEditText.setText("");
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mDataBaseDAO.close();
+    }
 }
