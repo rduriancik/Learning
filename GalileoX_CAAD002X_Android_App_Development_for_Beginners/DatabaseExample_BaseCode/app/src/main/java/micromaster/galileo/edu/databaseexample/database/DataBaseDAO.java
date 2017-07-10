@@ -1,5 +1,6 @@
 package micromaster.galileo.edu.databaseexample.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -29,8 +30,18 @@ public class DataBaseDAO {
         dataBaseHelper.close();
     }
 
-    //TODO: Implement the necessary code to add a contact instance to database
     public void addContact(Contact contact) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DataBaseHelper.COLUMN_NAME, contact.getName());
+        contentValues.put(DataBaseHelper.COLUMN_LAST_NAME, contact.getLastName());
+        contentValues.put(DataBaseHelper.COLUMN_EMAIL, contact.getEmail());
+        contentValues.put(DataBaseHelper.COLUMN_PHONE_NUMBER, contact.getPhoneNumber());
+
+        if (database != null) {
+            database.insert(DataBaseHelper.TABLE_CONTACTS, null, contentValues);
+        } else {
+            throw new IllegalStateException("Database is not opened");
+        }
     }
 
     //TODO: Implement the necessary code to get all the contacts from contacts table
