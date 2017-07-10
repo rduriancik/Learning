@@ -11,6 +11,7 @@ import android.widget.Button;
 import java.util.ArrayList;
 
 import micromaster.galileo.edu.databaseexample.adapter.ContactAdapter;
+import micromaster.galileo.edu.databaseexample.database.DataBaseDAO;
 import micromaster.galileo.edu.databaseexample.model.Contact;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,10 +20,15 @@ public class MainActivity extends AppCompatActivity {
     private ContactAdapter contactAdapter;
     private ArrayList<Contact> contactArrayList;
 
+    private DataBaseDAO mDataBaseDAO;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mDataBaseDAO = new DataBaseDAO(this);
+        mDataBaseDAO.open();
 
         contactArrayList = getContactsFromDB();
 
@@ -50,9 +56,13 @@ public class MainActivity extends AppCompatActivity {
         contactAdapter.notifyDataSetChanged();
     }
 
-    //TODO: get the list of contacts from database
     private ArrayList<Contact> getContactsFromDB() {
-        return new ArrayList<>();
+        return mDataBaseDAO.getAllContacts();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mDataBaseDAO.close();
+    }
 }

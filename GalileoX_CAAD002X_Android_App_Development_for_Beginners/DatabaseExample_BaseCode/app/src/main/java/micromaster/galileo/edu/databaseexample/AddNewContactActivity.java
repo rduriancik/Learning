@@ -51,14 +51,7 @@ public class AddNewContactActivity extends AppCompatActivity {
     private void createNewContact(String name, String lastName, String email, String phoneNumber) {
         Contact contact = new Contact(name, lastName, email, phoneNumber);
         mDataBaseDAO.addContact(contact);
-        clearEditText();
-    }
-
-    private void clearEditText() {
-        nameEditText.setText("");
-        lastNameEditText.setText("");
-        emailEditText.setText("");
-        phoneNumberEditText.setText("");
+        finish();
     }
 
     @Override
