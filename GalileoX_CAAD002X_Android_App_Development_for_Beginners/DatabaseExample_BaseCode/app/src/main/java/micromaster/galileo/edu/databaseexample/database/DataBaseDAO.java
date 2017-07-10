@@ -2,6 +2,7 @@ package micromaster.galileo.edu.databaseexample.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -44,9 +45,31 @@ public class DataBaseDAO {
         }
     }
 
-    //TODO: Implement the necessary code to get all the contacts from contacts table
     public ArrayList<Contact> getAllContacts() {
-        return new ArrayList<Contact>();
+        if (database != null) {
+            ArrayList<Contact> contacts = new ArrayList<>();
+            Cursor cursor = database.query(DataBaseHelper.TABLE_CONTACTS,
+                    null, null, null, null, null, null);
+
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                Contact contact = new Contact();
+                contact.setName(cursor.getString(1));
+                contact.setLastName(cursor.getString(2));
+                contact.setEmail(cursor.getString(3));
+                contact.setPhoneNumber(cursor.getString(4));
+
+                contacts.add(contact);
+
+                cursor.moveToNext();
+            }
+
+            cursor.close();
+
+            return contacts;
+        } else {
+            throw new IllegalStateException("Database is not opened");
+        }
     }
 
 }
