@@ -1,5 +1,6 @@
 package com.example.robertduriancik.weatherapp.data.db
 
+import com.example.robertduriancik.weatherapp.domain.datasource.ForecastDataSource
 import com.example.robertduriancik.weatherapp.domain.model.ForecastList
 import com.example.robertduriancik.weatherapp.extensions.clear
 import com.example.robertduriancik.weatherapp.extensions.parseList
@@ -11,11 +12,10 @@ import org.jetbrains.anko.db.select
 /**
  * Created by robert on 10.7.2017.
  */
-class ForecastDb(
-        val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.instance,
-        val dataMapper: DbDataMapper = DbDataMapper()
-) {
-    fun requestForecastByZipCode(zipCode: Long, date: Long) = forecastDbHelper.use {
+class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.instance,
+                 val dataMapper: DbDataMapper = DbDataMapper()) : ForecastDataSource {
+
+    override fun requestForecastByZipCode(zipCode: Long, date: Long) = forecastDbHelper.use {
         val dailyRequest = "${DayForecastTable.CITY_ID} = ? " +
                 "AND ${DayForecastTable.DATE} >= ?"
 
