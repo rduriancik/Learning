@@ -17,6 +17,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+        free {
+            applicationId "com.example.robert.mytodolist.free"
+            versionName '1.2-free'
+            resValue "string", "app_name", "TODO List Free"
+            buildConfigField 'String', 'BASE_URL', "https://galileo.edu/free"
+        }
+        paid {
+            applicationId "com.example.robert.mytodolist"
+            versionName '1.2'
+            resValue "string", "app_name", "TODO List"
+            buildConfigField 'String', 'BASE_URL', "https://galileo.edu/paid"
+        }
+    }
 }
 
 dependencies {
