@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:minWidth="250dp"
     android:minHeight="40dp"
     android:updatePeriodMillis="300000"
     android:initialLayout="@layout/widget_layout"
-    android:widgetCategory="home_screen"
-</resources>
+    android:widgetCategory="home_screen" />
