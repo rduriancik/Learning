@@ -1,6 +1,7 @@
 package com.example.robertduriancik.weatherapp.domain.datasource
 
 import com.example.robertduriancik.weatherapp.data.db.ForecastDb
+import com.example.robertduriancik.weatherapp.data.server.ForecastServer
 import com.example.robertduriancik.weatherapp.domain.model.ForecastList
 import com.example.robertduriancik.weatherapp.extensions.firstResult
 
