@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">WidgetExercise</string>
+    <string name="empty_view_text">No items</string>
+</resources>
