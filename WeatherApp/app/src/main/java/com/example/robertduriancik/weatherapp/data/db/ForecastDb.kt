@@ -1,7 +1,11 @@
 package com.example.robertduriancik.weatherapp.data.db
 
+import com.example.robertduriancik.weatherapp.domain.model.ForecastList
+import com.example.robertduriancik.weatherapp.extensions.clear
 import com.example.robertduriancik.weatherapp.extensions.parseList
 import com.example.robertduriancik.weatherapp.extensions.parseOpt
+import com.example.robertduriancik.weatherapp.extensions.toVarargArray
+import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 
 /**
@@ -24,5 +28,15 @@ class ForecastDb(
                 .parseOpt { CityForecast(HashMap(it), dailyForecast) }
 
         if (city != null) dataMapper.convertToDomain(city) else null
+    }
+
+    fun saveForecast(forecast: ForecastList) = forecastDbHelper.use {
+        clear(CityForecastTable.NAME)
+        clear(DayForecastTable.NAME)
+
+        with(dataMapper.convertFromDomain(forecast)) {
+            insert(CityForecastTable.NAME, *map.toVarargArray())
+            dailyForecast.forEach { insert(DayForecastTable.NAME, *it.map.toVarargArray()) }
+        }
     }
 }
