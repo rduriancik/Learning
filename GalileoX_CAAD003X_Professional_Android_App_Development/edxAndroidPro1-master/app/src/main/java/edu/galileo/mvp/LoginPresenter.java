@@ -6,5 +6,5 @@ package edu.galileo.mvp;
 
 public interface LoginPresenter {
 
-    void validateredentials(String username, String password);
+    void validateCredentials(String username, String password);
 }
