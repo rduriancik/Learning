@@ -6,7 +6,7 @@ import android.text.TextUtils;
  * Created by robert on 12.7.2017.
  */
 
-public class LoginPresenterImpl implements LoginPresenter, LoginModel.OnLoginFinishedListener {
+public class LoginPresenterImpl implements LoginPresenter {
 
     private LoginView mLoginView;
     private LoginModel mLoginModel;
@@ -34,7 +34,7 @@ public class LoginPresenterImpl implements LoginPresenter, LoginModel.OnLoginFin
         }
 
         mLoginView.showProgress(true);
-        mLoginModel.login(username, password, this);
+        mLoginModel.login(username, password);
     }
 
 
@@ -48,20 +48,4 @@ public class LoginPresenterImpl implements LoginPresenter, LoginModel.OnLoginFin
         return password.length() > 4;
     }
 
-    @Override
-    public void onCancelled() {
-        mLoginView.showProgress(false);
-    }
-
-    @Override
-    public void onPasswordError() {
-        mLoginView.showProgress(false);
-        mLoginView.setPasswordError(R.string.error_incorrect_password);
-    }
-
-    @Override
-    public void onSuccess() {
-        mLoginView.showProgress(false);
-        mLoginView.successAction();
-    }
 }
