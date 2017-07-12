@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+
 /**
  * A login screen that offers login via email/password.
  */
@@ -46,6 +48,18 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         mProgressView = findViewById(R.id.login_progress);
 
         mLoginPresenter = new LoginPresenterImpl(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
     /**
