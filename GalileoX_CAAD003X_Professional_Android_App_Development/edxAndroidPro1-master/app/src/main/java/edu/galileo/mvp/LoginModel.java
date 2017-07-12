@@ -8,7 +8,7 @@ public interface LoginModel {
 
     interface OnLoginFinishedListener {
 
-        void onCandelled();
+        void onCancelled();
 
         void onPasswordError();
 
