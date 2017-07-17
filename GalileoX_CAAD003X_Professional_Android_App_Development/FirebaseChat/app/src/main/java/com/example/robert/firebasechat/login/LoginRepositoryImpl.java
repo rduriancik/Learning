@@ -1,7 +1,9 @@
-package com.example.robert.firebasechat;
+package com.example.robert.firebasechat.login;
 
 import android.support.annotation.NonNull;
 
+import com.example.robert.firebasechat.domain.FirebaseHelper;
+import com.example.robert.firebasechat.login.events.LoginEvent;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -12,8 +14,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import org.greenrobot.eventbus.EventBus;
-
-import static com.example.robert.firebasechat.LoginEvent.onSignUpSuccess;
 
 /**
  * Created by robert on 14.7.2017.
@@ -37,7 +37,7 @@ public class LoginRepositoryImpl implements LoginRepository {
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        postEvent(onSignUpSuccess);
+                        postEvent(LoginEvent.onSignUpSuccess);
                         signIn(email, password);
                     }
                 })

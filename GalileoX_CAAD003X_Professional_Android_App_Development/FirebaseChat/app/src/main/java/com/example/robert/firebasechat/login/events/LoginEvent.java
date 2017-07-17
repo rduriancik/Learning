@@ -1,10 +1,10 @@
-package com.example.robert.firebasechat;
+package com.example.robert.firebasechat.login.events;
 
 /**
  * Created by robert on 14.7.2017.
  */
 
-class LoginEvent {
+public class LoginEvent {
 
     public static final int onSignInSuccess = 0;
     public static final int onSignInError = 1;

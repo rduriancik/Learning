@@ -1,4 +1,4 @@
-package com.example.robert.firebasechat;
+package com.example.robert.firebasechat.domain;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

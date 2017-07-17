@@ -1,4 +1,7 @@
-package com.example.robert.firebasechat;
+package com.example.robert.firebasechat.login;
+
+import com.example.robert.firebasechat.login.events.LoginEvent;
+import com.example.robert.firebasechat.login.ui.LoginView;
 
 import org.greenrobot.eventbus.EventBus;
 

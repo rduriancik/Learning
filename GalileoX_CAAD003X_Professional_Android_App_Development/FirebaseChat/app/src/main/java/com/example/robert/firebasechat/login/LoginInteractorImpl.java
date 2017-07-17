@@ -1,4 +1,4 @@
-package com.example.robert.firebasechat;
+package com.example.robert.firebasechat.login;
 
 /**
  * Created by robert on 14.7.2017.

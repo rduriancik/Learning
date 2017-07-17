@@ -1,4 +1,6 @@
-package com.example.robert.firebasechat;
+package com.example.robert.firebasechat.login;
+
+import com.example.robert.firebasechat.login.events.LoginEvent;
 
 /**
  * Created by robert on 14.7.2017.

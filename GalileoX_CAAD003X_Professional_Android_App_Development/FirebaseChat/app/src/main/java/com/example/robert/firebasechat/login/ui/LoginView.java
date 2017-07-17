@@ -1,4 +1,4 @@
-package com.example.robert.firebasechat;
+package com.example.robert.firebasechat.login.ui;
 
 public interface LoginView {
     void enableInputs();
