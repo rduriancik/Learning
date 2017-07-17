@@ -2,6 +2,7 @@ package com.example.robert.firebasechat.login;
 
 import android.support.annotation.NonNull;
 
+import com.example.robert.firebasechat.User;
 import com.example.robert.firebasechat.domain.FirebaseHelper;
 import com.example.robert.firebasechat.login.events.LoginEvent;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -97,11 +98,22 @@ public class LoginRepositoryImpl implements LoginRepository {
     }
 
     private void initSignIn(DataSnapshot dataSnapshot) {
-        // TODO implement after the user model will be created
+        User currentUser = dataSnapshot.getValue(User.class);
+
+        if (currentUser == null) {
+            registerNewUser();
+        }
+
+        helper.changeUserConnectionStatus(User.ONLINE);
+        postEvent(LoginEvent.onSignInSuccess);
     }
 
     private void registerNewUser() {
-        // TODO implement after the user model will be created
+        String email = helper.getAuthUserEmail();
+        if (email != null) {
+            User currentUser = new User(email, true, null);
+            myUserReference.setValue(currentUser);
+        }
     }
 
     @Override
