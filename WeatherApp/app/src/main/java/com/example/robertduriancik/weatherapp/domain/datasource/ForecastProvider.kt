@@ -2,6 +2,7 @@ package com.example.robertduriancik.weatherapp.domain.datasource
 
 import com.example.robertduriancik.weatherapp.data.db.ForecastDb
 import com.example.robertduriancik.weatherapp.data.server.ForecastServer
+import com.example.robertduriancik.weatherapp.domain.model.Forecast
 import com.example.robertduriancik.weatherapp.domain.model.ForecastList
 import com.example.robertduriancik.weatherapp.extensions.firstResult
 
@@ -14,8 +15,14 @@ class ForecastProvider(val sources: List<ForecastDataSource> = ForecastProvider.
         val SOURCES = listOf(ForecastDb(), ForecastServer())
     }
 
-    fun requestByZipCode(zipCode: Long, days: Int): ForecastList =
-            sources.firstResult { requestSource(it, days, zipCode) }
+    fun requestByZipCode(zipCode: Long, days: Int): ForecastList = requestToSources {
+        val res = it.requestForecastByZipCode(zipCode, todayTimeSpan())
+        if (res != null && res.size >= days) res else null
+    }
+
+    fun requestForecast(id: Long): Forecast = requestToSources {
+        it.requestDayForecast(id)
+    }
 
     private fun requestSource(source: ForecastDataSource, days: Int, zipCode: Long): ForecastList? {
         val res = source.requestForecastByZipCode(zipCode, todayTimeSpan())
@@ -24,4 +31,7 @@ class ForecastProvider(val sources: List<ForecastDataSource> = ForecastProvider.
 
     private fun todayTimeSpan() = System.currentTimeMillis() /
             DAY_IN_MILLIS * DAY_IN_MILLIS
+
+    private fun <T : Any> requestToSources(f: (ForecastDataSource) -> T?): T =
+            sources.firstResult { f(it) }
 }

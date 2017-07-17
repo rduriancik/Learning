@@ -2,6 +2,7 @@ package com.example.robertduriancik.weatherapp.data.server
 
 import com.example.robertduriancik.weatherapp.data.db.ForecastDb
 import com.example.robertduriancik.weatherapp.domain.datasource.ForecastDataSource
+import com.example.robertduriancik.weatherapp.domain.model.Forecast
 import com.example.robertduriancik.weatherapp.domain.model.ForecastList
 
 /**
@@ -17,4 +18,6 @@ class ForecastServer(val dataMapper: ServerDataMapper = ServerDataMapper(),
         return forecastDb.requestForecastByZipCode(zipCode, date)
     }
 
+    override fun requestDayForecast(id: Long): Forecast?
+            = throw UnsupportedOperationException()
 }
