@@ -8,4 +8,5 @@
 
     <string name="login.error.message.signin">Unable to login %s</string>
     <string name="login.error.message.signup">Unable to sing up %s</string>
+    <string name="title_activity_contact_list">ContactListActivity</string>
 </resources>
