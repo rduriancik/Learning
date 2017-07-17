@@ -9,9 +9,9 @@ public interface LoginPresenter {
 
     void onDestroy();
 
-    void checkForAuthenticatedUser(LoginEvent event);
+    void checkForAuthenticatedUser();
 
-    void onEventMainThread();
+    void onEventMainThread(LoginEvent loginEvent);
 
     void validateLogin(String email, String password);
 
