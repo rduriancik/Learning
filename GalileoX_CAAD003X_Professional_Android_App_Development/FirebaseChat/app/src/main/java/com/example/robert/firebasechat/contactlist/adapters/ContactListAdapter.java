@@ -1,4 +1,4 @@
-package com.example.robert.firebasechat;
+package com.example.robert.firebasechat.contactlist.adapters;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
@@ -7,8 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.robert.firebasechat.R;
+import com.example.robert.firebasechat.contactlist.ui.OnItemClickListener;
 import com.example.robert.firebasechat.domain.AvatarHelper;
 import com.example.robert.firebasechat.lib.ImageLoader;
+import com.example.robert.firebasechat.models.User;
 
 import java.util.List;
 

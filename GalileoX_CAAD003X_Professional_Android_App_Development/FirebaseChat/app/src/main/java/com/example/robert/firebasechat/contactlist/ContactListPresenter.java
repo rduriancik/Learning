@@ -1,4 +1,6 @@
-package com.example.robert.firebasechat;
+package com.example.robert.firebasechat.contactlist;
+
+import com.example.robert.firebasechat.contactlist.events.ContactListEvent;
 
 /**
  * Created by robert on 17.7.2017.

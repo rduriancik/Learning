@@ -1,4 +1,4 @@
-package com.example.robert.firebasechat;
+package com.example.robert.firebasechat.contactlist.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +8,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.robert.firebasechat.AndroidChatApplication;
+import com.example.robert.firebasechat.R;
+import com.example.robert.firebasechat.contactlist.ContactListPresenter;
+import com.example.robert.firebasechat.contactlist.adapters.ContactListAdapter;
 import com.example.robert.firebasechat.lib.ImageLoader;
+import com.example.robert.firebasechat.models.User;
 
 import java.util.ArrayList;
 
