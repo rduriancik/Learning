@@ -2,10 +2,10 @@ package com.example.robert.firebasechat.login;
 
 import android.support.annotation.NonNull;
 
-import com.example.robert.firebasechat.User;
 import com.example.robert.firebasechat.domain.FirebaseHelper;
 import com.example.robert.firebasechat.lib.GreenRobotEventBus;
 import com.example.robert.firebasechat.login.events.LoginEvent;
+import com.example.robert.firebasechat.models.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;

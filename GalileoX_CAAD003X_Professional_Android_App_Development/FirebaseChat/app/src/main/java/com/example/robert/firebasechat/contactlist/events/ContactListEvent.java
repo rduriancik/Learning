@@ -8,7 +8,7 @@ import com.example.robert.firebasechat.models.User;
 
 public class ContactListEvent {
     public static final int onContactAdded = 0;
-    public static final int onContactChanged = 0;
+    public static final int onContactChanged = 1;
     public static final int onContactRemoved = 2;
 
     private User user;

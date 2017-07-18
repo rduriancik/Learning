@@ -10,8 +10,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
-import com.example.robert.firebasechat.ContactListActivity;
 import com.example.robert.firebasechat.R;
+import com.example.robert.firebasechat.contactlist.ui.ContactListActivity;
 import com.example.robert.firebasechat.login.LoginPresenter;
 import com.example.robert.firebasechat.login.LoginPresenterImpl;
 
