@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.example.robert.firebasechat.User;
 import com.example.robert.firebasechat.domain.FirebaseHelper;
+import com.example.robert.firebasechat.lib.GreenRobotEventBus;
 import com.example.robert.firebasechat.login.events.LoginEvent;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -13,8 +14,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-
-import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by robert on 14.7.2017.
@@ -61,7 +60,7 @@ public class LoginRepositoryImpl implements LoginRepository {
             loginEvent.setErrorMessage(message);
         }
 
-        EventBus.getDefault().post(loginEvent);
+        GreenRobotEventBus.getInstance().post(loginEvent);
     }
 
     @Override

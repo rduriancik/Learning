@@ -1,9 +1,10 @@
 package com.example.robert.firebasechat.login;
 
+import com.example.robert.firebasechat.lib.EventBus;
+import com.example.robert.firebasechat.lib.GreenRobotEventBus;
 import com.example.robert.firebasechat.login.events.LoginEvent;
 import com.example.robert.firebasechat.login.ui.LoginView;
 
-import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by robert on 14.7.2017.
@@ -16,7 +17,7 @@ public class LoginPresenterImpl implements LoginPresenter {
 
     public LoginPresenterImpl(LoginView loginView) {
         this.loginView = loginView;
-        this.eventBus = EventBus.getDefault();
+        this.eventBus = GreenRobotEventBus.getInstance();
         this.loginInteractor = new LoginInteractorImpl();
     }
 

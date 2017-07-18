@@ -1,5 +1,6 @@
 package com.example.robert.firebasechat.login.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import com.example.robert.firebasechat.ContactListActivity;
 import com.example.robert.firebasechat.R;
 import com.example.robert.firebasechat.login.LoginPresenter;
 import com.example.robert.firebasechat.login.LoginPresenterImpl;
@@ -94,7 +96,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void navigateToMainScreen() {
-        // TODO start new activity
+        startActivity(new Intent(this, ContactListActivity.class));
     }
 
     @Override
