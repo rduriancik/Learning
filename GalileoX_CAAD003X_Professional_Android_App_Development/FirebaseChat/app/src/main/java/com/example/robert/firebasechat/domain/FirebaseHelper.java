@@ -1,5 +1,6 @@
 package com.example.robert.firebasechat.domain;
 
+import com.example.robert.firebasechat.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -76,12 +77,12 @@ public class FirebaseHelper {
         });
     }
 
-    private DatabaseReference getOneContactReference(String mainEmail, String childEmail) {
+    public DatabaseReference getOneContactReference(String mainEmail, String childEmail) {
         String childKey = childEmail.replace(".", "_");
         return getUserReference(mainEmail).child(CONTACTS_PATH).child(childKey);
     }
 
-    private DatabaseReference getMyContactsReference() {
+    public DatabaseReference getMyContactsReference() {
         return getContactsReference(getAuthUserEmail());
     }
 
@@ -113,6 +114,10 @@ public class FirebaseHelper {
         }
 
         return userReference;
+    }
+
+    public void signOff() {
+        notifyContactsOfConnectionChange(User.OFFLINE, true);
     }
 
 }
