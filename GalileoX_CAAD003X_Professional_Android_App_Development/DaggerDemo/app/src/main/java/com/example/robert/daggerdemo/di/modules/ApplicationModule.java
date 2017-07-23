@@ -1,8 +1,11 @@
-package com.example.robert.daggerdemo.di;
+package com.example.robert.daggerdemo.di.modules;
 
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.example.robert.daggerdemo.di.ApplicationContext;
+import com.example.robert.daggerdemo.di.DatabaseInfo;
 
 import dagger.Module;
 import dagger.Provides;

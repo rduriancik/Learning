@@ -1,6 +1,8 @@
-package com.example.robert.daggerdemo.di;
+package com.example.robert.daggerdemo.di.components;
 
 import com.example.robert.daggerdemo.MainActivity;
+import com.example.robert.daggerdemo.di.PerActivity;
+import com.example.robert.daggerdemo.di.modules.ActivityModule;
 
 import dagger.Component;
 

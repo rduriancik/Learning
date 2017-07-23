@@ -1,4 +1,4 @@
-package com.example.robert.daggerdemo.di;
+package com.example.robert.daggerdemo.di.components;
 
 import android.app.Application;
 import android.content.Context;
@@ -7,6 +7,8 @@ import com.example.robert.daggerdemo.DemoApplication;
 import com.example.robert.daggerdemo.data.DataManager;
 import com.example.robert.daggerdemo.data.DbHelper;
 import com.example.robert.daggerdemo.data.SharedPreferencesHelper;
+import com.example.robert.daggerdemo.di.ApplicationContext;
+import com.example.robert.daggerdemo.di.modules.ApplicationModule;
 
 import javax.inject.Singleton;
 

@@ -7,9 +7,9 @@ import android.widget.TextView;
 
 import com.example.robert.daggerdemo.data.DataManager;
 import com.example.robert.daggerdemo.data.model.User;
-import com.example.robert.daggerdemo.di.ActivityComponent;
-import com.example.robert.daggerdemo.di.ActivityModule;
-import com.example.robert.daggerdemo.di.DaggerActivityComponent;
+import com.example.robert.daggerdemo.di.components.ActivityComponent;
+import com.example.robert.daggerdemo.di.components.DaggerActivityComponent;
+import com.example.robert.daggerdemo.di.modules.ActivityModule;
 
 import javax.inject.Inject;
 

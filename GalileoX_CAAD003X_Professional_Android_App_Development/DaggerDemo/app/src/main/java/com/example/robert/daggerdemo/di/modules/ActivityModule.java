@@ -1,7 +1,9 @@
-package com.example.robert.daggerdemo.di;
+package com.example.robert.daggerdemo.di.modules;
 
 import android.app.Activity;
 import android.content.Context;
+
+import com.example.robert.daggerdemo.di.ActivityContext;
 
 import dagger.Module;
 import dagger.Provides;

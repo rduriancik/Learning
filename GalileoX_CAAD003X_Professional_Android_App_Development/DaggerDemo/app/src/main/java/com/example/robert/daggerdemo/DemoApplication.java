@@ -4,9 +4,9 @@ import android.app.Application;
 import android.content.Context;
 
 import com.example.robert.daggerdemo.data.DataManager;
-import com.example.robert.daggerdemo.di.ApplicationComponent;
-import com.example.robert.daggerdemo.di.ApplicationModule;
-import com.example.robert.daggerdemo.di.DaggerApplicationComponent;
+import com.example.robert.daggerdemo.di.components.ApplicationComponent;
+import com.example.robert.daggerdemo.di.components.DaggerApplicationComponent;
+import com.example.robert.daggerdemo.di.modules.ApplicationModule;
 
 import javax.inject.Inject;
 
