@@ -11,6 +11,7 @@ import com.twitter.sdk.android.core.TwitterConfig;
  */
 
 public class TwitterClientApp extends Application {
+
     @Override
     public void onCreate() {
         super.onCreate();
