@@ -1,4 +1,4 @@
-package com.example.robert.daggerdemo;
+package com.example.robert.daggerdemo.data;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,7 +8,9 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.robert.daggerdemo.model.User;
+import com.example.robert.daggerdemo.data.model.User;
+import com.example.robert.daggerdemo.di.ApplicationContext;
+import com.example.robert.daggerdemo.di.DatabaseInfo;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

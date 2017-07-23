@@ -1,4 +1,4 @@
-package com.example.robert.daggerdemo;
+package com.example.robert.daggerdemo.di;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

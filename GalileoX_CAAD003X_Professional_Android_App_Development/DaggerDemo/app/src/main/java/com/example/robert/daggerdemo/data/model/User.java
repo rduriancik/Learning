@@ -1,4 +1,4 @@
-package com.example.robert.daggerdemo.model;
+package com.example.robert.daggerdemo.data.model;
 
 /**
  * Created by robert on 23.7.2017.

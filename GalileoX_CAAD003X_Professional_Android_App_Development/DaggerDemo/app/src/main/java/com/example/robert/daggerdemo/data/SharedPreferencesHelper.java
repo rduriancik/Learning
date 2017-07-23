@@ -1,4 +1,4 @@
-package com.example.robert.daggerdemo;
+package com.example.robert.daggerdemo.data;
 
 import android.content.SharedPreferences;
 
