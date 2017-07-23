@@ -33,7 +33,7 @@ public class DataManager {
         mSharedPreferencesHelper.put(SharedPreferencesHelper.PREF_KEY_ACCESS_TOKEN, accessToken);
     }
 
-    private String getAccessToken() {
+    public String getAccessToken() {
         return mSharedPreferencesHelper.get(SharedPreferencesHelper.PREF_KEY_ACCESS_TOKEN, null);
     }
 
