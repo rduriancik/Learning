@@ -6,7 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.RelativeLayout;
 
-import com.example.robert.twitterclient.main.MainActivity;
+import com.example.robert.twitterclient.main.ui.MainActivity;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterCore;
@@ -21,6 +21,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
 
+    @BindView(R.id.twitterLoginButton)
     TwitterLoginButton twitterLoginButton;
     @BindView(R.id.container)
     RelativeLayout container;
@@ -30,8 +31,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-
-        twitterLoginButton = (TwitterLoginButton) findViewById(R.id.twitterLoginButton);
 
         if (TwitterCore.getInstance().getSessionManager().getActiveSession() != null) {
             navigateToMainScreen();
