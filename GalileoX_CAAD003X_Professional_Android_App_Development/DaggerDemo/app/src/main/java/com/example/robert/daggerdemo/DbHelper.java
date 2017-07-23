@@ -103,9 +103,11 @@ public class DbHelper extends SQLiteOpenHelper {
     protected Long insertUser(User user) throws Exception {
         try {
             SQLiteDatabase db = this.getWritableDatabase();
+
             ContentValues contentValues = new ContentValues();
             contentValues.put(USER_COLUMN_USER_NAME, user.getName());
             contentValues.put(USER_COLUMN_USER_ADDRESS, user.getAddress());
+
             return db.insert(USER_TABLE_NAME, null, contentValues);
         } catch (Exception e) {
             e.printStackTrace();
