@@ -3,6 +3,7 @@ package com.example.robert.twitterclient.main.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 
 import com.example.robert.twitterclient.LoginActivity;
 import com.example.robert.twitterclient.R;
+import com.example.robert.twitterclient.main.adapters.MainSectionsPagerAdapter;
 import com.twitter.sdk.android.core.TwitterCore;
 
 import butterknife.BindView;
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.tabs)
     TabLayout tabs;
     @BindView(R.id.container)
-    ViewPager container;
+    ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,16 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
+        setupAdapter();
+    }
+
+    private void setupAdapter() {
+        Fragment[] fragments = new Fragment[]{};
+        String[] titles = new String[]{getString(R.string.main_header_images, R.string.main_header_hashtags)};
+        MainSectionsPagerAdapter adapter = new MainSectionsPagerAdapter(getSupportFragmentManager(), titles, fragments);
+
+        viewPager.setAdapter(adapter);
+        tabs.setupWithViewPager(viewPager);
     }
 
     @Override
