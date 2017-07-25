@@ -28,4 +28,9 @@ public class MainSectionsPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return this.fragments.length;
     }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return this.titles[position];
+    }
 }

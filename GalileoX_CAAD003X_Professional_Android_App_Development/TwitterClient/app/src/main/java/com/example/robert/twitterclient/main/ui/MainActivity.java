@@ -12,6 +12,8 @@ import android.view.MenuItem;
 
 import com.example.robert.twitterclient.LoginActivity;
 import com.example.robert.twitterclient.R;
+import com.example.robert.twitterclient.hashtags.HashtagsFragment;
+import com.example.robert.twitterclient.images.ImagesFragment;
 import com.example.robert.twitterclient.main.adapters.MainSectionsPagerAdapter;
 import com.twitter.sdk.android.core.TwitterCore;
 
@@ -38,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupAdapter() {
-        Fragment[] fragments = new Fragment[]{};
-        String[] titles = new String[]{getString(R.string.main_header_images, R.string.main_header_hashtags)};
+        Fragment[] fragments = new Fragment[]{new ImagesFragment(), new HashtagsFragment()};
+        String[] titles = new String[]{getString(R.string.main_header_images), getString(R.string.main_header_hashtags)};
         MainSectionsPagerAdapter adapter = new MainSectionsPagerAdapter(getSupportFragmentManager(), titles, fragments);
 
         viewPager.setAdapter(adapter);
