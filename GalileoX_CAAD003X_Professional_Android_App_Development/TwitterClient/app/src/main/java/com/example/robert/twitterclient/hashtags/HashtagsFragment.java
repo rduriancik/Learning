@@ -1,4 +1,4 @@
-package com.example.robert.twitterclient.images;
+package com.example.robert.twitterclient.hashtags;
 
 
 import android.os.Bundle;
@@ -13,10 +13,10 @@ import com.example.robert.twitterclient.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ImagesFragment extends Fragment {
+public class HashtagsFragment extends Fragment {
 
 
-    public ImagesFragment() {
+    public HashtagsFragment() {
         // Required empty public constructor
     }
 

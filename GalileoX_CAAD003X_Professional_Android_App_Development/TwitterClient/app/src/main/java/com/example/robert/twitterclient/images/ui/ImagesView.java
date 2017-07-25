@@ -1,4 +1,4 @@
-package com.example.robert.twitterclient.images;
+package com.example.robert.twitterclient.images.ui;
 
 import com.example.robert.twitterclient.entities.Image;
 
@@ -9,9 +9,9 @@ import java.util.List;
  */
 
 public interface ImagesView {
-    void showElements();
+    void showImages();
 
-    void hideElements();
+    void hideImages();
 
     void showProgress();
 
