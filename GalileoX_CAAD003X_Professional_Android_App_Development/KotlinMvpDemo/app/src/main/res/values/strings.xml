@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">KotlinMvpDemo</string>
+    <string name="main_name">Name</string>
+    <string name="main_surname">Surname</string>
+    <string name="main_save_user">Save user</string>
+    <string name="name_empty_error">Name cannot be blank</string>
+    <string name="surname_empty_error">Surname cannot be blank</string>
+    <string name="user_saved">User was saved</string>
 </resources>
