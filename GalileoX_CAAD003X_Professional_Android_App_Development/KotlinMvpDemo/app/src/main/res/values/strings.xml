@@ -6,4 +6,5 @@
     <string name="name_empty_error">Name cannot be blank</string>
     <string name="surname_empty_error">Surname cannot be blank</string>
     <string name="user_saved">User was saved</string>
+    <string name="no_user_error">No user passed</string>
 </resources>

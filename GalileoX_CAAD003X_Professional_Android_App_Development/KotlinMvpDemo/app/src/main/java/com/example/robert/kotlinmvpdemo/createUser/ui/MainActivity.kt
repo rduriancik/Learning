@@ -3,11 +3,14 @@ package com.example.robert.kotlinmvpdemo.createUser.ui
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.example.robert.kotlinmvpdemo.R
+import com.example.robert.kotlinmvpdemo.USER_KEY
 import com.example.robert.kotlinmvpdemo.createUser.CreateUserPresenter
 import com.example.robert.kotlinmvpdemo.createUser.CreateUserPresenterImpl
 import com.example.robert.kotlinmvpdemo.entities.User
 import com.example.robert.kotlinmvpdemo.extensions.textValue
+import com.example.robert.kotlinmvpdemo.userDetails.ui.UserDetailsActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity(), CreateUserView {
@@ -38,7 +41,7 @@ class MainActivity : AppCompatActivity(), CreateUserView {
     }
 
     override fun showUserDetails(user: User) {
-
+        startActivity<UserDetailsActivity>(USER_KEY to user)
     }
 
     override fun onDestroy() {
