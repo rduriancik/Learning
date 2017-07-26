@@ -74,7 +74,9 @@ public class ImagesRepositoryImpl implements ImagesRepository {
             }
         };
 
-        client.getTimelineService().homeTimeline(TWEET_COUNT, true, true, true, true, callback);
+        client.getTimelineService()
+                .homeTimeline(TWEET_COUNT, true, true, true, true)
+                .enqueue(callback);
     }
 
     private boolean containsImages(Tweet tweet) {

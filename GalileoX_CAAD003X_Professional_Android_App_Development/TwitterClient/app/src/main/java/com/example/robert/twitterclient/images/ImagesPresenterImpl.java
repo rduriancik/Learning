@@ -43,6 +43,7 @@ public class ImagesPresenterImpl implements ImagesPresenter {
             view.hideImages();
             view.showProgress();
         }
+        interactor.execute();
     }
 
     @Override
