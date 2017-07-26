@@ -1,4 +1,10 @@
-package com.example.robert.kotlinmvpdemo
+package com.example.robert.kotlinmvpdemo.createUser
+
+import com.example.robert.kotlinmvpdemo.createUser.ui.CreateUserView
+import com.example.robert.kotlinmvpdemo.entities.User
+import com.example.robert.kotlinmvpdemo.entities.UserError
+import com.example.robert.kotlinmvpdemo.entities.UserStore
+import com.example.robert.kotlinmvpdemo.entities.UserValidator
 
 /**
  * Created by robert on 25.7.2017.

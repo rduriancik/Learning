@@ -1,4 +1,4 @@
-package com.example.robert.kotlinmvpdemo
+package com.example.robert.kotlinmvpdemo.entities
 
 import android.os.Parcel
 import android.os.Parcelable

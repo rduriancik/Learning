@@ -1,4 +1,4 @@
-package com.example.robert.kotlinmvpdemo
+package com.example.robert.kotlinmvpdemo.extensions
 
 import android.widget.EditText
 
