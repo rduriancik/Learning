@@ -5,4 +5,5 @@ package com.example.robert.twitterclient.hashtags;
  */
 
 public interface HashtagsInteractor {
+    void execute();
 }

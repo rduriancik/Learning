@@ -1,24 +1,20 @@
-package com.example.robert.twitterclient.images;
+package com.example.robert.twitterclient.hashtags;
 
-import com.example.robert.twitterclient.images.events.ImagesEvent;
-import com.example.robert.twitterclient.images.ui.ImagesView;
+import com.example.robert.twitterclient.hashtags.events.HashtagsEvent;
 import com.example.robert.twitterclient.libs.base.EventBus;
 
-import org.greenrobot.eventbus.Subscribe;
-
 /**
- * Created by robert on 26.7.2017.
+ * Created by robert on 27.7.2017.
  */
 
-public class ImagesPresenterImpl implements ImagesPresenter {
-
+public class HashtagsPresenterImpl implements HashtagsPresenter {
+    private HashtagsView view;
     private EventBus eventBus;
-    private ImagesView view;
-    private ImagesInteractor interactor;
+    private HashtagsInteractor interactor;
 
-    public ImagesPresenterImpl(EventBus eventBus, ImagesView view, ImagesInteractor interactor) {
-        this.eventBus = eventBus;
+    public HashtagsPresenterImpl(HashtagsView view, EventBus eventBus, HashtagsInteractor interactor) {
         this.view = view;
+        this.eventBus = eventBus;
         this.interactor = interactor;
     }
 
@@ -38,26 +34,25 @@ public class ImagesPresenterImpl implements ImagesPresenter {
     }
 
     @Override
-    public void getImageTweets() {
+    public void getHashtagTweets() {
         if (view != null) {
-            view.hideImages();
+            view.hideHashtags();
             view.showProgress();
         }
         interactor.execute();
     }
 
     @Override
-    @Subscribe
-    public void onEventMainThread(ImagesEvent event) {
+    public void onEventMainThread(HashtagsEvent event) {
         String error = event.getError();
         if (view != null) {
-            view.showImages();
+            view.showHashtags();
             view.hideProgress();
 
             if (error != null) {
                 view.onError(error);
             } else {
-                view.setContent(event.getImages());
+                view.setContent(event.getHashtags());
             }
         }
     }
