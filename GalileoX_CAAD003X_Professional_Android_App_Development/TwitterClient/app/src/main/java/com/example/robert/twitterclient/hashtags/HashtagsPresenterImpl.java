@@ -1,6 +1,7 @@
 package com.example.robert.twitterclient.hashtags;
 
 import com.example.robert.twitterclient.hashtags.events.HashtagsEvent;
+import com.example.robert.twitterclient.hashtags.ui.HashtagsView;
 import com.example.robert.twitterclient.libs.base.EventBus;
 
 /**

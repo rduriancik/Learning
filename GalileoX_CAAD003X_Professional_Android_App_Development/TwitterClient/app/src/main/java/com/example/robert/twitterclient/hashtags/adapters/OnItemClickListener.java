@@ -1,4 +1,4 @@
-package com.example.robert.twitterclient.hashtags;
+package com.example.robert.twitterclient.hashtags.adapters;
 
 import com.example.robert.twitterclient.entities.Hashtag;
 
