@@ -44,4 +44,8 @@ public class Hashtag {
     public void setHashtags(List<String> hashtags) {
         this.hashtags = hashtags;
     }
+
+    public String getTweetUrl() {
+        return BASE_TWEET_URL + this.id;
+    }
 }

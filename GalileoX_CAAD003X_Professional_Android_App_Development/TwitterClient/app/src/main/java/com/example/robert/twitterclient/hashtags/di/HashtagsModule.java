@@ -64,7 +64,7 @@ public class HashtagsModule {
     @Provides
     @Singleton
     HashtagsPresenter providesHashtagsPresenter(HashtagsView view, EventBus eventBus, HashtagsInteractor interactor) {
-        return new HashtagsPresenterImpl(view, eventBus, interactor); // TODO
+        return new HashtagsPresenterImpl(view, eventBus, interactor);
     }
 
     @Provides
