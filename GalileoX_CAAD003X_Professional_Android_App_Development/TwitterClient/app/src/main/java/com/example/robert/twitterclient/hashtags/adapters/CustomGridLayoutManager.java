@@ -11,8 +11,10 @@ import android.view.ViewGroup;
  */
 
 class CustomGridLayoutManager extends GridLayoutManager {
-    public CustomGridLayoutManager(Context context, int i) {
-        super(context, i);
+
+    public CustomGridLayoutManager(Context context, int spanCount) {
+        super(context, spanCount);
+        setAutoMeasureEnabled(false);
     }
 
     private int[] mMeasuredDimension = new int[2];

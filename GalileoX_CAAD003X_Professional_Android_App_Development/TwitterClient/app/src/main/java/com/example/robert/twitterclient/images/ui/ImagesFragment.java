@@ -35,11 +35,12 @@ import butterknife.Unbinder;
  */
 public class ImagesFragment extends Fragment implements ImagesView, OnItemClickListener {
 
+    Unbinder unbinder;
+
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    Unbinder unbinder;
     @BindView(R.id.container)
     FrameLayout container;
 

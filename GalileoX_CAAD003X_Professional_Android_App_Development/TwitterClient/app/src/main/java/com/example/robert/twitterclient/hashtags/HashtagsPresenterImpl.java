@@ -4,6 +4,8 @@ import com.example.robert.twitterclient.hashtags.events.HashtagsEvent;
 import com.example.robert.twitterclient.hashtags.ui.HashtagsView;
 import com.example.robert.twitterclient.libs.base.EventBus;
 
+import org.greenrobot.eventbus.Subscribe;
+
 /**
  * Created by robert on 27.7.2017.
  */
@@ -44,6 +46,7 @@ public class HashtagsPresenterImpl implements HashtagsPresenter {
     }
 
     @Override
+    @Subscribe
     public void onEventMainThread(HashtagsEvent event) {
         String error = event.getError();
         if (view != null) {
