@@ -3,6 +3,10 @@ package com.example.robert.twitterclient;
 import android.app.Application;
 import android.support.v4.app.Fragment;
 
+import com.example.robert.twitterclient.hashtags.di.DaggerHashtagsComponent;
+import com.example.robert.twitterclient.hashtags.di.HashtagsComponent;
+import com.example.robert.twitterclient.hashtags.di.HashtagsModule;
+import com.example.robert.twitterclient.hashtags.ui.HashtagsView;
 import com.example.robert.twitterclient.images.di.DaggerImagesComponent;
 import com.example.robert.twitterclient.images.di.ImagesComponent;
 import com.example.robert.twitterclient.images.di.ImagesModule;
@@ -37,6 +41,14 @@ public class TwitterClientApp extends Application {
                 .builder()
                 .libsModule(new LibsModule(fragment))
                 .imagesModule(new ImagesModule(view, clickListener))
+                .build();
+    }
+
+    public HashtagsComponent getHashtagsComponent(HashtagsView view, com.example.robert.twitterclient.hashtags.adapters.OnItemClickListener listener) {
+        return DaggerHashtagsComponent
+                .builder()
+                .libsModule(new LibsModule(null))
+                .hashtagsModule(new HashtagsModule(view, listener))
                 .build();
     }
 }
