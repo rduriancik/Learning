@@ -37,5 +37,5 @@ ext {
     facebookVersion = '[4,5)'
     eventbusVersion = '3.0.0'
     daggerVersion = '2.11'
-    glideVersion = '4.0.0'
+    glideVersion = '3.6.1'
 }
