@@ -5,4 +5,7 @@
     <string name="recipes_main_image_description">Image of the recipe</string>
     <string name="recipes_main_keep_description">Keep recipe</string>
     <string name="recipes_main_dismiss_description">Dismiss recipe</string>
+
+    <string name="recipes_main_notice_saved">Successfully saved</string>
+    <string name="recipes_main_error">Impossible obtain information %s</string>
 </resources>

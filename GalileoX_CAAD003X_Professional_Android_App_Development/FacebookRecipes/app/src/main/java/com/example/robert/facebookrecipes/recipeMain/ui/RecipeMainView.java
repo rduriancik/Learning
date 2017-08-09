@@ -1,4 +1,4 @@
-package com.example.robert.facebookrecipes.recipeMain;
+package com.example.robert.facebookrecipes.recipeMain.ui;
 
 import com.example.robert.facebookrecipes.entities.Recipe;
 
@@ -11,9 +11,9 @@ public interface RecipeMainView {
 
     void hideProgress();
 
-    void showUIElement();
+    void showUIElements();
 
-    void hideUIElement();
+    void hideUIElements();
 
     void saveAnimation();
 
