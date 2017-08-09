@@ -2,10 +2,13 @@
     <string name="app_name">FacebookRecipes</string>
     <string name="login.error">Impossible to initialize a session %s</string>
     <string name="login.cancel.error">Initialization of the session was cancelled</string>
+
     <string name="recipes_main_image_description">Image of the recipe</string>
     <string name="recipes_main_keep_description">Keep recipe</string>
     <string name="recipes_main_dismiss_description">Dismiss recipe</string>
-
     <string name="recipes_main_notice_saved">Successfully saved</string>
     <string name="recipes_main_error">Impossible obtain information %s</string>
+    <string name="recipes_main_action_list">Saved recipes</string>
+
+    <string name="global_menu_action_logout">Log Out</string>
 </resources>
