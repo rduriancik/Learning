@@ -2,4 +2,7 @@
     <string name="app_name">FacebookRecipes</string>
     <string name="login.error">Impossible to initialize a session %s</string>
     <string name="login.cancel.error">Initialization of the session was cancelled</string>
+    <string name="recipes_main_image_description">Image of the recipe</string>
+    <string name="recipes_main_keep_description">Keep recipe</string>
+    <string name="recipes_main_dismiss_description">Dismiss recipe</string>
 </resources>
