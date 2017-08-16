@@ -14,12 +14,13 @@ import android.widget.RelativeLayout;
 
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.example.robert.facebookrecipes.App;
+import com.example.robert.facebookrecipes.FacebookRecipesApp;
 import com.example.robert.facebookrecipes.R;
 import com.example.robert.facebookrecipes.RecipeListActivity;
 import com.example.robert.facebookrecipes.entities.Recipe;
 import com.example.robert.facebookrecipes.libs.base.ImageLoader;
 import com.example.robert.facebookrecipes.recipeMain.RecipeMainPresenter;
+import com.example.robert.facebookrecipes.recipeMain.di.RecipeMainComponent;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +42,7 @@ public class RecipeMainActivity extends AppCompatActivity implements RecipeMainV
     private RecipeMainPresenter presenter;
     private Recipe currentRecipe;
     private ImageLoader imageLoader;
+    private RecipeMainComponent recipeMainComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +84,7 @@ public class RecipeMainActivity extends AppCompatActivity implements RecipeMainV
     }
 
     private void logout() {
-        App app = (App) getApplication();
+        FacebookRecipesApp app = (FacebookRecipesApp) getApplication();
         app.logout();
     }
 
@@ -91,7 +93,10 @@ public class RecipeMainActivity extends AppCompatActivity implements RecipeMainV
     }
 
     private void setupInjection() {
-
+        FacebookRecipesApp app = (FacebookRecipesApp) getApplication();
+        recipeMainComponent = app.getRecipeMainComponent(this, this);
+        imageLoader = getImageLoader();
+        presenter = getPresenter();
     }
 
     private void setupImageLoader() {
@@ -108,7 +113,7 @@ public class RecipeMainActivity extends AppCompatActivity implements RecipeMainV
                 return false;
             }
         };
-//        imageLoader.setOnFinishedImageLoadingListener(glideRequestListener);
+        imageLoader.setOnFinishedImageLoadingListener(glideRequestListener);
     }
 
     @Override
@@ -170,5 +175,13 @@ public class RecipeMainActivity extends AppCompatActivity implements RecipeMainV
     public void onGetRecipeError(String error) {
         String msgError = String.format(getString(R.string.recipes_main_error), error);
         Snackbar.make(layoutContainer, msgError, Snackbar.LENGTH_SHORT).show();
+    }
+
+    public ImageLoader getImageLoader() {
+        return recipeMainComponent.getImageLoader();
+    }
+
+    public RecipeMainPresenter getPresenter() {
+        return recipeMainComponent.getPresenter();
     }
 }

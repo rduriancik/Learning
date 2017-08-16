@@ -23,8 +23,8 @@ public class LibsModule {
 
     private Activity activity;
 
-    public LibsModule(Activity fragment) {
-        this.activity = fragment;
+    public LibsModule(Activity activity) {
+        this.activity = activity;
     }
 
     @Provides
