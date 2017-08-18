@@ -1,7 +1,9 @@
-package com.example.robert.facebookrecipes;
+package com.example.robert.facebookrecipes.recipeList.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.example.robert.facebookrecipes.R;
 
 public class RecipeListActivity extends AppCompatActivity {
 
