@@ -16,6 +16,7 @@ import com.example.robert.facebookrecipes.entities.Recipe;
 import com.example.robert.facebookrecipes.recipeList.RecipeListPresenter;
 import com.example.robert.facebookrecipes.recipeList.adapters.OnItemClickListener;
 import com.example.robert.facebookrecipes.recipeList.adapters.RecipesAdapter;
+import com.example.robert.facebookrecipes.recipeList.di.RecipeListComponent;
 import com.example.robert.facebookrecipes.recipeMain.ui.RecipeMainActivity;
 
 import java.util.List;
@@ -31,8 +32,9 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListV
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    RecipesAdapter adapter;
-    RecipeListPresenter presenter;
+    private RecipesAdapter adapter;
+    private RecipeListPresenter presenter;
+    private RecipeListComponent component;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +88,10 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListV
 
 
     private void setupInjection() {
-
+        FacebookRecipesApp app = (FacebookRecipesApp) getApplication();
+        component = app.getRecipeListComponent(this, this, this);
+        presenter = getPresenter();
+        adapter = getAdapter();
     }
 
     private void setupRecyclerView() {
@@ -132,5 +137,13 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListV
     @Override
     public void onDeleteClick(Recipe recipe) {
         presenter.removeRecipe(recipe);
+    }
+
+    public RecipeListPresenter getPresenter() {
+        return component.getPresenter();
+    }
+
+    public RecipesAdapter getAdapter() {
+        return component.getAdapter();
     }
 }

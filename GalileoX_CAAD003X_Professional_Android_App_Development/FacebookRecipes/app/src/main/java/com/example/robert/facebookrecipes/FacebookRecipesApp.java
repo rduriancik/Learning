@@ -5,6 +5,12 @@ import android.content.Intent;
 
 import com.example.robert.facebookrecipes.libs.di.LibsModule;
 import com.example.robert.facebookrecipes.login.ui.LoginActivity;
+import com.example.robert.facebookrecipes.recipeList.adapters.OnItemClickListener;
+import com.example.robert.facebookrecipes.recipeList.di.DaggerRecipeListComponent;
+import com.example.robert.facebookrecipes.recipeList.di.RecipeListComponent;
+import com.example.robert.facebookrecipes.recipeList.di.RecipeListModule;
+import com.example.robert.facebookrecipes.recipeList.ui.RecipeListActivity;
+import com.example.robert.facebookrecipes.recipeList.ui.RecipeListView;
 import com.example.robert.facebookrecipes.recipeMain.di.DaggerRecipeMainComponent;
 import com.example.robert.facebookrecipes.recipeMain.di.RecipeMainComponent;
 import com.example.robert.facebookrecipes.recipeMain.di.RecipeMainModule;
@@ -59,6 +65,13 @@ public class FacebookRecipesApp extends Application {
                 .builder()
                 .libsModule(new LibsModule(activity))
                 .recipeMainModule(new RecipeMainModule(view))
+                .build();
+    }
+
+    public RecipeListComponent getRecipeListComponent(RecipeListActivity activity, RecipeListView view, OnItemClickListener listener) {
+        return DaggerRecipeListComponent.builder()
+                .libsModule(new LibsModule(activity))
+                .recipeListModule(new RecipeListModule(view, listener))
                 .build();
     }
 }
