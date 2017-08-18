@@ -11,4 +11,5 @@
     <string name="recipes_main_action_list">Saved recipes</string>
 
     <string name="global_menu_action_logout">Log Out</string>
+    <string name="recipes_list_action_main">Choose a recipe</string>
 </resources>
