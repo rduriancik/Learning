@@ -213,8 +213,12 @@ public class RecipeMainActivity extends AppCompatActivity implements RecipeMainV
 
     @Override
     public void setRecipe(Recipe recipe) {
-        this.currentRecipe = recipe;
-        imageLoader.load(imgRecipe, recipe.getImageURL());
+        if (recipe.getImageURL() != null) {
+            this.currentRecipe = recipe;
+            imageLoader.load(imgRecipe, recipe.getImageURL());
+        } else {
+            presenter.getNextRecipe();
+        }
     }
 
     @Override

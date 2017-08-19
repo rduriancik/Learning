@@ -4,6 +4,7 @@ import com.example.robert.facebookrecipes.entities.Recipe;
 import com.example.robert.facebookrecipes.libs.base.EventBus;
 import com.example.robert.facebookrecipes.recipeList.events.RecipeListEvent;
 import com.raizlabs.android.dbflow.list.FlowCursorList;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,10 +23,7 @@ public class RecipeListRepositoryImpl implements RecipeListRepository {
 
     @Override
     public void getSavedRecipes() {
-        FlowCursorList<Recipe> storedRecipes = new FlowCursorList.Builder<Recipe>(Recipe.class)
-                .cacheModels(true)
-                .build();
-
+        FlowCursorList<Recipe> storedRecipes = SQLite.select().from(Recipe.class).cursorList();
         post(RecipeListEvent.READ_EVENT, storedRecipes.getAll());
         storedRecipes.close();
     }

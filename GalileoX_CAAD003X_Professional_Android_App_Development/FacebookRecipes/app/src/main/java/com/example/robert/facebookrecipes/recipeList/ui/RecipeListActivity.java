@@ -42,9 +42,9 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListV
         setContentView(R.layout.activity_recipe_list);
         ButterKnife.bind(this);
 
+        setupInjection();
         setupToolbar();
         setupRecyclerView();
-        setupInjection();
 
         presenter.onCreate();
         presenter.getRecipes();

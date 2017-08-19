@@ -8,7 +8,7 @@
         android:id="@+id/action_list"
         android:icon="@android:drawable/ic_menu_gallery"
         android:title="@string/recipes_list_action_main"
-        app:showAsAction="ifRoom|always" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_logout"

@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         if (AccessToken.getCurrentAccessToken() != null) {
             navigateToMainScreen();
         }
+
         callbackManager = CallbackManager.Factory.create();
         btnLogin.setPublishPermissions("publish_actions");
         btnLogin.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {

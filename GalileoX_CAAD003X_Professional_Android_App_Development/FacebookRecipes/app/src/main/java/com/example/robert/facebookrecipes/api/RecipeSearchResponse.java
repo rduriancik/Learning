@@ -31,9 +31,17 @@ public class RecipeSearchResponse {
     public Recipe getFirstRecipe() {
         Recipe first = null;
         if (!recipes.isEmpty()) {
-            recipes.get(0);
+            first = recipes.get(0);
         }
 
         return first;
+    }
+
+    @Override
+    public String toString() {
+        return "RecipeSearchResponse{" +
+                "count=" + count +
+                ", recipes=" + recipes +
+                '}';
     }
 }
