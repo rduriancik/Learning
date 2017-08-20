@@ -13,6 +13,14 @@ class PhotosResponse {
     @SerializedName("photo")
     private List<Photo> photos;
 
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
+    }
+
     public int getCount() {
         return photos.size();
     }
