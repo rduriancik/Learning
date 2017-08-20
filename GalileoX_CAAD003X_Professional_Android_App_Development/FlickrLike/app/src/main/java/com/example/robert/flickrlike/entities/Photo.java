@@ -1,5 +1,7 @@
 package com.example.robert.flickrlike.entities;
 
+import android.annotation.SuppressLint;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -63,5 +65,10 @@ public class Photo {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @SuppressLint("DefaultLocale")
+    public String getPhotoUrl() {
+        return String.format("https://farm%d.staticflickr.com/%d/%d_%s.jpg", farmId, serverId, id, secret);
     }
 }

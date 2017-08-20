@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">FlickrLike</string>
+    <string name="flickr_main_message">Enter tags separated with commas to search:</string>
+    <string name="flickr_main_search">Search</string>
+    <string name="flickr_main_liked_photos">View liked photos</string>
+    <string name="flickr_main_hint">tags</string>
 </resources>
