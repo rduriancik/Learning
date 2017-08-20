@@ -1,8 +1,8 @@
-package com.example.robert.flickrlike.main;
+package com.example.robert.flickrlike.mainActivity;
 
 import android.text.TextUtils;
 
-import com.example.robert.flickrlike.main.ui.MainView;
+import com.example.robert.flickrlike.mainActivity.ui.MainView;
 
 /**
  * Created by robert on 20.8.2017.

@@ -1,4 +1,4 @@
-package com.example.robert.flickrlike.main.ui;
+package com.example.robert.flickrlike.mainActivity.ui;
 
 /**
  * Created by robert on 20.8.2017.

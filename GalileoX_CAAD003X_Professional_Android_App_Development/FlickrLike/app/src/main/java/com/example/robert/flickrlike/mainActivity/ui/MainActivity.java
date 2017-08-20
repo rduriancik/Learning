@@ -1,13 +1,15 @@
-package com.example.robert.flickrlike.main.ui;
+package com.example.robert.flickrlike.mainActivity.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.robert.flickrlike.R;
-import com.example.robert.flickrlike.main.MainPresenter;
-import com.example.robert.flickrlike.main.di.DaggerMainComponent;
-import com.example.robert.flickrlike.main.di.MainModule;
+import com.example.robert.flickrlike.mainActivity.MainPresenter;
+import com.example.robert.flickrlike.mainActivity.di.DaggerMainComponent;
+import com.example.robert.flickrlike.mainActivity.di.MainModule;
+import com.example.robert.flickrlike.photoActivity.PhotoActivity;
 
 import javax.inject.Inject;
 
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void navigateToPhotoActivity(String tags) {
-        // TODO
+        Intent intent = new Intent(this, PhotoActivity.class);
+//        intent.putExtra()
     }
 }

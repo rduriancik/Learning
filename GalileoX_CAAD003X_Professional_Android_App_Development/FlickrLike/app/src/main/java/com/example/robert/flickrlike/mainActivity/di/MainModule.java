@@ -1,8 +1,8 @@
-package com.example.robert.flickrlike.main.di;
+package com.example.robert.flickrlike.mainActivity.di;
 
-import com.example.robert.flickrlike.main.MainPresenter;
-import com.example.robert.flickrlike.main.MainPresenterImpl;
-import com.example.robert.flickrlike.main.ui.MainView;
+import com.example.robert.flickrlike.mainActivity.MainPresenter;
+import com.example.robert.flickrlike.mainActivity.MainPresenterImpl;
+import com.example.robert.flickrlike.mainActivity.ui.MainView;
 
 import dagger.Module;
 import dagger.Provides;

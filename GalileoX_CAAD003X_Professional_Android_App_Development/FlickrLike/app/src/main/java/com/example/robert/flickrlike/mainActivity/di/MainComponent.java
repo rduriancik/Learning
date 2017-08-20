@@ -1,6 +1,6 @@
-package com.example.robert.flickrlike.main.di;
+package com.example.robert.flickrlike.mainActivity.di;
 
-import com.example.robert.flickrlike.main.ui.MainActivity;
+import com.example.robert.flickrlike.mainActivity.ui.MainActivity;
 
 import dagger.Component;
 
