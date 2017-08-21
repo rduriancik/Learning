@@ -1,8 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.robert.flickrlike.photoActivity.PhotoActivity">
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    tools:context="com.example.robert.flickrlike.photoActivity.ui.PhotoActivity"
+    tools:ignore="UseCompoundDrawables">
 
-</android.support.constraint.ConstraintLayout>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyleLarge"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="@dimen/flickr_photo_size"
+        android:layout_height="@dimen/flickr_photo_size"
+        android:contentDescription="Image"
+        tools:src="@mipmap/ic_launcher"
+        tools:ignore="ContentDescription,HardcodedText" />
+
+    <TextView
+        android:id="@+id/imgTitle"
+        android:layout_width="@dimen/flickr_photo_size"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/medium_padding"
+        android:paddingRight="@dimen/medium_padding"
+        tools:text="Title text" />
+
+</LinearLayout>
