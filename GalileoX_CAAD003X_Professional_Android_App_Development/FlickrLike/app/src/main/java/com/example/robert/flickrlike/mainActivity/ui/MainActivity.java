@@ -6,10 +6,11 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.robert.flickrlike.R;
+import com.example.robert.flickrlike.likedPhotosActivity.LikedPhotosActivity;
 import com.example.robert.flickrlike.mainActivity.MainPresenter;
 import com.example.robert.flickrlike.mainActivity.di.DaggerMainComponent;
 import com.example.robert.flickrlike.mainActivity.di.MainModule;
-import com.example.robert.flickrlike.photoActivity.PhotoActivity;
+import com.example.robert.flickrlike.photoActivity.ui.PhotoActivity;
 
 import javax.inject.Inject;
 
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     private void navigateToLikedPhotosActivity() {
-        // TODO
+        startActivity(new Intent(this, LikedPhotosActivity.class));
     }
 
     @Override
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public void navigateToPhotoActivity(String tags) {
         Intent intent = new Intent(this, PhotoActivity.class);
-//        intent.putExtra()
+        intent.putExtra(PhotoActivity.TAGS_KEY, tags);
+        startActivity(intent);
     }
 }

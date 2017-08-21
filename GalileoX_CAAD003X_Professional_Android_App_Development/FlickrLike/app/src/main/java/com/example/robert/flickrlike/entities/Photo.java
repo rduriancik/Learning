@@ -1,6 +1,8 @@
 package com.example.robert.flickrlike.entities;
 
 import android.annotation.SuppressLint;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -8,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by robert on 20.8.2017.
  */
 
-public class Photo {
+public class Photo implements Parcelable {
 
     private long id;
     private String owner;
@@ -71,4 +73,44 @@ public class Photo {
     public String getPhotoUrl() {
         return String.format("https://farm%d.staticflickr.com/%d/%d_%s.jpg", farmId, serverId, id, secret);
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.id);
+        dest.writeString(this.owner);
+        dest.writeString(this.secret);
+        dest.writeLong(this.serverId);
+        dest.writeLong(this.farmId);
+        dest.writeString(this.title);
+    }
+
+    public Photo() {
+    }
+
+    protected Photo(Parcel in) {
+        this.id = in.readLong();
+        this.owner = in.readString();
+        this.secret = in.readString();
+        this.serverId = in.readLong();
+        this.farmId = in.readLong();
+        this.title = in.readString();
+    }
+
+    public static final Parcelable.Creator<Photo> CREATOR = new Parcelable.Creator<Photo>() {
+        @Override
+        public Photo createFromParcel(Parcel source) {
+            return new Photo(source);
+        }
+
+        @Override
+        public Photo[] newArray(int size) {
+            return new Photo[size];
+        }
+    };
 }
