@@ -2,6 +2,8 @@ package com.example.robert.flickrlike.photoActivity.events;
 
 import com.example.robert.flickrlike.entities.Photo;
 
+import java.util.List;
+
 /**
  * Created by robert on 21.8.2017.
  */
@@ -13,7 +15,8 @@ public class PhotoEvent {
 
     private int type;
     private String error;
-    private Photo photo;
+    private List<Photo> photos;
+    private Integer page;
 
     public int getType() {
         return type;
@@ -31,11 +34,19 @@ public class PhotoEvent {
         this.error = error;
     }
 
-    public Photo getPhoto() {
-        return photo;
+    public List<Photo> getPhotos() {
+        return photos;
     }
 
-    public void setPhoto(Photo photo) {
-        this.photo = photo;
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
     }
 }

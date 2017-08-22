@@ -10,6 +10,7 @@ import java.util.List;
  */
 
 class PhotosResponse {
+    private int page;
     @SerializedName("photo")
     private List<Photo> photos;
 
@@ -19,6 +20,14 @@ class PhotosResponse {
 
     public void setPhotos(List<Photo> photos) {
         this.photos = photos;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
     }
 
     public int getCount() {

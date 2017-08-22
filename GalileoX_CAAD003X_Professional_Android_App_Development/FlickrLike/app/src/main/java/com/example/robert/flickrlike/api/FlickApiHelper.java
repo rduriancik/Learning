@@ -20,29 +20,21 @@ import retrofit2.Response;
 public class FlickApiHelper {
     EventBus eventBus;
     FlickrService flickrService;
-    private String tags;
-    private List<Photo> photos;
 
     public FlickApiHelper(EventBus eventBus, FlickrService flickrService, List<Photo> photos) {
         this.eventBus = eventBus;
         this.flickrService = flickrService;
-        this.photos = photos;
-
     }
 
-    public void findPhotos(@NonNull String tags) {
-        this.tags = tags;
-
-        Call<PhotosResponse> call = flickrService.search(this.tags, 15);
+    public void findPhotos(@NonNull String tags, int page) {
+        Call<PhotosResponse> call = flickrService.search(tags, 15, page);
         call.enqueue(new Callback<PhotosResponse>() {
             @Override
             public void onResponse(@NonNull Call<PhotosResponse> call, @NonNull Response<PhotosResponse> response) {
                 if (response.isSuccessful()) {
                     PhotosResponse photosResponse = response.body();
                     if (photosResponse.getPhotos() != null && photosResponse.getCount() != 0) {
-                        photos.clear();
-                        photos.addAll(photosResponse.getPhotos());
-                        postNextPhoto();
+                        post(photosResponse.getPhotos(), photosResponse.getPage());
                     } else {
                         post("Empty response");
                     }
@@ -58,37 +50,20 @@ public class FlickApiHelper {
         });
     }
 
-    public void getNextPhoto() {
-        if (tags == null) {
-            throw new IllegalStateException("No tags were provided");
-        }
-
-        if (photos.isEmpty()) {
-            findPhotos(tags);
-        } else {
-            postNextPhoto();
-        }
-    }
-
-    private void postNextPhoto() {
-        Photo photo = photos.get(0);
-        photos.remove(0);
-        post(photo);
-    }
-
-    private void post(@NonNull Photo photo) {
-        post(photo, null);
+    private void post(@NonNull List<Photo> photos, int page) {
+        post(photos, page, null);
     }
 
     private void post(@NonNull String error) {
-        post(null, error);
+        post(null, null, error);
     }
 
-    private void post(@Nullable Photo photo, @Nullable String error) {
+    private void post(@Nullable List<Photo> photos, @Nullable Integer page, @Nullable String error) {
         PhotoEvent event = new PhotoEvent();
         event.setType(PhotoEvent.NEXT_PHOTO_EVENT);
         event.setError(error);
-        event.setPhoto(photo);
+        event.setPhotos(photos);
+        event.setPage(page);
         eventBus.post(event);
     }
 }

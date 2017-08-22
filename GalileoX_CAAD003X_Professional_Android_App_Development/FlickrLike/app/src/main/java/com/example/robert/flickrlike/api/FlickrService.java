@@ -10,5 +10,5 @@ import retrofit2.http.Query;
 
 interface FlickrService {
     @GET("/services/rest/?method=flickr.photos.search")
-    Call<PhotosResponse> search(@Query("tags") String tags, @Query("per_page") int perPage);
+    Call<PhotosResponse> search(@Query("tags") String tags, @Query("per_page") int perPage, @Query("page") int page);
 }
