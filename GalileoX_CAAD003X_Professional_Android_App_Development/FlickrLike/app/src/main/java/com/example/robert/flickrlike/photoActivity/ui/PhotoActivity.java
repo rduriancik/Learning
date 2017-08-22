@@ -3,6 +3,7 @@ package com.example.robert.flickrlike.photoActivity.ui;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,7 +18,10 @@ import android.widget.Toast;
 import com.example.robert.flickrlike.R;
 import com.example.robert.flickrlike.entities.Photo;
 import com.example.robert.flickrlike.libs.base.ImageLoader;
+import com.example.robert.flickrlike.libs.di.LibsModule;
 import com.example.robert.flickrlike.photoActivity.PhotoPresenter;
+import com.example.robert.flickrlike.photoActivity.di.DaggerPhotoComponent;
+import com.example.robert.flickrlike.photoActivity.di.PhotoModule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +32,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class PhotoActivity extends AppCompatActivity implements PhotoView, SwipeGestureListener {
+    private static final String TAG = "PhotoActivity";
 
     public static final String TAGS_KEY = "tags_key";
     public static final String PHOTOS_KEY = "photos_key";
@@ -102,6 +107,11 @@ public class PhotoActivity extends AppCompatActivity implements PhotoView, Swipe
     }
 
     private void setupInjection() {
+        DaggerPhotoComponent.builder()
+                .libsModule(new LibsModule(this))
+                .photoModule(new PhotoModule(this))
+                .build()
+                .inject(this);
     }
 
     private void setupGestureDetector() {
@@ -117,7 +127,8 @@ public class PhotoActivity extends AppCompatActivity implements PhotoView, Swipe
     public void setPhoto(Photo photo) {
         if (photo != null) {
             this.currentPhoto = photo;
-            imageLoader.load(image, currentPhoto.getPhotoUrl());
+            imageLoader.load(image, currentPhoto.getPhotoUrl()); // add listener TODO
+            imgTitle.setText(currentPhoto.getTitle());
         }
     }
 
@@ -203,6 +214,7 @@ public class PhotoActivity extends AppCompatActivity implements PhotoView, Swipe
 
     @Override
     public void onSaveSwipeRight() {
+        Log.d(TAG, "onSaveSwipeRight: called");
         presenter.onSwipePhoto(currentPhoto, SWIPE_RIGHT);
     }
 
