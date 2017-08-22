@@ -28,6 +28,11 @@ public class PhotoActivity extends AppCompatActivity implements PhotoView, Swipe
     public static final String PHOTOS_KEY = "photos_key";
     public static final String PAGE_KEY = "page_key";
 
+    public static final int SWIPE_UP = 0;
+    public static final int SWIPE_DOWN = 1;
+    public static final int SWIPE_RIGHT = 3;
+    public static final int SWIPE_LEFT = 4;
+
     @BindView(R.id.image)
     ImageView image;
     @BindView(R.id.imgTitle)
@@ -137,30 +142,26 @@ public class PhotoActivity extends AppCompatActivity implements PhotoView, Swipe
     }
 
     @Override
-    public void showSaveAnimation() {
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.save_animation);
-        animation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
+    public void showAnimation(int type) {
+        Animation animation;
 
-            }
+        switch (type) {
+            case SWIPE_UP:
+                animation = AnimationUtils.loadAnimation(this, R.anim.dismiss_animation_up);
+                break;
+            case SWIPE_DOWN:
+                animation = AnimationUtils.loadAnimation(this, R.anim.dismiss_animation_down);
+                break;
+            case SWIPE_RIGHT:
+                animation = AnimationUtils.loadAnimation(this, R.anim.save_animation_right);
+                break;
+            case SWIPE_LEFT:
+                animation = AnimationUtils.loadAnimation(this, R.anim.save_animation_left);
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown type of the animation");
+        }
 
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                presenter.getNextPhoto();
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-        image.setAnimation(animation);
-    }
-
-    @Override
-    public void showDismissAnimation() {
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.dismiss_animation);
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -186,12 +187,22 @@ public class PhotoActivity extends AppCompatActivity implements PhotoView, Swipe
     }
 
     @Override
-    public void onSave() {
-        presenter.onSavePhoto(currentPhoto);
+    public void onSaveSwipeRight() {
+        presenter.onSwipePhoto(currentPhoto, SWIPE_RIGHT);
     }
 
     @Override
-    public void onDismiss() {
-        presenter.onDismissPhoto();
+    public void onSaveSwipeLeft() {
+        presenter.onSwipePhoto(currentPhoto, SWIPE_LEFT);
+    }
+
+    @Override
+    public void onDismissSwipeUp() {
+        presenter.onSwipePhoto(currentPhoto, SWIPE_UP);
+    }
+
+    @Override
+    public void onDismissSwipeDown() {
+        presenter.onSwipePhoto(currentPhoto, SWIPE_DOWN);
     }
 }

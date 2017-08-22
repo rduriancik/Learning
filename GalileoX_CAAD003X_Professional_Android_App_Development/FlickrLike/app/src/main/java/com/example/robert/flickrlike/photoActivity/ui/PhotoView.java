@@ -11,9 +11,7 @@ public interface PhotoView {
 
     void showContent();
 
-    void showSaveAnimation();
-
-    void showDismissAnimation();
+    void showAnimation(int type);
 
     void onError(String error);
 

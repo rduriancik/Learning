@@ -5,7 +5,11 @@ package com.example.robert.flickrlike.photoActivity.ui;
  */
 
 public interface SwipeGestureListener {
-    void onSave();
+    void onSaveSwipeRight();
 
-    void onDismiss();
+    void onSaveSwipeLeft();
+
+    void onDismissSwipeUp();
+
+    void onDismissSwipeDown();
 }

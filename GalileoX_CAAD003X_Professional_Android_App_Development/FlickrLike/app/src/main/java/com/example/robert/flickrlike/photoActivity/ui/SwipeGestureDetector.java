@@ -24,11 +24,19 @@ public class SwipeGestureDetector extends GestureDetector.SimpleOnGestureListene
 
         if (Math.abs(diffX) > Math.abs(diffY)) {
             if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
-                gestureListener.onSave();
+                if (diffX > 0) {
+                    gestureListener.onSaveSwipeRight();
+                } else {
+                    gestureListener.onSaveSwipeLeft();
+                }
             }
         } else {
             if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
-                gestureListener.onDismiss();
+                if (diffY > 0) {
+                    gestureListener.onDismissSwipeDown();
+                } else {
+                    gestureListener.onDismissSwipeUp();
+                }
             }
         }
 
