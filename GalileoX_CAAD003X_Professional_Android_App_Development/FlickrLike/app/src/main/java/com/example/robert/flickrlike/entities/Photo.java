@@ -4,21 +4,38 @@ import android.annotation.SuppressLint;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.robert.flickrlike.db.PhotoDatabase;
 import com.google.gson.annotations.SerializedName;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
 
 /**
  * Created by robert on 20.8.2017.
  */
 
-public class Photo implements Parcelable {
+@Table(database = PhotoDatabase.class)
+public class Photo extends BaseModel implements Parcelable {
 
+    @PrimaryKey
     private long id;
+
+    @Column
     private String owner;
+
+    @Column
     private String secret;
+
+    @Column
     @SerializedName("server")
     private long serverId;
+
+    @Column
     @SerializedName("farm")
     private long farmId;
+
+    @Column
     private String title;
 
     public long getId() {
