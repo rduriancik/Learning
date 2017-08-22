@@ -60,7 +60,7 @@ public class FlickApiHelper {
 
     private void post(@Nullable List<Photo> photos, @Nullable Integer page, @Nullable String error) {
         PhotoEvent event = new PhotoEvent();
-        event.setType(PhotoEvent.NEXT_PHOTO_EVENT);
+        event.setType(PhotoEvent.NEXT_PHOTOS_EVENT);
         event.setError(error);
         event.setPhotos(photos);
         event.setPage(page);

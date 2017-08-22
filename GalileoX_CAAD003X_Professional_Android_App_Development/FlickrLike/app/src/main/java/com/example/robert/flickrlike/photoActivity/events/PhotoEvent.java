@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PhotoEvent {
 
-    public static final int NEXT_PHOTO_EVENT = 0;
+    public static final int NEXT_PHOTOS_EVENT = 0;
     public static final int SAVE_PHOTO_EVENT = 1;
 
     private int type;
@@ -42,8 +42,8 @@ public class PhotoEvent {
         this.photos = photos;
     }
 
-    public Integer getPage() {
-        return page;
+    public int getPage() {
+        return page != null ? page : 0;
     }
 
     public void setPage(Integer page) {

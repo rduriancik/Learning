@@ -1,6 +1,7 @@
 package com.example.robert.flickrlike.photoActivity.ui;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +20,9 @@ import com.example.robert.flickrlike.libs.base.ImageLoader;
 import com.example.robert.flickrlike.photoActivity.PhotoPresenter;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,24 +33,23 @@ public class PhotoActivity extends AppCompatActivity implements PhotoView, Swipe
     public static final String PHOTOS_KEY = "photos_key";
     public static final String PAGE_KEY = "page_key";
 
-    public static final int SWIPE_UP = 0;
-    public static final int SWIPE_DOWN = 1;
-    public static final int SWIPE_RIGHT = 3;
-    public static final int SWIPE_LEFT = 4;
-
     @BindView(R.id.image)
     ImageView image;
     @BindView(R.id.imgTitle)
     TextView imgTitle;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
+    @BindView(R.id.container)
+    LinearLayout container;
 
-    private ArrayList<Photo> photos;
+    private List<Photo> photos;
     private int page = 0;
     private String tags;
     private Photo currentPhoto;
 
+    @Inject
     PhotoPresenter presenter;
+    @Inject
     ImageLoader imageLoader;
 
     @Override
@@ -87,7 +91,7 @@ public class PhotoActivity extends AppCompatActivity implements PhotoView, Swipe
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putString(TAGS_KEY, tags);
-        outState.putParcelableArrayList(PHOTOS_KEY, photos);
+        outState.putParcelableArrayList(PHOTOS_KEY, (ArrayList<Photo>) photos);
         super.onSaveInstanceState(outState);
     }
 
@@ -118,6 +122,12 @@ public class PhotoActivity extends AppCompatActivity implements PhotoView, Swipe
     }
 
     @Override
+    public void setData(List<Photo> photos, int page) {
+        this.photos = photos;
+        this.page = page;
+    }
+
+    @Override
     public void showNextPhoto() {
         if (photos != null && !photos.isEmpty()) {
             setPhoto(photos.get(0));
@@ -125,6 +135,11 @@ public class PhotoActivity extends AppCompatActivity implements PhotoView, Swipe
         } else {
             presenter.findPhotos(tags, ++page);
         }
+    }
+
+    @Override
+    public void showPhotoSaved() {
+        Snackbar.make(container, "Saved", Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
