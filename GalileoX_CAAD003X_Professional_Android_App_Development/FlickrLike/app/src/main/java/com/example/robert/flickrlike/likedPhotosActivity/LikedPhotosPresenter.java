@@ -7,9 +7,7 @@ import com.example.robert.flickrlike.likedPhotosActivity.events.LikedPhotosEvent
  */
 
 public interface LikedPhotosPresenter {
-    void onResume();
-
-    void onPause();
+    void onCreate();
 
     void onDestroy();
 

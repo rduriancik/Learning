@@ -1,5 +1,7 @@
 package com.example.robert.flickrlike.likedPhotosActivity;
 
+import android.util.Log;
+
 import com.example.robert.flickrlike.libs.base.EventBus;
 import com.example.robert.flickrlike.likedPhotosActivity.events.LikedPhotosEvent;
 import com.example.robert.flickrlike.likedPhotosActivity.ui.LikedPhotosView;
@@ -11,6 +13,7 @@ import org.greenrobot.eventbus.Subscribe;
  */
 
 public class LikedPhotosPresenterImpl implements LikedPhotosPresenter {
+    private static final String TAG = "LikedPhotosPresenterImp";
     private LikedPhotosView view;
     private EventBus eventBus;
     private LikedPhotosInteractor interactor;
@@ -22,17 +25,13 @@ public class LikedPhotosPresenterImpl implements LikedPhotosPresenter {
     }
 
     @Override
-    public void onResume() {
+    public void onCreate() {
         eventBus.register(this);
     }
 
     @Override
-    public void onPause() {
-        eventBus.unregister(this);
-    }
-
-    @Override
     public void onDestroy() {
+        eventBus.unregister(this);
         view = null;
     }
 
@@ -43,13 +42,15 @@ public class LikedPhotosPresenterImpl implements LikedPhotosPresenter {
             view.hideEmpty();
             view.showProgressBar();
         }
+        Log.d(TAG, "getLikedPhotos: called");
         interactor.getLikedPhotos();
     }
 
-    @Subscribe
     @Override
+    @Subscribe
     public void onEventMainThread(LikedPhotosEvent event) {
         if (view != null && event != null) {
+            Log.d(TAG, "onEventMainThread: called");
             view.hideProgressBar();
             if (event.getPhotos() == null || event.getPhotos().isEmpty()) {
                 view.showEmpty();

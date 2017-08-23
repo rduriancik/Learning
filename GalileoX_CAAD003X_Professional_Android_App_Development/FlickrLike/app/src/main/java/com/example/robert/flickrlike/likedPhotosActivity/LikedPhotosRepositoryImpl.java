@@ -1,5 +1,7 @@
 package com.example.robert.flickrlike.likedPhotosActivity;
 
+import android.util.Log;
+
 import com.example.robert.flickrlike.entities.Photo;
 import com.example.robert.flickrlike.libs.base.EventBus;
 import com.example.robert.flickrlike.likedPhotosActivity.events.LikedPhotosEvent;
@@ -14,6 +16,7 @@ import java.util.List;
 
 public class LikedPhotosRepositoryImpl implements LikedPhotosRepository {
     private EventBus eventBus;
+    private static final String TAG = "LikedPhotosRepositoryIm";
 
     public LikedPhotosRepositoryImpl(EventBus eventBus) {
         this.eventBus = eventBus;
@@ -22,6 +25,7 @@ public class LikedPhotosRepositoryImpl implements LikedPhotosRepository {
     @Override
     public void getLikedPhotos() {
         FlowCursorList<Photo> photoCursor = SQLite.select().from(Photo.class).cursorList();
+        Log.d(TAG, "getLikedPhotos: post " + photoCursor.isEmpty());
         post(photoCursor.getAll());
         photoCursor.close();
     }

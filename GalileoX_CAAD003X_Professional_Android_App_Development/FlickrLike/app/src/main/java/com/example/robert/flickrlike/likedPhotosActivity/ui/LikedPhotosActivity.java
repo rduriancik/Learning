@@ -11,10 +11,15 @@ import android.widget.TextView;
 
 import com.example.robert.flickrlike.R;
 import com.example.robert.flickrlike.entities.Photo;
+import com.example.robert.flickrlike.libs.di.LibsModule;
 import com.example.robert.flickrlike.likedPhotosActivity.LikedPhotosPresenter;
 import com.example.robert.flickrlike.likedPhotosActivity.adapters.LikedPhotosAdapter;
+import com.example.robert.flickrlike.likedPhotosActivity.di.DaggerLikedPhotosComponent;
+import com.example.robert.flickrlike.likedPhotosActivity.di.LikedPhotosModule;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,7 +35,9 @@ public class LikedPhotosActivity extends AppCompatActivity implements LikedPhoto
     @BindView(R.id.container)
     LinearLayout container;
 
+    @Inject
     LikedPhotosAdapter adapter;
+    @Inject
     LikedPhotosPresenter presenter;
 
     @Override
@@ -41,19 +48,8 @@ public class LikedPhotosActivity extends AppCompatActivity implements LikedPhoto
         setupInjection();
         setupRecyclerView();
 
+        presenter.onCreate();
         presenter.getLikedPhotos();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        presenter.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        presenter.onPause();
-        super.onPause();
     }
 
     @Override
@@ -63,7 +59,11 @@ public class LikedPhotosActivity extends AppCompatActivity implements LikedPhoto
     }
 
     private void setupInjection() {
-
+        DaggerLikedPhotosComponent.builder()
+                .libsModule(new LibsModule(this))
+                .likedPhotosModule(new LikedPhotosModule(this))
+                .build()
+                .inject(this);
     }
 
     private void setupRecyclerView() {
