@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".likedPhotosActivity.LikedPhotosActivity"
+            android:name=".likedPhotosActivity.ui.LikedPhotosActivity"
             android:parentActivityName=".mainActivity.ui.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

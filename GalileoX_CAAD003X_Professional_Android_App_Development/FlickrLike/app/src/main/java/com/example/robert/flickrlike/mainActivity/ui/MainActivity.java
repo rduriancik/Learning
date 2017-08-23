@@ -6,7 +6,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.robert.flickrlike.R;
-import com.example.robert.flickrlike.likedPhotosActivity.LikedPhotosActivity;
+import com.example.robert.flickrlike.likedPhotosActivity.ui.LikedPhotosActivity;
 import com.example.robert.flickrlike.mainActivity.MainPresenter;
 import com.example.robert.flickrlike.mainActivity.di.DaggerMainComponent;
 import com.example.robert.flickrlike.mainActivity.di.MainModule;

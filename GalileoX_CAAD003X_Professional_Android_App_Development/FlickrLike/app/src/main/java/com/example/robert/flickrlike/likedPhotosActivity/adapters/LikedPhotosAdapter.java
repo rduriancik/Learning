@@ -45,6 +45,11 @@ public class LikedPhotosAdapter extends RecyclerView.Adapter<LikedPhotosAdapter.
         return photos.size();
     }
 
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
+        notifyDataSetChanged();
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.image)
         ImageView image;
