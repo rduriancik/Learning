@@ -1,9 +1,14 @@
 package com.example.robert.flickrlike.likedPhotosActivity.ui;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.robert.flickrlike.R;
 import com.example.robert.flickrlike.entities.Photo;
@@ -19,6 +24,12 @@ public class LikedPhotosActivity extends AppCompatActivity implements LikedPhoto
 
     @BindView(R.id.rvPhotos)
     RecyclerView rvPhotos;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+    @BindView(R.id.emptyView)
+    TextView emptyView;
+    @BindView(R.id.container)
+    LinearLayout container;
 
     LikedPhotosAdapter adapter;
     LikedPhotosPresenter presenter;
@@ -59,6 +70,41 @@ public class LikedPhotosActivity extends AppCompatActivity implements LikedPhoto
     private void setupRecyclerView() {
         rvPhotos.setAdapter(adapter);
         rvPhotos.setLayoutManager(new GridLayoutManager(this, 3));
+    }
+
+    @Override
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showContent() {
+        rvPhotos.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideContent() {
+        rvPhotos.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showEmpty() {
+        emptyView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideEmpty() {
+        emptyView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onError(String error) {
+        Snackbar.make(container, error, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override

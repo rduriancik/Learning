@@ -4,4 +4,5 @@
     <string name="flickr_main_search">Search</string>
     <string name="flickr_main_liked_photos">View liked photos</string>
     <string name="flickr_main_hint">tags</string>
+    <string name="liked_photos_empty_view">No items stored</string>
 </resources>

@@ -9,5 +9,18 @@ import java.util.List;
  */
 
 public interface LikedPhotosView {
+    void showProgressBar();
+
+    void hideProgressBar();
+
+    void showContent();
+
+    void hideContent();
+
+    void showEmpty();
+
+    void hideEmpty();
+
+    void onError(String error);
     void setContent(List<Photo> photos);
 }
