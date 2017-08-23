@@ -14,11 +14,15 @@ public interface PhotoView {
     int SWIPE_RIGHT = 3;
     int SWIPE_LEFT = 4;
 
-    void showNextPhoto();
+    void getNextPhoto();
 
-    void showProgress();
+    void showProgressBar();
+
+    void hideProgressBar();
 
     void showContent();
+
+    void hideContent();
 
     void showAnimation(int type);
 

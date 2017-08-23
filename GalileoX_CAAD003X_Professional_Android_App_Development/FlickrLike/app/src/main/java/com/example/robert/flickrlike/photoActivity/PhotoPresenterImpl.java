@@ -12,6 +12,7 @@ import org.greenrobot.eventbus.Subscribe;
  */
 
 public class PhotoPresenterImpl implements PhotoPresenter {
+    private static final String TAG = "PhotoPresenterImpl";
     private PhotoView view;
     private PhotoInteractor interactor;
     private EventBus eventBus;
@@ -39,14 +40,17 @@ public class PhotoPresenterImpl implements PhotoPresenter {
 
     @Override
     public void findPhotos(String tags, int page) {
-        view.showProgress();
+        if (view != null) {
+            view.hideContent();
+            view.showProgressBar();
+        }
         interactor.findPhotos(tags, page);
     }
 
     @Override
     public void getNextPhoto() {
         if (view != null) {
-            view.showNextPhoto();
+            view.getNextPhoto();
         }
     }
 
@@ -54,12 +58,29 @@ public class PhotoPresenterImpl implements PhotoPresenter {
     public void onSwipePhoto(Photo photo, int type) {
         if (view != null) {
             view.showAnimation(type);
-            if (type == PhotoView.SWIPE_DOWN || type == PhotoView.SWIPE_UP) {
-                view.showNextPhoto();
-            } else {
-                view.showProgress();
+            view.hideContent();
+            view.showProgressBar();
+            if (type == PhotoView.SWIPE_LEFT || type == PhotoView.SWIPE_RIGHT) {
                 interactor.savePhoto(photo);
             }
+        }
+    }
+
+    @Override
+    public void imageReady() {
+        if (view != null) {
+            view.hideProgressBar();
+            view.showContent();
+        }
+    }
+
+    @Override
+    public void imageError(String error) {
+        if (view != null) {
+            view.hideContent();
+            view.hideProgressBar();
+            view.onError(error);
+            view.getNextPhoto();
         }
     }
 
@@ -69,17 +90,15 @@ public class PhotoPresenterImpl implements PhotoPresenter {
         if (event != null && view != null) {
             if (event.getType() == PhotoEvent.NEXT_PHOTOS_EVENT) {
                 if (event.getError() != null) {
-                    view.showContent();
+                    view.hideContent();
+                    view.hideProgressBar();
                     view.onError(event.getError());
                 } else {
                     view.setData(event.getPhotos(), event.getPage());
-                    view.showNextPhoto();
-                    view.showContent();
+                    view.getNextPhoto();
                 }
             } else if (event.getType() == PhotoEvent.SAVE_PHOTO_EVENT) {
                 view.showPhotoSaved();
-                view.showNextPhoto();
-                view.showContent();
             }
         }
     }

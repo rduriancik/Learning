@@ -3,7 +3,6 @@ package com.example.robert.flickrlike.photoActivity.ui;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,6 +14,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.robert.flickrlike.R;
 import com.example.robert.flickrlike.entities.Photo;
 import com.example.robert.flickrlike.libs.base.ImageLoader;
@@ -64,6 +65,7 @@ public class PhotoActivity extends AppCompatActivity implements PhotoView, Swipe
         ButterKnife.bind(this);
         setupInjection();
         setupGestureDetector();
+        setupImageLoader();
 
         if (savedInstanceState != null) {
             photos = savedInstanceState.getParcelable(PHOTOS_KEY);
@@ -124,10 +126,27 @@ public class PhotoActivity extends AppCompatActivity implements PhotoView, Swipe
         });
     }
 
+    private void setupImageLoader() {
+        RequestListener requestListener = new RequestListener() {
+            @Override
+            public boolean onException(Exception e, Object model, Target target, boolean isFirstResource) {
+                presenter.imageError(e.getLocalizedMessage());
+                return false;
+            }
+
+            @Override
+            public boolean onResourceReady(Object resource, Object model, Target target, boolean isFromMemoryCache, boolean isFirstResource) {
+                presenter.imageReady();
+                return false;
+            }
+        };
+        imageLoader.setOnFinishedLoadingListener(requestListener);
+    }
+
     public void setPhoto(Photo photo) {
         if (photo != null) {
             this.currentPhoto = photo;
-            imageLoader.load(image, currentPhoto.getPhotoUrl()); // add listener TODO
+            imageLoader.load(image, currentPhoto.getPhotoUrl());
             imgTitle.setText(currentPhoto.getTitle());
         }
     }
@@ -139,7 +158,7 @@ public class PhotoActivity extends AppCompatActivity implements PhotoView, Swipe
     }
 
     @Override
-    public void showNextPhoto() {
+    public void getNextPhoto() {
         if (photos != null && !photos.isEmpty()) {
             setPhoto(photos.get(0));
             photos.remove(0);
@@ -154,15 +173,23 @@ public class PhotoActivity extends AppCompatActivity implements PhotoView, Swipe
     }
 
     @Override
-    public void showProgress() {
-        image.setVisibility(View.GONE);
-        imgTitle.setVisibility(View.GONE);
+    public void showProgressBar() {
         progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void showContent() {
+    public void hideProgressBar() {
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void hideContent() {
+        image.setVisibility(View.GONE);
+        imgTitle.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showContent() {
         image.setVisibility(View.VISIBLE);
         imgTitle.setVisibility(View.VISIBLE);
     }
@@ -191,11 +218,12 @@ public class PhotoActivity extends AppCompatActivity implements PhotoView, Swipe
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-
+                imgTitle.setVisibility(View.GONE);
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
+                clearImage();
                 presenter.getNextPhoto();
             }
 
@@ -204,7 +232,12 @@ public class PhotoActivity extends AppCompatActivity implements PhotoView, Swipe
 
             }
         });
-        image.setAnimation(animation);
+        animation.setFillAfter(false);
+        image.startAnimation(animation);
+    }
+
+    private void clearImage() {
+        image.setImageResource(0);
     }
 
     @Override
@@ -214,7 +247,6 @@ public class PhotoActivity extends AppCompatActivity implements PhotoView, Swipe
 
     @Override
     public void onSaveSwipeRight() {
-        Log.d(TAG, "onSaveSwipeRight: called");
         presenter.onSwipePhoto(currentPhoto, SWIPE_RIGHT);
     }
 

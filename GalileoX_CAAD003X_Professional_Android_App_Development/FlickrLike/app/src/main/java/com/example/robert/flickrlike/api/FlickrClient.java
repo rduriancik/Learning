@@ -1,6 +1,7 @@
 package com.example.robert.flickrlike.api;
 
 import android.support.annotation.NonNull;
+
 import com.example.robert.flickrlike.BuildConfig;
 
 import java.io.IOException;
@@ -17,11 +18,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by robert on 20.8.2017.
  */
 
-class FlickrClient {
+public class FlickrClient {
     private static final String FLICKR_API_BASE_URL = "https://api.flickr.com/";
     private static final FlickrService ourInstance ;
 
-    static FlickrService getFlickrService() {
+    public static FlickrService getFlickrService() {
         return ourInstance;
     }
 

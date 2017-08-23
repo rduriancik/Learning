@@ -21,7 +21,7 @@ public class FlickApiHelper {
     EventBus eventBus;
     FlickrService flickrService;
 
-    public FlickApiHelper(EventBus eventBus, FlickrService flickrService, List<Photo> photos) {
+    public FlickApiHelper(EventBus eventBus, FlickrService flickrService) {
         this.eventBus = eventBus;
         this.flickrService = flickrService;
     }

@@ -8,6 +8,7 @@ import android.view.MotionEvent;
  */
 
 public class SwipeGestureDetector extends GestureDetector.SimpleOnGestureListener {
+    private static final String TAG = "SwipeGestureDetector";
     private static final int SWIPE_THRESHOLD = 100;
     private static final int SWIPE_VELOCITY_THRESHOLD = 100;
 
@@ -15,6 +16,11 @@ public class SwipeGestureDetector extends GestureDetector.SimpleOnGestureListene
 
     public SwipeGestureDetector(SwipeGestureListener gestureListener) {
         this.gestureListener = gestureListener;
+    }
+
+    @Override
+    public boolean onDown(MotionEvent e) {
+        return true;
     }
 
     @Override
@@ -40,6 +46,6 @@ public class SwipeGestureDetector extends GestureDetector.SimpleOnGestureListene
             }
         }
 
-        return super.onFling(e1, e2, velocityX, velocityY);
+        return true;
     }
 }

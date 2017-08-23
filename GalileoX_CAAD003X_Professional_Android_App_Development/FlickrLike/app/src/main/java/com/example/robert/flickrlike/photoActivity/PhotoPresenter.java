@@ -20,5 +20,9 @@ public interface PhotoPresenter {
 
     void onSwipePhoto(Photo photo, int type);
 
+    void imageReady();
+
+    void imageError(String error);
+
     void onEventMainThread(PhotoEvent event);
 }

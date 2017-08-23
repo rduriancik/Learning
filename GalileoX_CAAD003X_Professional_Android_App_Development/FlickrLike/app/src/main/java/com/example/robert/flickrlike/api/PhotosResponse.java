@@ -10,27 +10,31 @@ import java.util.List;
  */
 
 class PhotosResponse {
-    private int page;
-    @SerializedName("photo")
-    private List<Photo> photos;
+    private Photos photos;
 
     public List<Photo> getPhotos() {
-        return photos;
+        return photos.photos;
     }
 
     public void setPhotos(List<Photo> photos) {
-        this.photos = photos;
+        this.photos.photos = photos;
     }
 
     public int getPage() {
-        return page;
+        return photos.page;
     }
 
     public void setPage(int page) {
-        this.page = page;
+        this.photos.page = page;
     }
 
     public int getCount() {
-        return photos.size();
+        return photos.photos.size();
+    }
+
+    private static class Photos {
+        private int page;
+        @SerializedName("photo")
+        private List<Photo> photos;
     }
 }
