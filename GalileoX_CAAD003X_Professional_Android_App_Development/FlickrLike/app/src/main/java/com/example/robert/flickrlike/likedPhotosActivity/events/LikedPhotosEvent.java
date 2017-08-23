@@ -9,16 +9,7 @@ import java.util.List;
  */
 
 public class LikedPhotosEvent {
-    private String error;
     private List<Photo> photos;
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
 
     public List<Photo> getPhotos() {
         return photos;

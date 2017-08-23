@@ -21,6 +21,5 @@ public interface LikedPhotosView {
 
     void hideEmpty();
 
-    void onError(String error);
     void setContent(List<Photo> photos);
 }

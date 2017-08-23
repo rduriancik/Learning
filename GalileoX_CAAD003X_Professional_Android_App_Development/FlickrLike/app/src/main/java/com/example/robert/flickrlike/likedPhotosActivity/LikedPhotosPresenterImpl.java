@@ -53,9 +53,6 @@ public class LikedPhotosPresenterImpl implements LikedPhotosPresenter {
             view.hideProgressBar();
             if (event.getPhotos() == null || event.getPhotos().isEmpty()) {
                 view.showEmpty();
-                if (event.getError() != null) {
-                    view.onError(event.getError());
-                }
             } else {
                 view.setContent(event.getPhotos());
                 view.showContent();

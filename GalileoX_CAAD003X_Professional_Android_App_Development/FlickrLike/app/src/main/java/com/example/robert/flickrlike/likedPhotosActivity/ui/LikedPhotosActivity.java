@@ -1,7 +1,6 @@
 package com.example.robert.flickrlike.likedPhotosActivity.ui;
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -100,11 +99,6 @@ public class LikedPhotosActivity extends AppCompatActivity implements LikedPhoto
     @Override
     public void hideEmpty() {
         emptyView.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onError(String error) {
-        Snackbar.make(container, error, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
