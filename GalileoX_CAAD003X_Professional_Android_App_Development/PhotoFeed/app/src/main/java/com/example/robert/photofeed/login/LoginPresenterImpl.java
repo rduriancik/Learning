@@ -17,7 +17,7 @@ import static com.example.robert.photofeed.login.events.LoginEvent.onSignUpSucce
  */
 
 public class LoginPresenterImpl implements LoginPresenter {
-    EventBus eventBus;
+    EventBus eventBus; // FIXME import
     LoginView loginView;
     LoginInteractor loginInteractor;
     SignupInteractor signupInteractor;

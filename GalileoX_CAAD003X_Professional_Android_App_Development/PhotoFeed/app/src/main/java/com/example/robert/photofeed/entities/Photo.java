@@ -4,7 +4,7 @@ package com.example.robert.photofeed.entities;
  * Created by robert on 28.8.2017.
  */
 
-class Photo {
+public class Photo {
     private String id;
     private boolean publishedByMe;
     private String url;

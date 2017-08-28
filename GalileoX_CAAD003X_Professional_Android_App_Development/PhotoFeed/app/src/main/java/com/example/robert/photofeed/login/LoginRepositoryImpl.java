@@ -19,7 +19,7 @@ import org.greenrobot.eventbus.EventBus;
  */
 
 public class LoginRepositoryImpl implements LoginRepository {
-    private EventBus eventBus;
+    private EventBus eventBus; // FIXME import
     private FirebaseApiHelper firebase;
     private DatabaseReference dataReference;
     private DatabaseReference myUserReference;
