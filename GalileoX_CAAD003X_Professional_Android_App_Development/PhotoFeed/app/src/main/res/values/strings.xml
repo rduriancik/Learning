@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">PhotoFeed</string>
+    <string name="login_message_email">Email</string>
+    <string name="login_message_password">Password</string>
+    <string name="login_message_signin">Sign In</string>
+    <string name="login_message_signup">Sign Up</string>
 </resources>
