@@ -19,7 +19,7 @@ public interface LoginView {
 
     void newUserSuccess();
 
-    void navigateToMainScree();
+    void navigateToMainScreen();
 
     void setUserEmail(String email);
 

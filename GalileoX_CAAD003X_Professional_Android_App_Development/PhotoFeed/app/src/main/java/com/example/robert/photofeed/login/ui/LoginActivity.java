@@ -106,7 +106,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
     @Override
-    public void navigateToMainScree() {
+    public void navigateToMainScreen() {
         startActivity(new Intent(this, MainActivity.class));
     }
 
