@@ -1,4 +1,4 @@
-package com.example.robert.photofeed.main;
+package com.example.robert.photofeed.main.ui;
 
 import android.Manifest;
 import android.content.Intent;
@@ -21,6 +21,8 @@ import android.view.MenuItem;
 import com.example.robert.photofeed.PhotoFeedApp;
 import com.example.robert.photofeed.R;
 import com.example.robert.photofeed.login.ui.LoginActivity;
+import com.example.robert.photofeed.main.MainPresenter;
+import com.example.robert.photofeed.main.MainSectionsPagerAdapter;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
