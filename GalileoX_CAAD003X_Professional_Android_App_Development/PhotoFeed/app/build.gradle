@@ -47,9 +47,6 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$rootProject.ext.supportLibraryVersion"
     compile "com.android.support:design:$rootProject.ext.supportLibraryVersion"
     compile "com.android.support:support-v4:$rootProject.ext.supportLibraryVersion"
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-
-    testCompile 'junit:junit:4.12'
 
     // Dagger
     compile "com.google.dagger:dagger:$rootProject.ext.daggerVersion"
@@ -78,6 +75,8 @@ dependencies {
 
     // Google Play Services
     compile "com.google.android.gms:play-services-location:$rootProject.ext.playServicesLocationVersion"
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
 }
 
 apply plugin: 'com.google.gms.google-services'
