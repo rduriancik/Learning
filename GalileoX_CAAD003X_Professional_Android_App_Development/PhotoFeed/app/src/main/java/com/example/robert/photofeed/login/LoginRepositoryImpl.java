@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.example.robert.photofeed.domain.FirebaseActionListenerCallback;
 import com.example.robert.photofeed.domain.FirebaseApiHelper;
+import com.example.robert.photofeed.libs.base.EventBus;
 import com.example.robert.photofeed.login.events.LoginEvent;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -12,14 +13,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
-import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by robert on 28.8.2017.
  */
 
 public class LoginRepositoryImpl implements LoginRepository {
-    private EventBus eventBus; // FIXME import
+    private EventBus eventBus;
     private FirebaseApiHelper firebase;
     private DatabaseReference dataReference;
     private DatabaseReference myUserReference;

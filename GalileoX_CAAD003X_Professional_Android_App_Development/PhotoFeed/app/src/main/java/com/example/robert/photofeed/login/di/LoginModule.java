@@ -1,6 +1,7 @@
 package com.example.robert.photofeed.login.di;
 
 import com.example.robert.photofeed.domain.FirebaseApiHelper;
+import com.example.robert.photofeed.libs.base.EventBus;
 import com.example.robert.photofeed.login.LoginInteractor;
 import com.example.robert.photofeed.login.LoginInteractorImpl;
 import com.example.robert.photofeed.login.LoginPresenter;
@@ -10,8 +11,6 @@ import com.example.robert.photofeed.login.LoginRepositoryImpl;
 import com.example.robert.photofeed.login.SignupInteractor;
 import com.example.robert.photofeed.login.SignupInteractorImpl;
 import com.example.robert.photofeed.login.ui.LoginView;
-
-import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Singleton;
 
@@ -57,6 +56,6 @@ public class LoginModule {
     @Provides
     @Singleton
     LoginRepository providesLoginRepository(FirebaseApiHelper firebase, EventBus eventBus) {
-        return new LoginRepositoryImpl(eventBus, firebase); // TODO change eventbus import
+        return new LoginRepositoryImpl(eventBus, firebase);
     }
 }

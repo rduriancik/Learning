@@ -1,9 +1,9 @@
 package com.example.robert.photofeed.login;
 
+import com.example.robert.photofeed.libs.base.EventBus;
 import com.example.robert.photofeed.login.events.LoginEvent;
 import com.example.robert.photofeed.login.ui.LoginView;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import static com.example.robert.photofeed.login.events.LoginEvent.onFailedToRecoverSession;
@@ -17,7 +17,7 @@ import static com.example.robert.photofeed.login.events.LoginEvent.onSignUpSucce
  */
 
 public class LoginPresenterImpl implements LoginPresenter {
-    EventBus eventBus; // FIXME import
+    EventBus eventBus;
     LoginView loginView;
     LoginInteractor loginInteractor;
     SignupInteractor signupInteractor;

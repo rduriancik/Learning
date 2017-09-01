@@ -1,4 +1,4 @@
-package com.example.robert.photofeed.main.adapters;
+package com.example.robert.photofeed.main.ui.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
  * Created by robert on 31.8.2017.
  */
 
-class MainSectionsPagerAdapter extends FragmentPagerAdapter {
+public class MainSectionsPagerAdapter extends FragmentPagerAdapter {
     private String[] titles;
     private Fragment[] fragments;
 

@@ -1,8 +1,10 @@
 package com.example.robert.photofeed.libs;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import com.cloudinary.Cloudinary;
+import com.cloudinary.android.Utils;
 import com.cloudinary.utils.ObjectUtils;
 import com.example.robert.photofeed.libs.base.EventBus;
 import com.example.robert.photofeed.libs.base.ImageStorage;
@@ -19,9 +21,9 @@ public class CloudinaryImageStorage implements ImageStorage {
     private EventBus eventBus;
     private Cloudinary cloudinary;
 
-    public CloudinaryImageStorage(EventBus eventBus, Cloudinary cloudinary) {
+    public CloudinaryImageStorage(Context context, EventBus eventBus) {
         this.eventBus = eventBus;
-        this.cloudinary = cloudinary;
+        this.cloudinary = new Cloudinary(Utils.cloudinaryUrlFromContext(context));
     }
 
     @Override
