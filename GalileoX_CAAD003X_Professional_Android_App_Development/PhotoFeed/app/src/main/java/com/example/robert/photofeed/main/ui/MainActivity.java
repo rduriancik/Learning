@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void setupInjection() {
-
+//TODO
     }
 
     private void checkLocationPermission() {
