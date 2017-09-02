@@ -72,13 +72,13 @@ public class LoginRepositoryImpl implements LoginRepository {
         } else {
             firebase.checkForSession(new FirebaseActionListenerCallback() {
                 @Override
-                public void onSucces() {
+                public void onSuccess() {
                     String email = firebase.getAuthEmail();
                     post(LoginEvent.onSignInSuccess, null, email);
                 }
 
                 @Override
-                public void onError(FirebaseError error) {
+                public void onError(String error) {
                     post(LoginEvent.onFailedToRecoverSession);
                 }
             });

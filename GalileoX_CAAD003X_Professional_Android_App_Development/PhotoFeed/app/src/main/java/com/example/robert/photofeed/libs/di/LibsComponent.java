@@ -1,5 +1,7 @@
 package com.example.robert.photofeed.libs.di;
 
+import com.example.robert.photofeed.PhotoFeedAppModule;
+
 import javax.inject.Singleton;
 
 import dagger.Component;

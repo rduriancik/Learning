@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import com.example.robert.photofeed.PhotoFeedApp;
 import com.example.robert.photofeed.R;
 import com.example.robert.photofeed.login.LoginPresenter;
+import com.example.robert.photofeed.main.ui.MainActivity;
 
 import javax.inject.Inject;
 
