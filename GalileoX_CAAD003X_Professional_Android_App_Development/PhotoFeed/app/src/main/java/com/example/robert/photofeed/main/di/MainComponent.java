@@ -1,5 +1,6 @@
 package com.example.robert.photofeed.main.di;
 
+import com.example.robert.photofeed.PhotoFeedAppModule;
 import com.example.robert.photofeed.libs.di.LibsModule;
 import com.example.robert.photofeed.main.ui.MainActivity;
 
