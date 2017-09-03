@@ -45,5 +45,16 @@ public class MainActivity extends AppCompatActivity {
         };
 
         Subscription subscription2 = myObservable.subscribe(myAction);
+
+        Observable<String> myArrayObservable =
+                Observable.from(new String[]{"Hello", "Gracias", "Bonjurno", "Goodbye", "Salam", "Shalom"});
+
+        myArrayObservable.subscribe(new Action1<String>() {
+            @Override
+            public void call(String s) {
+                Log.d("RXResult", s);
+            }
+        });
+
     }
 }
