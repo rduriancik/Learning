@@ -8,6 +8,7 @@ import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
 import rx.functions.Action1;
+import rx.functions.Func1;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,6 +54,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void call(String s) {
                 Log.d("RXResult", s);
+            }
+        });
+
+
+        Observable<Integer> myIntArrayObservable =
+                Observable.from(new Integer[]{1, 2, 3, 4, 5, 6});
+
+        myIntArrayObservable.filter(new Func1<Integer, Boolean>() {
+            @Override
+            public Boolean call(Integer integer) {
+                return integer % 2 == 0;
+            }
+        }).map(new Func1<Integer, String>() {
+            @Override
+            public String call(Integer integer) {
+                return String.valueOf(integer);
+            }
+        }).subscribe(new Action1<String>() {
+            @Override
+            public void call(String s) {
+                Log.d("RXResult", "Map function result: " + s);
             }
         });
 
