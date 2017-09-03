@@ -13,6 +13,7 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
-        Observable<String[]> fetchFromGoogle = Observable.create(new Observable.OnSubscribe<String[]>() {
+        /*Observable<String[]> fetchFromGoogle = Observable.create(new Observable.OnSubscribe<String[]>() {
             @Override
             public void call(Subscriber<? super String[]> subscriber) {
                 try {
@@ -103,7 +104,65 @@ public class MainActivity extends AppCompatActivity {
                     public void call(String[] s) {
                         Log.d("RXResult", s[0] + ", the result was: " + s[0]);
                     }
+                });*/
+
+
+        /*Observable.from(new String[]{"https://www.google.com", "https://www.yahoo.com"})
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(Schedulers.newThread())
+                .subscribe(new Action1<String>() {
+                    @Override
+                    public void call(String s) {
+                        try {
+                            Log.d("RXResult", "Resulting number is: " + fetchData(s));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });*/
+
+        Observable<String[]> fetchFromGoogle = Observable.create(new Observable.OnSubscribe<String[]>() {
+            @Override
+            public void call(Subscriber<? super String[]> subscriber) {
+                try {
+                    String data = fetchData("http://www.google.com");
+                    subscriber.onNext(new String[]{"from Google", data});
+                    subscriber.onCompleted();
+                } catch (Exception e) {
+                    subscriber.onError(e);
+                }
+            }
+        });
+
+        Observable<String[]> fetchFromYahoo = Observable.create(new Observable.OnSubscribe<String[]>() {
+            @Override
+            public void call(Subscriber<? super String[]> subscriber) {
+                try {
+                    String data = fetchData("http://www.yahoo.com");
+                    subscriber.onNext(new String[]{"from Yahoo", data});
+                    subscriber.onCompleted();
+                } catch (Exception e) {
+                    subscriber.onError(e);
+                }
+            }
+        });
+
+        Observable.zip(fetchFromGoogle, fetchFromYahoo, new Func2<String[], String[], String>() {
+            @Override
+            public String call(String[] strings, String[] strings2) {
+                return strings[0] + " and " + strings2[0] + " the result is "
+                        + (Integer.parseInt(strings[1]) + Integer.parseInt(strings2[1]));
+            }
+        })
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<String>() {
+                    @Override
+                    public void call(String s) {
+                        Log.d("RXResult", s);
+                    }
                 });
+
     }
 
 
