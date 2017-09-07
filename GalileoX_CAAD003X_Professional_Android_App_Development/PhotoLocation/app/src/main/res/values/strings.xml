@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PhotoLocation</string>
+    <string name="main_layout_button">Take Photo</string>
+    <string name="main_layout_image_desc">A photo taken with your camera</string>
 </resources>
