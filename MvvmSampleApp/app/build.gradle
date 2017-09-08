@@ -5,7 +5,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 project.ext {
-    appcompat = "25.4.0"
+    appcompat = "25.3.1"
+    arch = "1.0.0-alpha9"
     retrofit = "2.0.2"
 }
 
@@ -43,6 +44,11 @@ dependencies {
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     // Retrofit
-    implementation"com.squareup.retrofit2:retrofit:$project.retrofit"
-    implementation"com.squareup.retrofit2:converter-gson:$project.retrofit"
+    implementation "com.squareup.retrofit2:retrofit:$project.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$project.retrofit"
+
+    // Arch
+    implementation "android.arch.lifecycle:runtime:$project.arch"
+    implementation "android.arch.lifecycle:extensions:$project.arch"
+    kapt "android.arch.lifecycle:compiler:$project.arch"
 }
