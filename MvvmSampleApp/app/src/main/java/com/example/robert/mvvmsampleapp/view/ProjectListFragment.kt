@@ -21,6 +21,10 @@ import com.example.robert.mvvmsampleapp.viewmodel.ProjectListViewModel
  * Created by robert on 11.9.2017.
  */
 class ProjectListFragment : LifecycleFragment() {
+    companion object {
+        const val TAG = "ProjectListFragment"
+    }
+
     private lateinit var projectAdapter: ProjectAdapter
     private lateinit var binding: FragmentProjectListBinding
     private val projectClickCallback: ProjectClickCallback = object : ProjectClickCallback {
