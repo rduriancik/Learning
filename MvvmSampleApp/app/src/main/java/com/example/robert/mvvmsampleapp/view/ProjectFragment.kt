@@ -1,0 +1,58 @@
+package com.example.robert.mvvmsampleapp.view
+
+import android.arch.lifecycle.LifecycleFragment
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
+import android.databinding.DataBindingUtil
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.example.robert.mvvmsampleapp.R
+import com.example.robert.mvvmsampleapp.databinding.FragmentProjectDetailsBinding
+import com.example.robert.mvvmsampleapp.viewmodel.ProjectViewModel
+
+/**
+ * Created by robert on 11.9.2017.
+ */
+
+class ProjectFragment : LifecycleFragment() {
+    companion object {
+        const val KEY_PROJECT_ID = "project_id"
+
+        fun forProject(projectId: String) = ProjectFragment().apply {
+            arguments = Bundle().apply {
+                putString(KEY_PROJECT_ID, projectId)
+            }
+        }
+    }
+
+    private lateinit var binding: FragmentProjectDetailsBinding
+
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_project_details, container, false)
+        return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        val factory = ProjectViewModel.Factory(activity.application, arguments.getString(KEY_PROJECT_ID))
+
+        val viewModel = ViewModelProviders.of(this, factory).get(ProjectViewModel::class.java)
+
+        binding.projectViewModel = viewModel
+        binding.isLoading = true
+
+        observeViewModel(viewModel)
+    }
+
+    private fun observeViewModel(viewModel: ProjectViewModel) {
+        viewModel.projectObservable.observe(this, Observer { project ->
+            project?.let {
+                binding.isLoading = false
+                viewModel.setProject(project)
+            }
+        })
+    }
+}
