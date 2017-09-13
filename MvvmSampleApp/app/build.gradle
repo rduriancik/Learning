@@ -8,6 +8,7 @@ project.ext {
     appcompat = "25.3.1"
     arch = "1.0.0-alpha9"
     retrofit = "2.0.2"
+    dagger_version = "2.11"
 }
 
 android {
@@ -53,4 +54,12 @@ dependencies {
     implementation "android.arch.lifecycle:runtime:$project.arch"
     implementation "android.arch.lifecycle:extensions:$project.arch"
     kapt "android.arch.lifecycle:compiler:$project.arch"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:$project.dagger_version"
+    implementation "com.google.dagger:dagger-android:$project.dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$project.dagger_version"
+
+    kapt "com.google.dagger:dagger-compiler:$project.dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$project.dagger_version"
 }
