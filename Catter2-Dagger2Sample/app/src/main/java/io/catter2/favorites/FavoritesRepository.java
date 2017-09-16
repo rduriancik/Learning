@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import io.catter2.FavoritesActivity;
 import io.catter2.R;
 
 /**
@@ -24,7 +23,7 @@ public class FavoritesRepository {
         void onChanged(List<FavoriteModel> favorites);
     }
 
-    private static String SP_USER_FAVORITES_KEY = "user-favorites-urls-%s";
+    private static final String SP_USER_FAVORITES_KEY = "user-favorites-urls-%s";
     private static final String TAG = "FavoritesRepository";
 
     private Context mContext;
@@ -55,7 +54,7 @@ public class FavoritesRepository {
         getPref().registerOnSharedPreferenceChangeListener(sharedPrefListener);
     }
 
-    private List<FavoriteModel> getFavorites() {
+    public List<FavoriteModel> getFavorites() {
         SharedPreferences preferences = getPref();
         String prefKey = getFavoritesKey();
         Set<String> entriesSet = preferences.getStringSet(prefKey, new HashSet<String>());
@@ -76,7 +75,7 @@ public class FavoritesRepository {
         return favorites;
     }
 
-    public void clearListeners() {
+    public void clearOnChangeListener() {
         onChangeListener = null;
         if (sharedPrefListener != null) {
             getPref().unregisterOnSharedPreferenceChangeListener(sharedPrefListener);
@@ -114,7 +113,7 @@ public class FavoritesRepository {
     }
 
     private String getFavoritesKey() {
-        return String.format(FavoritesActivity.SP_USER_FAVORITES_KEY, userToken);
+        return String.format(SP_USER_FAVORITES_KEY, userToken);
     }
 
     private void saveFavorites(List<FavoriteModel> newFav) {

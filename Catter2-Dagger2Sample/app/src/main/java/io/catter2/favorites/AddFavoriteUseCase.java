@@ -15,9 +15,9 @@ public class AddFavoriteUseCase {
         repository = new FavoritesRepository(context, userToken);
     }
 
-    public Boolean addUrlToUserFavoritesList(String url) {
+    public boolean addUrlToUserFavoritesList(String url) {
         if (url == null) {
-            return null;
+            return false;
         }
 
         long timeNow = System.currentTimeMillis();
