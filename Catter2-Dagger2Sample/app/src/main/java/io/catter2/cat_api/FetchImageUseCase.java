@@ -1,5 +1,6 @@
 package io.catter2.cat_api;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class FetchImageUseCase {
         RetrofitTheCatAPI retrofitTheCatApi = retrofit.create(RetrofitTheCatAPI.class);
         retrofitTheCatApi.listCatsWithHat().enqueue(new retrofit2.Callback<CatImagesModel>() {
             @Override
-            public void onResponse(Call<CatImagesModel> call, Response<CatImagesModel> response) {
+            public void onResponse(@NonNull Call<CatImagesModel> call, @NonNull Response<CatImagesModel> response) {
                 ArrayList<String> imageUrls = new ArrayList<>();
                 if (response.body().catImages != null) {
                     for (CatImageModel img : response.body().catImages) {
@@ -44,7 +45,7 @@ public class FetchImageUseCase {
             }
 
             @Override
-            public void onFailure(Call<CatImagesModel> call, Throwable t) {
+            public void onFailure(@NonNull Call<CatImagesModel> call, @NonNull Throwable t) {
                 Log.e(TAG, "Error fetching cat images", t);
             }
         });

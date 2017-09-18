@@ -1,7 +1,5 @@
 package io.catter2.favorites;
 
-import android.content.Context;
-
 import java.util.List;
 
 /**
@@ -11,8 +9,8 @@ import java.util.List;
 public class AddFavoriteUseCase {
     private FavoritesRepository repository;
 
-    public AddFavoriteUseCase(Context context, String userToken) {
-        repository = new FavoritesRepository(context, userToken);
+    public AddFavoriteUseCase(FavoritesRepository repository) {
+        this.repository = repository;
     }
 
     public boolean addUrlToUserFavoritesList(String url) {
