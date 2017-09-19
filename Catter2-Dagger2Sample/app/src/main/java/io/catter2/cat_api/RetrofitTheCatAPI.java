@@ -8,7 +8,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 import retrofit2.http.GET;
 
-public class RetrofitTheCatAPI implements TheCatApi {
+public class RetrofitTheCatAPI implements TheCatAPI {
 
     interface RetrofitCatService {
         @GET("images/get?format=xml&results_per_page=20&category=hats")

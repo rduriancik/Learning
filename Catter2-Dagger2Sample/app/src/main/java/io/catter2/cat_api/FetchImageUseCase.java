@@ -13,14 +13,14 @@ public class FetchImageUseCase {
     }
 
     private static final String TAG = "FetchImageUseCase";
-    private TheCatApi theCatApi;
+    private TheCatAPI theCatAPI;
 
-    public FetchImageUseCase(TheCatApi theCatApi) {
-        this.theCatApi = theCatApi;
+    public FetchImageUseCase(TheCatAPI theCatApi) {
+        this.theCatAPI = theCatApi;
     }
 
     public void getImagesUrls(final Callback callback) {
-        theCatApi.getCatsWithHat(new TheCatApi.Callback() {
+        theCatAPI.getCatsWithHat(new TheCatAPI.Callback() {
             @Override
             public void response(CatImagesModel response) {
                 List<String> imageUrls = new ArrayList<>();

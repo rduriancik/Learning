@@ -17,11 +17,7 @@ import io.catter2.R;
  * Created by robert on 14.9.2017.
  */
 
-public class SharedPrefFavoritesRepository {
-
-    public interface OnChangeListener {
-        void onChanged(List<FavoriteModel> favorites);
-    }
+public class SharedPrefFavoritesRepository implements FavoritesRepository {
 
     private static final String SP_USER_FAVORITES_KEY = "user-favorites-urls-%s";
     private static final String TAG = "SharedPrefFavoritesRepo";
@@ -36,6 +32,7 @@ public class SharedPrefFavoritesRepository {
         this.userToken = userToken;
     }
 
+    @Override
     public void registerOnChangeListener(OnChangeListener listener) {
         if (listener == null) {
             throw new IllegalArgumentException("Invalid OnChangeListener");
@@ -54,6 +51,7 @@ public class SharedPrefFavoritesRepository {
         getPref().registerOnSharedPreferenceChangeListener(sharedPrefListener);
     }
 
+    @Override
     public List<FavoriteModel> getFavorites() {
         SharedPreferences preferences = getPref();
         String prefKey = getFavoritesKey();
@@ -75,6 +73,7 @@ public class SharedPrefFavoritesRepository {
         return favorites;
     }
 
+    @Override
     public void clearOnChangeListener() {
         onChangeListener = null;
         if (sharedPrefListener != null) {
@@ -83,6 +82,7 @@ public class SharedPrefFavoritesRepository {
         }
     }
 
+    @Override
     public List<FavoriteModel> addFavorite(FavoriteModel favorite) {
         SharedPreferences pref = getPref();
         String prefKey = getFavoritesKey();
