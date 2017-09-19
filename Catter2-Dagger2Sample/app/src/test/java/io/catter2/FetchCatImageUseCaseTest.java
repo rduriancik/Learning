@@ -29,7 +29,7 @@ public class FetchCatImageUseCaseTest {
         imageUseCase.getImagesUrls(new FetchImageUseCase.Callback() {
             @Override
             public void imageUrls(List<String> urls) {
-                Assert.assertEquals(urls.size(), 0);
+                Assert.assertEquals(0, urls.size());
                 latch.countDown();
             }
         });
@@ -51,9 +51,9 @@ public class FetchCatImageUseCaseTest {
         useCase.getImagesUrls(new FetchImageUseCase.Callback() {
             @Override
             public void imageUrls(List<String> urls) {
-                Assert.assertEquals(urls.size(), 2);
-                Assert.assertEquals(urls.get(0), "url0");
-                Assert.assertEquals(urls.get(1), "url1");
+                Assert.assertEquals(2, urls.size());
+                Assert.assertEquals("url0", urls.get(0));
+                Assert.assertEquals("url1", urls.get(1));
 
                 latch.countDown();
             }

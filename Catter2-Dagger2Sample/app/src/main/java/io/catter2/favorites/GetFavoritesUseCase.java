@@ -15,7 +15,7 @@ public class GetFavoritesUseCase {
     private FavoritesRepository repository;
 
     public GetFavoritesUseCase(FavoritesRepository repository) {
-        repository = repository;
+        this.repository = repository;
     }
 
     public void getFavorites(final Callback callback) {
