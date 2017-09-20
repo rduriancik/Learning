@@ -14,6 +14,7 @@ import android.widget.TextView;
 import io.catter2.di.AppComponent;
 import io.catter2.di.SharedPrefFavoritesRepoModule;
 import io.catter2.di.UserComponent;
+import io.catter2.favorites_activity.FavoritesActivity;
 import io.catter2.login.LoginUseCase;
 
 /**
