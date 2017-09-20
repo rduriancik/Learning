@@ -8,32 +8,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import java.util.List;
 
-import io.catter2.favorites.FavoritesRepository;
 import io.catter2.favorites.GetFavoritesUseCase;
-import io.catter2.favorites.SharedPrefFavoritesRepository;
 
 public class FavoritesActivity extends AppCompatActivity {
 
     private static String TAG = "ImagesRvAdapter";
     private static String ARG_USER_TOKEN = "favorites-user-token";
 
-    static public void launch(Context context, String userToken, boolean clearTop) {
+    static public void launch(Context context) {
         Intent intent = new Intent(context, FavoritesActivity.class);
-        intent.putExtra(ARG_USER_TOKEN, userToken);
-        if (clearTop) {
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        }
         context.startActivity(intent);
     }
 
     private RecyclerView recyclerView;
     private ImagesRvAdapter rvAdapter;
-    private String userToken;
     private GetFavoritesUseCase getFavoritesUseCase;
 
     @Override
@@ -47,7 +39,7 @@ public class FavoritesActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ListActivity.launch(FavoritesActivity.this, userToken);
+                ListActivity.launch(FavoritesActivity.this);
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -57,25 +49,12 @@ public class FavoritesActivity extends AppCompatActivity {
         rvAdapter = new ImagesRvAdapter(null);
         recyclerView.setAdapter(rvAdapter);
 
-        String extraUserToken = getIntent().getStringExtra(ARG_USER_TOKEN);
-        if (extraUserToken != null) {
-            userToken = extraUserToken;
-        }
-        Log.d(TAG, "UserToken: " + userToken);
-
-        setupFavoritesSharedPref(userToken);
+        getFavoritesUseCase = new GetFavoritesUseCase(App.getFavoritesRepository());
     }
 
     @Override
-    protected void onDestroy() {
-        getFavoritesUseCase.clear();
-        getFavoritesUseCase = null;
-        super.onDestroy();
-    }
-
-    private void setupFavoritesSharedPref(final String userToken) {
-        FavoritesRepository repository = new SharedPrefFavoritesRepository(this, userToken);
-        getFavoritesUseCase = new GetFavoritesUseCase(repository);
+    protected void onResume() {
+        super.onResume();
         getFavoritesUseCase.getFavorites(new GetFavoritesUseCase.Callback() {
             @Override
             public void favoriteUrlsUpdated(List<String> favoriteUrls) {
@@ -84,5 +63,15 @@ public class FavoritesActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onPause() {
+        getFavoritesUseCase.clear();
+        super.onPause();
+    }
 
+    @Override
+    protected void onDestroy() {
+        getFavoritesUseCase = null;
+        super.onDestroy();
+    }
 }
