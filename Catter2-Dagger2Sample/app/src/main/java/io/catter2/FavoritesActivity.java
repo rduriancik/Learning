@@ -12,6 +12,7 @@ import android.view.View;
 
 import java.util.List;
 
+import io.catter2.di.UserComponent;
 import io.catter2.favorites.GetFavoritesUseCase;
 
 public class FavoritesActivity extends AppCompatActivity {
@@ -49,7 +50,7 @@ public class FavoritesActivity extends AppCompatActivity {
         rvAdapter = new ImagesRvAdapter(null);
         recyclerView.setAdapter(rvAdapter);
 
-        getFavoritesUseCase = new GetFavoritesUseCase(App.getFavoritesRepository());
+        getFavoritesUseCase = new GetFavoritesUseCase(UserComponent.get().getFavoritesRepository());
     }
 
     @Override

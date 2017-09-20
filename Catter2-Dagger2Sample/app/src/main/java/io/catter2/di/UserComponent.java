@@ -17,7 +17,7 @@ public class UserComponent {
         return UserComponent.instance;
     }
 
-    public void initialize(FavoritesRepositoryModule module) {
+    public static void initialize(FavoritesRepositoryModule module) {
         if (UserComponent.get() != null) {
             throw new RuntimeException("UserComponent already initialized");
         }

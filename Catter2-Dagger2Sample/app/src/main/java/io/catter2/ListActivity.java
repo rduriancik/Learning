@@ -16,6 +16,7 @@ import com.plattysoft.leonids.ParticleSystem;
 import java.util.List;
 
 import io.catter2.cat_api.FetchImageUseCase;
+import io.catter2.di.UserComponent;
 import io.catter2.favorites.AddFavoriteUseCase;
 
 public class ListActivity extends AppCompatActivity {
@@ -50,8 +51,8 @@ public class ListActivity extends AppCompatActivity {
         });
         recyclerView.setAdapter(adapter);
 
-        addFavoriteUseCase = new AddFavoriteUseCase(App.getFavoritesRepository());
-        fetchImageUseCase = new FetchImageUseCase(App.getTheCatAPI());
+        addFavoriteUseCase = new AddFavoriteUseCase(UserComponent.get().getFavoritesRepository());
+        fetchImageUseCase = new FetchImageUseCase(UserComponent.get().getTheCatAPI());
 
         fetchImageUseCase.getImagesUrls(new FetchImageUseCase.Callback() {
             @Override

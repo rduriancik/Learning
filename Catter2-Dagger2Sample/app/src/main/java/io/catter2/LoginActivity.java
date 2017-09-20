@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import io.catter2.di.AppComponent;
+import io.catter2.di.SharedPrefFavoritesRepoModule;
+import io.catter2.di.UserComponent;
 import io.catter2.login.LoginUseCase;
 
 /**
@@ -52,7 +55,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        ((App) getApplication()).destroyFavoritesRepository();
+        if (UserComponent.get() != null) {
+            UserComponent.get().close();
+        }
     }
 
     private void attemptLogin() {
@@ -64,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
         String token = loginUseCase.login(username, password);
 
         if (token != null) {
-            ((App) getApplication()).initializeFavoriteRepository(token);
+            UserComponent.initialize(new SharedPrefFavoritesRepoModule(AppComponent.get(), token));
             FavoritesActivity.launch(this);
         } else {
             errorTv.setVisibility(View.VISIBLE);
