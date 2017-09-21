@@ -1,4 +1,4 @@
-package io.catter2;
+package io.catter2.login_activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+
+import io.catter2.R;
 import io.catter2.di.SharedPrefFavoritesRepoModule;
 import io.catter2.di.UserComponent;
 import io.catter2.favorites_activity.FavoritesActivity;
@@ -24,6 +27,9 @@ public class LoginActivity extends AppCompatActivity {
     private AutoCompleteTextView usernameActv;
     private EditText passwordEt;
     private TextView errorTv;
+
+    @Inject
+    LoginUseCase loginUseCase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +71,6 @@ public class LoginActivity extends AppCompatActivity {
         String username = usernameActv.getText().toString();
         String password = passwordEt.getText().toString();
 
-        LoginUseCase loginUseCase = new LoginUseCase();
         String token = loginUseCase.login(username, password);
 
         if (token != null) {
