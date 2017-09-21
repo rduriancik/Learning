@@ -2,25 +2,18 @@ package io.catter2.di;
 
 import android.content.Context;
 
+import javax.inject.Singleton;
+
+import dagger.Component;
 import io.catter2.cat_api.TheCatAPI;
 
 /**
  * Created by robert on 20.9.2017.
  */
-
-public class AppComponent {
+@Singleton
+@Component(modules = {AppModule.class, TheCatAPIModule.class})
+public abstract class AppComponent {
     private static AppComponent instance;
-
-    private AppModule appModule;
-    private TheCatAPIModule theCatAPIModule;
-
-    private Context context;
-    private TheCatAPI theCatAPI;
-
-    private AppComponent(AppModule appModule, TheCatAPIModule theCatAPIModule) {
-        this.appModule = appModule;
-        this.theCatAPIModule = theCatAPIModule;
-    }
 
     public static AppComponent get() {
         return AppComponent.instance;
@@ -31,22 +24,13 @@ public class AppComponent {
             throw new RuntimeException("AppComponent already initialized");
         }
 
-        AppComponent.instance = new AppComponent(appModule, theCatAPIModule);
+        AppComponent.instance = DaggerAppComponent.builder()
+                .appModule(appModule)
+                .theCatAPIModule(theCatAPIModule)
+                .build();
     }
 
-    public Context getAppContext() {
-        if (context == null) {
-            context = appModule.provideAppContext();
-        }
+    abstract public Context getAppContext();
 
-        return context;
-    }
-
-    public TheCatAPI getTheCatAPI() {
-        if (theCatAPI == null) {
-            theCatAPI = theCatAPIModule.provideTheCatAPI();
-        }
-
-        return theCatAPI;
-    }
+    abstract public TheCatAPI getTheCatAPI();
 }

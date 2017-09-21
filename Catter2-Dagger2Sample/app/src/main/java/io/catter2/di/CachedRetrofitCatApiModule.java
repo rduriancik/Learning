@@ -8,7 +8,7 @@ import io.catter2.cat_api.TheCatAPI;
  * Created by robert on 20.9.2017.
  */
 
-public class CachedRetrofitCatApiModule implements TheCatAPIModule {
+public class CachedRetrofitCatApiModule extends TheCatAPIModule {
 
     @Override
     public TheCatAPI provideTheCatAPI() {
