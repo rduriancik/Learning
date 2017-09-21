@@ -17,8 +17,8 @@ public class SharedPrefFavoritesRepoModule extends FavoritesRepositoryModule {
     }
 
     @Override
-    public FavoritesRepository provideFavoritesRepository(Context context, String userToken) {
-        return new SharedPrefFavoritesRepository(context, userToken);
+    public FavoritesRepository provideFavoritesRepository(Context appContext, String userToken) {
+        return new SharedPrefFavoritesRepository(appContext, userToken);
     }
 
     @Override

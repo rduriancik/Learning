@@ -5,6 +5,7 @@ import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +14,8 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.catter2.di.FavoritesRepositoryModule;
+import io.catter2.di.UserComponent;
 import io.catter2.favorites.FavoritesRepository;
 import io.catter2.favorites.GetFavoritesUseCase;
 import io.catter2.favorites_activity.FavoritesActivity;
@@ -29,6 +32,11 @@ public class FavoritesActivityTest {
     @Rule
     public ActivityTestRule<FavoritesActivity> activityRule =
             new ActivityTestRule<FavoritesActivity>(FavoritesActivity.class, true, false);
+
+    @BeforeClass
+    public static void beforeClass() {
+        UserComponent.initialize(Mockito.mock(FavoritesRepositoryModule.class));
+    }
 
     @Test
     public void testThereAreThreeImages() {

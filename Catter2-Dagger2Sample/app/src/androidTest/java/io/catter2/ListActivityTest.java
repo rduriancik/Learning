@@ -7,6 +7,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +18,8 @@ import java.util.List;
 
 import io.catter2.cat_api.FetchImageUseCase;
 import io.catter2.cat_api.TheCatAPI;
+import io.catter2.di.FavoritesRepositoryModule;
+import io.catter2.di.UserComponent;
 import io.catter2.favorites.AddFavoriteUseCase;
 import io.catter2.favorites.FavoritesRepository;
 import io.catter2.list_activity.ListActivity;
@@ -35,6 +38,11 @@ public class ListActivityTest {
     @Rule
     public ActivityTestRule<ListActivity> activityRule =
             new ActivityTestRule<>(ListActivity.class, true, false);
+
+    @BeforeClass
+    public static void beforeClass() {
+        UserComponent.initialize(Mockito.mock(FavoritesRepositoryModule.class));
+    }
 
     @Test
     public void testThereAreThreeImages() {
