@@ -1,4 +1,4 @@
-package io.catter2;
+package io.catter2.list_activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,8 +15,9 @@ import com.plattysoft.leonids.ParticleSystem;
 
 import java.util.List;
 
+import io.catter2.ImagesRvAdapter;
+import io.catter2.R;
 import io.catter2.cat_api.FetchImageUseCase;
-import io.catter2.di.UserComponent;
 import io.catter2.favorites.AddFavoriteUseCase;
 
 public class ListActivity extends AppCompatActivity {
@@ -51,8 +52,7 @@ public class ListActivity extends AppCompatActivity {
         });
         recyclerView.setAdapter(adapter);
 
-        addFavoriteUseCase = new AddFavoriteUseCase(UserComponent.get().getFavoritesRepository());
-        fetchImageUseCase = new FetchImageUseCase(UserComponent.get().getTheCatAPI());
+        new ListActivityComponent().inject(this);
 
         fetchImageUseCase.getImagesUrls(new FetchImageUseCase.Callback() {
             @Override
@@ -89,5 +89,13 @@ public class ListActivity extends AppCompatActivity {
             Snackbar.make(recyclerView, R.string.list_user_favorite_url_already_in, Snackbar.LENGTH_SHORT)
                     .show();
         }
+    }
+
+    public void injectAddFavoriteUseCase(AddFavoriteUseCase useCase) {
+        this.addFavoriteUseCase = useCase;
+    }
+
+    public void injectFetchImageUseCase(FetchImageUseCase useCase) {
+        this.fetchImageUseCase = useCase;
     }
 }

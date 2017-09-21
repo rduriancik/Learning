@@ -13,9 +13,9 @@ import android.view.View;
 import java.util.List;
 
 import io.catter2.ImagesRvAdapter;
-import io.catter2.ListActivity;
 import io.catter2.R;
 import io.catter2.favorites.GetFavoritesUseCase;
+import io.catter2.list_activity.ListActivity;
 
 public class FavoritesActivity extends AppCompatActivity {
 
