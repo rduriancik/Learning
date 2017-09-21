@@ -6,7 +6,6 @@ import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -63,14 +62,9 @@ public class ListActivityTest {
         expectedUrl.add("ur10");
         setupListCatImages(expectedUrl);
 
-        AddFavoriteUseCase stub = new AddFavoriteUseCase(Mockito.mock(FavoritesRepository.class)) {
-            @Override
-            public boolean addUrlToUserFavoritesList(String url) {
-                Assert.assertTrue("ur10".equals(url));
-                return true;
-            }
-        };
-        ListActivityModule.testAddFavoriteUseCase = stub;
+        AddFavoriteUseCase mock = Mockito.mock(AddFavoriteUseCase.class);
+        Mockito.when(mock.addUrlToUserFavoritesList("ur10")).thenReturn(true);
+        ListActivityModule.testAddFavoriteUseCase = mock;
 
         activityRule.launchActivity(new Intent());
 
@@ -78,6 +72,7 @@ public class ListActivityTest {
 
         onView(withId(R.id.list_rv)).check(new RecyclerViewItemCountAssertion(1));
         onView(withId(R.id.list_rv)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        Mockito.verify(mock, Mockito.times(1)).addUrlToUserFavoritesList("ur10");
     }
 
     private void setupListCatImages(final List<String> urls) {
