@@ -59,6 +59,7 @@ dependencies {
     androidTestCompile("com.android.support.test.espresso:espresso-core:$versions.espresso", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    androidTestCompile "com.android.support.test.espresso:espresso-intents:$versions.espresso"
     androidTestCompile("com.android.support.test.espresso:espresso-contrib:$versions.espresso", {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.android.support', module: 'design'
