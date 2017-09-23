@@ -1,4 +1,4 @@
-package com.example.robert.mvvmsampleapp.view
+package com.example.robert.mvvmsampleapp.view.ui
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleFragment
@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.robert.mvvmsampleapp.MainActivity
 import com.example.robert.mvvmsampleapp.R
 import com.example.robert.mvvmsampleapp.databinding.FragmentProjectListBinding
 import com.example.robert.mvvmsampleapp.service.model.Project

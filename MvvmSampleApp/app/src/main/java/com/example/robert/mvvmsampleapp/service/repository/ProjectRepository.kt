@@ -6,11 +6,14 @@ import com.example.robert.mvvmsampleapp.service.model.Project
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Created by robert on 8.9.2017.
  */
-class ProjectRepository(val githubService: GithubService) {
+@Singleton
+class ProjectRepository @Inject constructor(val githubService: GithubService) {
 
     fun getProjectList(userId: String): LiveData<List<Project>> {
         val data = MutableLiveData<List<Project>>()

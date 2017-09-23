@@ -1,13 +1,11 @@
-package com.example.robert.mvvmsampleapp
+package com.example.robert.mvvmsampleapp.view.ui
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.example.robert.mvvmsampleapp.R
 import com.example.robert.mvvmsampleapp.service.model.Project
-import com.example.robert.mvvmsampleapp.view.ProjectFragment
-import com.example.robert.mvvmsampleapp.view.ProjectListFragment
 
 class MainActivity : AppCompatActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

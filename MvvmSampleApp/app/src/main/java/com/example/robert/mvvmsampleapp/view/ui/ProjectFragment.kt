@@ -1,4 +1,4 @@
-package com.example.robert.mvvmsampleapp.view
+package com.example.robert.mvvmsampleapp.view.ui
 
 import android.arch.lifecycle.LifecycleFragment
 import android.arch.lifecycle.Observer
