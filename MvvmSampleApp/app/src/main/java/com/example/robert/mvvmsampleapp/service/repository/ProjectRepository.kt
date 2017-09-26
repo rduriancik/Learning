@@ -13,7 +13,7 @@ import javax.inject.Singleton
  * Created by robert on 8.9.2017.
  */
 @Singleton
-class ProjectRepository @Inject constructor(val githubService: GithubService) {
+class ProjectRepository @Inject constructor(private val githubService: GithubService) {
 
     fun getProjectList(userId: String): LiveData<List<Project>> {
         val data = MutableLiveData<List<Project>>()

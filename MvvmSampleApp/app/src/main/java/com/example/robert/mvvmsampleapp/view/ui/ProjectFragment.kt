@@ -2,6 +2,7 @@ package com.example.robert.mvvmsampleapp.view.ui
 
 import android.arch.lifecycle.LifecycleFragment
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -10,13 +11,15 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.robert.mvvmsampleapp.R
 import com.example.robert.mvvmsampleapp.databinding.FragmentProjectDetailsBinding
+import com.example.robert.mvvmsampleapp.di.Injectable
 import com.example.robert.mvvmsampleapp.viewmodel.ProjectViewModel
+import javax.inject.Inject
 
 /**
  * Created by robert on 11.9.2017.
  */
 
-class ProjectFragment : LifecycleFragment() {
+class ProjectFragment : LifecycleFragment(), Injectable {
     companion object {
         const val KEY_PROJECT_ID = "project_id"
 
@@ -27,6 +30,7 @@ class ProjectFragment : LifecycleFragment() {
         }
     }
 
+    @Inject lateinit var factory: ViewModelProvider.Factory
     private lateinit var binding: FragmentProjectDetailsBinding
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -37,9 +41,8 @@ class ProjectFragment : LifecycleFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val factory = ProjectViewModel.Factory(activity.application, arguments.getString(KEY_PROJECT_ID))
-
         val viewModel = ViewModelProviders.of(this, factory).get(ProjectViewModel::class.java)
+        viewModel.setProjectID(arguments.getString(KEY_PROJECT_ID))
 
         binding.projectViewModel = viewModel
         binding.isLoading = true

@@ -14,15 +14,16 @@ import javax.inject.Singleton
  */
 @Module(subcomponents = arrayOf(ViewModelSubComponent::class))
 class AppModule {
-    @Provides
     @Singleton
-    fun provideGithubService(): GithubService = Retrofit.Builder().baseUrl(GithubService.HTTPS_API_GITHUB_URL)
+    @Provides
+    fun provideGithubService(): GithubService = Retrofit.Builder()
+            .baseUrl(GithubService.HTTPS_API_GITHUB_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(GithubService::class.java)
 
-    @Provides
     @Singleton
-    fun provideViewModelFactory(viewModelSubComponent: ViewModelSubComponent): ViewModelProvider.Factory =
-            ProjectViewModelFactory(viewModelSubComponent)
+    @Provides
+    fun provideViewModelFactory(viewModelSubComponent: ViewModelSubComponent.Builder): ViewModelProvider.Factory =
+            ProjectViewModelFactory(viewModelSubComponent.build())
 }

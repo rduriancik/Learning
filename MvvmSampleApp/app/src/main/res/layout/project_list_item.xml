@@ -47,7 +47,7 @@
                 android:textSize="@dimen/project_text" />
 
             <TextView
-                android:id="@+id/project_watchers"
+                android:id="@+id/watchers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/project_watchers"

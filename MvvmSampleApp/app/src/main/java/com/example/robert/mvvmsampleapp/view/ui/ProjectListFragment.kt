@@ -1,9 +1,6 @@
 package com.example.robert.mvvmsampleapp.view.ui
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleFragment
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import android.arch.lifecycle.*
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,15 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.robert.mvvmsampleapp.R
 import com.example.robert.mvvmsampleapp.databinding.FragmentProjectListBinding
+import com.example.robert.mvvmsampleapp.di.Injectable
 import com.example.robert.mvvmsampleapp.service.model.Project
 import com.example.robert.mvvmsampleapp.view.adapters.ProjectAdapter
 import com.example.robert.mvvmsampleapp.view.callback.ProjectClickCallback
 import com.example.robert.mvvmsampleapp.viewmodel.ProjectListViewModel
+import javax.inject.Inject
 
 /**
  * Created by robert on 11.9.2017.
  */
-class ProjectListFragment : LifecycleFragment() {
+class ProjectListFragment : LifecycleFragment(), Injectable {
     companion object {
         const val TAG = "ProjectListFragment"
     }
@@ -33,6 +32,7 @@ class ProjectListFragment : LifecycleFragment() {
             }
         }
     }
+    @Inject lateinit var factory: ViewModelProvider.Factory
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate<FragmentProjectListBinding>(inflater,
@@ -47,7 +47,7 @@ class ProjectListFragment : LifecycleFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val viewModel = ViewModelProviders.of(this).get(ProjectListViewModel::class.java)
+        val viewModel = ViewModelProviders.of(this, factory).get(ProjectListViewModel::class.java)
         observeViewModel(viewModel)
     }
 
