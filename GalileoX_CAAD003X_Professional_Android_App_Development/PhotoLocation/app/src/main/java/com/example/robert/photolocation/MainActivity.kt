@@ -2,12 +2,14 @@ package com.example.robert.photolocation
 
 import android.app.Activity
 import android.content.Intent
+import android.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AppCompatActivity
+import com.example.robert.photolocation.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 import java.text.SimpleDateFormat
@@ -23,8 +25,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        cameraButton.setOnClickListener { takePicture() }
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.callback = object : TakePhotoClickCallback {
+            override fun onTakePhotoButtonClick() {
+                takePicture()
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -44,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getPhotoFileUri(): Uri {
-        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.ENGLISH).format(Date())
         val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         val photoFile = File.createTempFile(
                 "PHOTO_$timeStamp",

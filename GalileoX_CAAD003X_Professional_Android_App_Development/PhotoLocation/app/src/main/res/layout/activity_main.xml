@@ -1,38 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
-    android:paddingBottom="@dimen/activity_vertical_padding"
-    android:paddingLeft="@dimen/activity_horizontal_padding"
-    android:paddingRight="@dimen/activity_horizontal_padding"
-    android:paddingTop="@dimen/activity_vertical_padding"
-    tools:context="com.example.robert.photolocation.MainActivity">
+<layout>
 
-    <ImageView
-        android:id="@+id/image"
+    <data>
+
+        <variable
+            name="callback"
+            type="com.example.robert.photolocation.TakePhotoClickCallback" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/colorAccent"
-        android:contentDescription="@string/main_layout_image_desc"
-        android:layout_marginBottom="@dimen/activity_horizontal_padding" />
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_padding"
+        android:paddingLeft="@dimen/activity_horizontal_padding"
+        android:paddingRight="@dimen/activity_horizontal_padding"
+        android:paddingTop="@dimen/activity_vertical_padding"
+        tools:context="com.example.robert.photolocation.MainActivity">
 
-    <TextView
-        android:id="@+id/photoLocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_marginBottom="@dimen/activity_horizontal_padding"
-        tools:text="Hello World!" />
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/activity_horizontal_padding"
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
+            android:contentDescription="@string/main_layout_image_desc" />
 
-    <Button
-        android:id="@+id/cameraButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/main_layout_button" />
+        <TextView
+            android:id="@+id/photoLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_horizontal_padding"
+            android:textAlignment="center"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            tools:text="Hello World!" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/cameraButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_layout_button"
+            android:onClick="@{() -> callback.onTakePhotoButtonClick()}" />
+
+    </LinearLayout>
+</layout>
