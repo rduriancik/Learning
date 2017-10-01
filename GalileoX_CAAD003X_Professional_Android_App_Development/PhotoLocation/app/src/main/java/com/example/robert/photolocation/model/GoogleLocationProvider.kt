@@ -1,4 +1,4 @@
-package com.example.robert.photolocation
+package com.example.robert.photolocation.model
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package com.example.robert.photolocation
+package com.example.robert.photolocation.view
 
 /**
  * Created by robert on 29.9.2017.
