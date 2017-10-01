@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity
 import com.example.robert.photolocation.R
 import com.example.robert.photolocation.databinding.ActivityMainBinding
 import com.example.robert.photolocation.viewmodel.MainActivityViewModel
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private var photoUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         val viewModel = ViewModelProviders.of(this, factory).get(MainActivityViewModel::class.java).apply {

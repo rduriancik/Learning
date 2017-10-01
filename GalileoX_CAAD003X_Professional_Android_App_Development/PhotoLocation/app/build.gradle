@@ -6,13 +6,26 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+project.ext {
+    compileSdkVersion = 26
+    buildToolsVersion = "26.0.0"
+    minSdkVersion = 16
+    targetSdkVersion = 26
+
+    supportLibVersions = "26.1.0"
+    playServicesVersion = "11.4.0"
+    archVersion = "1.0.0-alpha9-1"
+    dataBindingVersion = "3.0.0-beta6"
+    daggerVersion = "2.11"
+}
+
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.0"
+    compileSdkVersion project.compileSdkVersion
+    buildToolsVersion project.buildToolsVersion
     defaultConfig {
         applicationId "com.example.robert.photolocation"
-        minSdkVersion 16
-        targetSdkVersion 26
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -31,18 +44,32 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+
+    // Support lib
+    implementation "com.android.support:appcompat-v7:$project.supportLibVersions"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    // Kotlin
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    // Data binding compiler
+    kapt "com.android.databinding:compiler:$project.dataBindingVersion"
+
+    // Arch
+    implementation "android.arch.lifecycle:extensions:$project.archVersion"
+
+    // Google Play Services
+    implementation "com.google.android.gms:play-services-location:$project.playServicesVersion"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:$project.daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$project.daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$project.daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$project.daggerVersion"
+
+    // Tests
     testImplementation 'junit:junit:4.12'
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    kapt "com.android.databinding:compiler:3.0.0-beta6"
-    implementation "android.arch.lifecycle:extensions:1.0.0-alpha9-1"
-
-    compile "com.google.android.gms:play-services-location:11.4.0"
-
-    implementation 'com.google.dagger:dagger:2.11'
-    kapt 'com.google.dagger:dagger-compiler:2.11'
 }
