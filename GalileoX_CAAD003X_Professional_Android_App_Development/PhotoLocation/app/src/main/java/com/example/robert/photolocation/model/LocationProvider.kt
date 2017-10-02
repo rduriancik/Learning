@@ -7,5 +7,5 @@ import android.location.Location
  * Created by robert on 30.9.2017.
  */
 interface LocationProvider {
-    fun getLastKnownLocation(): LiveData<Location>
+    fun getLocation(): LiveData<Location>
 }

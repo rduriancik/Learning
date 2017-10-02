@@ -26,7 +26,7 @@
             android:layout_height="0dp"
             android:layout_marginBottom="@dimen/activity_horizontal_padding"
             android:layout_weight="1"
-            android:background="@color/colorAccent"
+            android:background="@android:color/darker_gray"
             android:contentDescription="@string/main_layout_image_desc" />
 
         <TextView
@@ -36,7 +36,7 @@
             android:layout_marginBottom="@dimen/activity_horizontal_padding"
             android:textAlignment="center"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            tools:text="Hello World!" />
+            android:text="You will see the picture location here" />
 
         <Button
             android:id="@+id/cameraButton"
