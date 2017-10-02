@@ -10,6 +10,8 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.databinding.DataBindingUtil
+import android.location.Geocoder
+import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -23,6 +25,8 @@ import com.example.robert.photolocation.util.firstTimeAskingPermission
 import com.example.robert.photolocation.util.isFirstTimeAskingPermission
 import com.example.robert.photolocation.viewmodel.MainActivityViewModel
 import dagger.android.AndroidInjection
+import java.io.IOException
+import java.util.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -41,7 +45,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainActivityViewModel
     private lateinit var binding: ActivityMainBinding
     private var photoUri: Uri? = null
-    private var photoLocation = "Unknown location"
+    private var photoLastLocation: Location? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -49,11 +53,7 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         viewModel = ViewModelProviders.of(this, factory).get(MainActivityViewModel::class.java).apply {
             location.observe(this@MainActivity, Observer { t ->
-                photoLocation = if (t != null) {
-                    "${t.latitude} ${t.longitude}"
-                } else {
-                    "Unknown location"
-                }
+                photoLastLocation = t
             })
         }
 
@@ -71,23 +71,21 @@ class MainActivity : AppCompatActivity() {
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        photoLocation = savedInstanceState.getString(RESTORE_KEY_LOCATION)
+        photoLastLocation = savedInstanceState.getParcelable(RESTORE_KEY_LOCATION)
         photoUri = savedInstanceState.getParcelable(RESTORE_KEY_URI)
 
-        binding.image.setImageURI(photoUri)
-        binding.photoLocation.text = photoLocation
+        updateUI()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putString(RESTORE_KEY_LOCATION, photoLocation)
+        outState.putParcelable(RESTORE_KEY_LOCATION, photoLastLocation)
         outState.putParcelable(RESTORE_KEY_URI, photoUri)
         super.onSaveInstanceState(outState)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-            binding.image.setImageURI(photoUri)
-            binding.photoLocation.text = photoLocation
+            updateUI()
         }
     }
 
@@ -126,6 +124,24 @@ class MainActivity : AppCompatActivity() {
                         .show()
             }
 
+        }
+    }
+
+    private fun updateUI() {
+        binding.image.setImageURI(photoUri)
+
+        photoLastLocation?.let {
+            if (binding.photoLocation.text != getString(R.string.photo_location_text)) {
+                try {
+                    val geocoder = Geocoder(this, Locale.getDefault())
+                    val addresses = geocoder.getFromLocation(it.latitude, it.longitude, 1)
+                    binding.photoLocation.text = "Photo at ... Country: ${addresses.get(0).countryName}" +
+                            ", State: ${addresses.get(0).adminArea}, City: ${addresses.get(0).locality}"
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                    binding.photoLocation.text = "Photo at ... $photoLastLocation"
+                }
+            }
         }
     }
 
