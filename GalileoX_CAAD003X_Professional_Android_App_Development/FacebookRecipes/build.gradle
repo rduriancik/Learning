@@ -3,6 +3,7 @@
 buildscript {
     repositories {
         jcenter()
+        google()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
@@ -16,6 +17,7 @@ allprojects {
     repositories {
         jcenter()
         maven { url "https://jitpack.io" }
+        google()
     }
 }
 
@@ -33,9 +35,13 @@ ext {
 
     retrofitVersion = '2.3.0'
     dbflowVersion = '4.0.5'
-    butterknifeVersion = '8.7.0'
+    butterknifeVersion = '8.8.1'
     facebookVersion = '[4,5)'
     eventbusVersion = '3.0.0'
     daggerVersion = '2.11'
     glideVersion = '3.6.1'
+
+    junitVersion = '4.12'
+    mockitoVersion = '2.+'
+    roboelectricVersion = '3.4.2'
 }
