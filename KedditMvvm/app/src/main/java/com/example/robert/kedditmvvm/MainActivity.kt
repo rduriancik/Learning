@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         fragmentManager.beginTransaction().also {
             it.setCustomAnimations(
                     R.anim.abc_fade_in, R.anim.abc_fade_out, R.anim.abc_popup_enter, R.anim.abc_popup_exit)
-            it.replace(mainContainer.id, fragment)
+            it.replace(main_container.id, fragment)
             it.addToBackStack(null)
         }.commit()
     }
