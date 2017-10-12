@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.robert.kedditmvvm.adapter.NewsAdapter
 import com.example.robert.kedditmvvm.common.inflate
 import kotlinx.android.synthetic.main.fragment_news.*
 
@@ -23,8 +24,15 @@ class NewsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         news_list.setHasFixedSize(true)
         news_list.layoutManager = LinearLayoutManager(context)
+
+        initAdapter()
+    }
+
+    private fun initAdapter() {
+        news_list.adapter = NewsAdapter()
     }
 
 }// Required empty public constructor
