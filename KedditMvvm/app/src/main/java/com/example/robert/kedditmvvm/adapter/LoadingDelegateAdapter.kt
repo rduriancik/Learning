@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import com.example.robert.kedditmvvm.R
 import com.example.robert.kedditmvvm.common.adapter.ViewType
 import com.example.robert.kedditmvvm.common.adapter.ViewTypeDelegateAdapter
-import com.example.robert.kedditmvvm.common.inflate
+import com.example.robert.kedditmvvm.common.extensions.inflate
 
 /**
  * Created by robert on 12.10.2017.

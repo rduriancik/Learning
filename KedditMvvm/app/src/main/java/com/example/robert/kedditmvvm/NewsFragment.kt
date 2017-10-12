@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.robert.kedditmvvm.adapter.NewsAdapter
-import com.example.robert.kedditmvvm.common.inflate
+import com.example.robert.kedditmvvm.common.extensions.inflate
 import kotlinx.android.synthetic.main.fragment_news.*
 
 

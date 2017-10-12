@@ -9,7 +9,7 @@ import com.example.robert.kedditmvvm.common.adapter.ViewType
 data class RedditNewsItem(val author: String,
                           val title: String,
                           val numComments: Int,
-                          val create: Long,
+                          val created: Long,
                           val thumbnail: String,
                           val url: String) : ViewType {
     override fun getViewType() = AdapterConstants.NEWS
