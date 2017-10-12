@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.fragment_news.*
  */
 class NewsFragment : Fragment() {
 
-
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? =
             container?.inflate(R.layout.fragment_news)
@@ -35,4 +34,4 @@ class NewsFragment : Fragment() {
         news_list.adapter = NewsAdapter()
     }
 
-}// Required empty public constructor
+}
