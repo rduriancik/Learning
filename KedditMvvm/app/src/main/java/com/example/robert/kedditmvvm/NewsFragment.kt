@@ -2,6 +2,7 @@ package com.example.robert.kedditmvvm
 
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -9,6 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.robert.kedditmvvm.adapter.NewsAdapter
 import com.example.robert.kedditmvvm.common.extensions.inflate
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_news.*
 
 
@@ -16,6 +20,9 @@ import kotlinx.android.synthetic.main.fragment_news.*
  * A simple [Fragment] subclass.
  */
 class NewsFragment : Fragment() {
+
+    private val newsManager by lazy { NewsManager() }
+    private val subscriptions = CompositeDisposable()
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? =
@@ -30,21 +37,29 @@ class NewsFragment : Fragment() {
         initAdapter()
 
         if (savedInstanceState == null) {
-
-            val news = mutableListOf<RedditNewsItem>()
-            for (i in 1..10) {
-                news.add(RedditNewsItem(
-                        "author$i",
-                        "Title $i",
-                        i, // number of comments
-                        +1457207701L - i * 200, // time
-                        "http://lorempixel.com/200/200/technics/$i", // image url
-                        "url"
-                ))
-
-            }
-            (news_list.adapter as NewsAdapter).addNews(news)
+            requestNews()
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (!subscriptions.isDisposed) {
+            subscriptions.dispose()
+        }
+        subscriptions.clear()
+    }
+
+    private fun requestNews() {
+        val subscription = newsManager.getNews()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ redditNews ->
+                    (news_list.adapter as NewsAdapter).addNews(redditNews)
+                }, { e ->
+                    Snackbar.make(news_list, e.message ?: "", Snackbar.LENGTH_LONG).show()
+                })
+
+        subscriptions.add(subscription)
     }
 
     private fun initAdapter() {
