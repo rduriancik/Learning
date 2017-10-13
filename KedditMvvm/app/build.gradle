@@ -29,6 +29,8 @@ android {
 project.ext {
     supportLib_version = '26.1.0'
     picasso_version = '2.5.2'
+    rxJava_version = '2.1.5'
+    rxAndroid_version = '2.0.1'
 }
 
 dependencies {
@@ -47,4 +49,8 @@ dependencies {
 
     // Picasso
     implementation "com.squareup.picasso:picasso:$project.picasso_version"
+
+    // RxJava2 & RxAndroid
+    implementation "io.reactivex.rxjava2:rxjava:$project.rxJava_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$project.rxAndroid_version"
 }
