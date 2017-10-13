@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.robert.kedditmvvm.adapter.NewsAdapter
+import com.example.robert.kedditmvvm.common.InfiniteScrollListener
 import com.example.robert.kedditmvvm.common.extensions.inflate
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -21,6 +22,7 @@ import kotlinx.android.synthetic.main.fragment_news.*
  */
 class NewsFragment : Fragment() {
 
+    private var redditNews: RedditNews? = null
     private val newsManager by lazy { NewsManager() }
     private val subscriptions = CompositeDisposable()
 
@@ -32,7 +34,10 @@ class NewsFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         news_list.setHasFixedSize(true)
-        news_list.layoutManager = LinearLayoutManager(context)
+        val linearLayoutManager = LinearLayoutManager(context)
+        news_list.layoutManager = linearLayoutManager
+        news_list.clearOnScrollListeners()
+        news_list.addOnScrollListener(InfiniteScrollListener({ requestNews() }, linearLayoutManager))
 
         initAdapter()
 
@@ -50,11 +55,12 @@ class NewsFragment : Fragment() {
     }
 
     private fun requestNews() {
-        val subscription = newsManager.getNews()
+        val subscription = newsManager.getNews(redditNews?.after ?: "")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ redditNews ->
-                    (news_list.adapter as NewsAdapter).addNews(redditNews)
+                .subscribe({ retrievedNews ->
+                    redditNews = retrievedNews
+                    (news_list.adapter as NewsAdapter).addNews(retrievedNews.news)
                 }, { e ->
                     Snackbar.make(news_list, e.message ?: "", Snackbar.LENGTH_LONG).show()
                 })

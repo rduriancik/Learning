@@ -4,22 +4,36 @@ import com.example.robert.kedditmvvm.api.RestAPI
 import io.reactivex.Observable
 
 /**
- * Created by robert on 13.10.2017.
+ * NewsManager allows you to request news from Reddit API
  */
 class NewsManager(private val api: RestAPI = RestAPI()) {
-    fun getNews(limit: String = "10"): Observable<List<RedditNewsItem>> =
+
+    /**
+     * Returns Reddit News paginated by the given limit
+     *
+     * @param after indicates the next page to navigate
+     * @param limit the number of news to request
+     */
+    fun getNews(after: String, limit: String = "10"): Observable<RedditNews> =
             Observable.create { subscriber ->
-                val callResponse = api.getNews("", limit)
+                val callResponse = api.getNews(after, limit)
                 val response = callResponse.execute()
 
                 if (response.isSuccessful) {
-                    val news = response.body()?.data?.children?.map {
+                    val dataResponse = response.body()?.data
+                    val news = dataResponse?.children?.map {
                         val item = it.data
                         RedditNewsItem(item.author, item.title, item.num_comments, item.created,
                                 item.thumbnail, item.url)
                     } ?: emptyList<RedditNewsItem>()
 
-                    subscriber.onNext(news)
+                    val redditNews = RedditNews(
+                            dataResponse?.after ?: "",
+                            dataResponse?.before ?: "",
+                            news
+                    )
+
+                    subscriber.onNext(redditNews)
                     subscriber.onComplete()
 
                 } else {

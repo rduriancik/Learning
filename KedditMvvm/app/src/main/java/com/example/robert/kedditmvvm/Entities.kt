@@ -6,6 +6,10 @@ import com.example.robert.kedditmvvm.common.adapter.ViewType
 /**
  * Created by robert on 12.10.2017.
  */
+data class RedditNews(val after: String,
+                      val before: String,
+                      val news: List<RedditNewsItem>)
+
 data class RedditNewsItem(val author: String,
                           val title: String,
                           val numComments: Int,
