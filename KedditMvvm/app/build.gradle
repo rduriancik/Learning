@@ -31,6 +31,8 @@ project.ext {
     picasso_version = '2.5.2'
     rxJava_version = '2.1.5'
     rxAndroid_version = '2.0.1'
+    retrofit_version = '2.3.0'
+    moshi_version = '2.3.0'
 }
 
 dependencies {
@@ -53,4 +55,8 @@ dependencies {
     // RxJava2 & RxAndroid
     implementation "io.reactivex.rxjava2:rxjava:$project.rxJava_version"
     implementation "io.reactivex.rxjava2:rxandroid:$project.rxAndroid_version"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$project.retrofit_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$project.moshi_version"
 }
