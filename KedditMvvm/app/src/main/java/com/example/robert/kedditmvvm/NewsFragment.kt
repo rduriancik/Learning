@@ -22,6 +22,10 @@ import kotlinx.android.synthetic.main.fragment_news.*
  */
 class NewsFragment : Fragment() {
 
+    companion object {
+        private const val KEY_REDDIT_NEWS = "redditNews"
+    }
+
     private var redditNews: RedditNews? = null
     private val newsManager by lazy { NewsManager() }
     private val subscriptions = CompositeDisposable()
@@ -33,15 +37,20 @@ class NewsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        news_list.setHasFixedSize(true)
-        val linearLayoutManager = LinearLayoutManager(context)
-        news_list.layoutManager = linearLayoutManager
-        news_list.clearOnScrollListeners()
-        news_list.addOnScrollListener(InfiniteScrollListener({ requestNews() }, linearLayoutManager))
+        news_list.apply {
+            setHasFixedSize(true)
+            val linearLayoutManager = LinearLayoutManager(context)
+            layoutManager = linearLayoutManager
+            clearOnScrollListeners()
+            addOnScrollListener(InfiniteScrollListener({ requestNews() }, linearLayoutManager))
+        }
 
         initAdapter()
 
-        if (savedInstanceState == null) {
+        if (savedInstanceState != null && savedInstanceState.containsKey(KEY_REDDIT_NEWS)) {
+            redditNews = savedInstanceState.get(KEY_REDDIT_NEWS) as RedditNews
+            (news_list.adapter as NewsAdapter).clearAndAddNews(redditNews!!.news)
+        } else {
             requestNews()
         }
     }
@@ -52,6 +61,14 @@ class NewsFragment : Fragment() {
             subscriptions.dispose()
         }
         subscriptions.clear()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        val news = (news_list.adapter as NewsAdapter).getNews()
+        if (redditNews != null && news.size > 0) {
+            outState.putParcelable(KEY_REDDIT_NEWS, redditNews?.copy(news = news))
+        }
     }
 
     private fun requestNews() {

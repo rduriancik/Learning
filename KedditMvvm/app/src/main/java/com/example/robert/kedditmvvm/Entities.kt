@@ -4,7 +4,6 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.example.robert.kedditmvvm.common.adapter.AdapterConstants
 import com.example.robert.kedditmvvm.common.adapter.ViewType
-import com.example.robert.kedditmvvm.common.extensions.createParcel
 
 /**
  * Created by robert on 12.10.2017.
@@ -12,18 +11,10 @@ import com.example.robert.kedditmvvm.common.extensions.createParcel
 data class RedditNews(val after: String,
                       val before: String,
                       val news: List<RedditNewsItem>) : Parcelable {
-
-    companion object {
-        @JvmField
-        val CREATOR: Parcelable.Creator<RedditNews> = createParcel { RedditNews(it) }
-    }
-
     constructor(source: Parcel) : this(
             source.readString(),
             source.readString(),
-            mutableListOf<RedditNewsItem>().apply {
-                source.readTypedList(this, RedditNewsItem.CREATOR)
-            }
+            source.createTypedArrayList(RedditNewsItem.CREATOR)
     )
 
     override fun describeContents() = 0
@@ -32,6 +23,14 @@ data class RedditNews(val after: String,
         writeString(after)
         writeString(before)
         writeTypedList(news)
+    }
+
+    companion object {
+        @JvmField
+        val CREATOR: Parcelable.Creator<RedditNews> = object : Parcelable.Creator<RedditNews> {
+            override fun createFromParcel(source: Parcel): RedditNews = RedditNews(source)
+            override fun newArray(size: Int): Array<RedditNews?> = arrayOfNulls(size)
+        }
     }
 }
 
@@ -42,10 +41,7 @@ data class RedditNewsItem(val author: String,
                           val thumbnail: String,
                           val url: String) : ViewType, Parcelable {
 
-    companion object {
-        @JvmField
-        val CREATOR: Parcelable.Creator<RedditNewsItem> = createParcel { RedditNewsItem(it) }
-    }
+    override fun getViewType() = AdapterConstants.NEWS
 
     constructor(source: Parcel) : this(
             source.readString(),
@@ -67,6 +63,11 @@ data class RedditNewsItem(val author: String,
         writeString(url)
     }
 
-    override fun getViewType() = AdapterConstants.NEWS
-
+    companion object {
+        @JvmField
+        val CREATOR: Parcelable.Creator<RedditNewsItem> = object : Parcelable.Creator<RedditNewsItem> {
+            override fun createFromParcel(source: Parcel): RedditNewsItem = RedditNewsItem(source)
+            override fun newArray(size: Int): Array<RedditNewsItem?> = arrayOfNulls(size)
+        }
+    }
 }
