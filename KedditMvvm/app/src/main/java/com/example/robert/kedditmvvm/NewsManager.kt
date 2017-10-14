@@ -1,12 +1,13 @@
 package com.example.robert.kedditmvvm
 
-import com.example.robert.kedditmvvm.api.RestAPI
+import com.example.robert.kedditmvvm.api.NewsAPI
+import com.example.robert.kedditmvvm.api.NewsRestAPI
 import io.reactivex.Observable
 
 /**
  * NewsManager allows you to request news from Reddit API
  */
-class NewsManager(private val api: RestAPI = RestAPI()) {
+class NewsManager(private val apiNews: NewsAPI = NewsRestAPI()) {
 
     /**
      * Returns Reddit News paginated by the given limit
@@ -16,7 +17,7 @@ class NewsManager(private val api: RestAPI = RestAPI()) {
      */
     fun getNews(after: String, limit: String = "10"): Observable<RedditNews> =
             Observable.create { subscriber ->
-                val callResponse = api.getNews(after, limit)
+                val callResponse = apiNews.getNews(after, limit)
                 val response = callResponse.execute()
 
                 if (response.isSuccessful) {
