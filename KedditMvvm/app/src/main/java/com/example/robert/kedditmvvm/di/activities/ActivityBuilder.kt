@@ -1,20 +1,15 @@
 package com.example.robert.kedditmvvm.di.activities
 
-import android.app.Activity
 import com.example.robert.kedditmvvm.MainActivity
-import dagger.Binds
+import com.example.robert.kedditmvvm.di.fragments.FragmentBuilder
 import dagger.Module
-import dagger.android.ActivityKey
-import dagger.android.AndroidInjector
-import dagger.multibindings.IntoMap
+import dagger.android.ContributesAndroidInjector
 
 /**
  * Created by robert on 15.10.2017.
  */
 @Module
 abstract class ActivityBuilder {
-    @Binds
-    @IntoMap
-    @ActivityKey(MainActivity::class)
-    abstract fun bindMainActivity(builder: MainActivitySubComponent.Builder): AndroidInjector.Factory<out Activity>
+    @ContributesAndroidInjector(modules = arrayOf(FragmentBuilder::class))
+    abstract fun bindMainActivity(): MainActivity
 }

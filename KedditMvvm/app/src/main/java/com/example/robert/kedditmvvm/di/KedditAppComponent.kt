@@ -13,7 +13,6 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = arrayOf(AndroidInjectionModule::class,
         ActivityBuilder::class,
-        KedditAppModule::class,
         NewsModule::class))
 interface KedditAppComponent {
     fun inject(app: KedditApp)
