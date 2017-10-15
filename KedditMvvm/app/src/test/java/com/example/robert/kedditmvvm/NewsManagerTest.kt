@@ -2,9 +2,9 @@ package com.example.robert.kedditmvvm
 
 import com.example.robert.kedditmvvm.api.*
 import io.reactivex.observers.TestObserver
-import junit.framework.Assert.assertEquals
 import okhttp3.MediaType
 import okhttp3.ResponseBody
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString

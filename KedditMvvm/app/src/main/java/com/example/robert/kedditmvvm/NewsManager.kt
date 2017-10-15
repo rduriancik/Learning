@@ -1,13 +1,15 @@
 package com.example.robert.kedditmvvm
 
 import com.example.robert.kedditmvvm.api.NewsAPI
-import com.example.robert.kedditmvvm.api.NewsRestAPI
 import io.reactivex.Observable
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * NewsManager allows you to request news from Reddit API
  */
-class NewsManager(private val apiNews: NewsAPI = NewsRestAPI()) {
+@Singleton
+class NewsManager @Inject constructor(private val apiNews: NewsAPI) {
 
     /**
      * Returns Reddit News paginated by the given limit

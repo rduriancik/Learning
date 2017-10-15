@@ -1,6 +1,7 @@
 package com.example.robert.kedditmvvm
 
 
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
@@ -11,10 +12,12 @@ import android.view.ViewGroup
 import com.example.robert.kedditmvvm.adapter.NewsAdapter
 import com.example.robert.kedditmvvm.common.InfiniteScrollListener
 import com.example.robert.kedditmvvm.common.extensions.inflate
+import dagger.android.support.AndroidSupportInjection
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_news.*
+import javax.inject.Inject
 
 
 /**
@@ -27,8 +30,13 @@ class NewsFragment : Fragment() {
     }
 
     private var redditNews: RedditNews? = null
-    private val newsManager by lazy { NewsManager() }
+    @Inject lateinit var newsManager: NewsManager
     private val subscriptions = CompositeDisposable()
+
+    override fun onAttach(context: Context?) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? =
