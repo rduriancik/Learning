@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
@@ -33,6 +35,7 @@ project.ext {
     rxAndroid_version = '2.0.1'
     retrofit_version = '2.3.0'
     moshi_version = '2.3.0'
+    dagger_version = '2.12'
 
     mockito_version = '2.10.0'
 }
@@ -58,6 +61,12 @@ dependencies {
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$project.retrofit_version"
     implementation "com.squareup.retrofit2:converter-moshi:$project.moshi_version"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:$project.dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$project.dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$project.dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$project.dagger_version"
 
     /** Tests */
     testImplementation 'junit:junit:4.12'
