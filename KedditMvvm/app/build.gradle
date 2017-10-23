@@ -43,6 +43,8 @@ project.ext {
     moshi_version = '2.3.0'
     dagger_version = '2.12'
     dataBinding_version = '2.3.3'
+    arch_version = '1.0.0-rc1'
+    arch_paging_version = '1.0.0-alpha3'
 
     mockito_version = '2.10.0'
 }
@@ -76,6 +78,10 @@ dependencies {
 
     // DataBinding
     kapt "com.android.databinding:compiler:$project.dataBinding_version"
+
+    // Architecture Components
+    implementation "android.arch.lifecycle:extensions:$project.arch_version"
+    implementation "android.arch.paging:runtime:$project.arch_paging_version"
 
     /** Tests */
     testImplementation 'junit:junit:4.12'
