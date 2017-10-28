@@ -2,47 +2,46 @@ package com.example.robert.kedditmvvm
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.example.robert.kedditmvvm.common.adapter.AdapterConstants
-import com.example.robert.kedditmvvm.common.adapter.ViewType
 import java.util.*
 
 /**
  * Created by robert on 12.10.2017.
  */
-data class RedditNews(val after: String,
-                      val before: String,
-                      val news: List<RedditNewsItem>) : Parcelable {
-    constructor(source: Parcel) : this(
-            source.readString(),
-            source.readString(),
-            source.createTypedArrayList(RedditNewsItem.CREATOR)
-    )
-
-    override fun describeContents() = 0
-
-    override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
-        writeString(after)
-        writeString(before)
-        writeTypedList(news)
-    }
-
-    companion object {
-        @JvmField
-        val CREATOR: Parcelable.Creator<RedditNews> = object : Parcelable.Creator<RedditNews> {
-            override fun createFromParcel(source: Parcel): RedditNews = RedditNews(source)
-            override fun newArray(size: Int): Array<RedditNews?> = arrayOfNulls(size)
-        }
-    }
-}
+//data class RedditNews(val after: String,
+//                      val before: String,
+//                      val news: List<RedditNewsItem>) : Parcelable {
+//    constructor(source: Parcel) : this(
+//            source.readString(),
+//            source.readString(),
+//            source.createTypedArrayList(RedditNewsItem.CREATOR)
+//    )
+//
+//    override fun describeContents() = 0
+//
+//    override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
+//        writeString(after)
+//        writeString(before)
+//        writeTypedList(news)
+//    }
+//
+//    companion object {
+//        @JvmField
+//        val CREATOR: Parcelable.Creator<RedditNews> = object : Parcelable.Creator<RedditNews> {
+//            override fun createFromParcel(source: Parcel): RedditNews = RedditNews(source)
+//            override fun newArray(size: Int): Array<RedditNews?> = arrayOfNulls(size)
+//        }
+//    }
+//}
 
 data class RedditNewsItem(val author: String,
                           val title: String,
                           val numComments: Int,
                           val created: Long,
                           val thumbnail: String,
-                          val url: String) : ViewType, Parcelable {
+                          val url: String,
+                          val id: String) : /*ViewType,*/ Parcelable {
 
-    override fun getViewType() = AdapterConstants.NEWS
+//    override fun getViewType() = AdapterConstants.NEWS
 
     fun getFriendlyTime(): String {
         val dateTime = Date(1000 * created)
@@ -138,6 +137,7 @@ data class RedditNewsItem(val author: String,
             source.readInt(),
             source.readLong(),
             source.readString(),
+            source.readString(),
             source.readString()
     )
 
@@ -150,6 +150,7 @@ data class RedditNewsItem(val author: String,
         writeLong(created)
         writeString(thumbnail)
         writeString(url)
+        writeString(id)
     }
 
     companion object {
