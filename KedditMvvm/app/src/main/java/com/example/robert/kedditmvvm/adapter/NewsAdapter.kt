@@ -1,64 +1,40 @@
 package com.example.robert.kedditmvvm.adapter
 
-import android.support.v4.util.SparseArrayCompat
+import android.arch.paging.PagedListAdapter
+import android.databinding.DataBindingUtil
+import android.support.v7.recyclerview.extensions.DiffCallback
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.example.robert.kedditmvvm.R
 import com.example.robert.kedditmvvm.RedditNewsItem
-import com.example.robert.kedditmvvm.common.adapter.AdapterConstants
-import com.example.robert.kedditmvvm.common.adapter.ViewType
-import com.example.robert.kedditmvvm.common.adapter.ViewTypeDelegateAdapter
+import com.example.robert.kedditmvvm.databinding.NewsItemBinding
 
 /**
  * Created by robert on 12.10.2017.
  */
-class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NewsAdapter : PagedListAdapter<RedditNewsItem, NewsAdapter.NewsItemViewHolder>(diffCallback) {
+    companion object {
+        private val diffCallback = object : DiffCallback<RedditNewsItem>() {
+            override fun areContentsTheSame(oldItem: RedditNewsItem, newItem: RedditNewsItem): Boolean =
+                    oldItem == newItem
 
-    private var items: ArrayList<ViewType>
-    private var delegateAdapters = SparseArrayCompat<ViewTypeDelegateAdapter>()
-    private val loadingItem = object : ViewType {
-        override fun getViewType() = AdapterConstants.LOADING
+            override fun areItemsTheSame(oldItem: RedditNewsItem, newItem: RedditNewsItem): Boolean =
+                    oldItem.url == newItem.url
+        }
     }
 
-    init {
-        delegateAdapters.put(AdapterConstants.LOADING, LoadingDelegateAdapter())
-        delegateAdapters.put(AdapterConstants.NEWS, NewsDelegateAdapter())
-        items = ArrayList()
-        items.add(loadingItem)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsItemViewHolder {
+        val binding = DataBindingUtil.inflate<NewsItemBinding>(LayoutInflater.from(parent.context),
+                R.layout.news_item, parent, false)
+        return NewsItemViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = items.size
-
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        delegateAdapters.get(getItemViewType(position)).onBindViewHolder(holder, items.get(position))
+    override fun onBindViewHolder(holder: NewsItemViewHolder, position: Int) {
+        val item = getItem(position)
+        holder.binding.item = item as RedditNewsItem
+        holder.binding.executePendingBindings()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-            delegateAdapters.get(viewType).onCreateViewHolder(parent)
-
-    override fun getItemViewType(position: Int) = items.get(position).getViewType()
-
-    fun addNews(news: List<RedditNewsItem>) {
-        val initPosition = items.size - 1
-        items.removeAt(initPosition)
-        notifyItemRemoved(initPosition)
-
-        items.addAll(news)
-        items.add(loadingItem)
-        notifyItemRangeInserted(initPosition, news.size + 1)
-    }
-
-    fun clearAndAddNews(news: List<RedditNewsItem>) {
-        val size = items.size
-        items.clear()
-        notifyItemRangeRemoved(0, size)
-
-        items.addAll(news)
-        items.add(loadingItem)
-        notifyItemRangeInserted(0, news.size)
-    }
-
-    fun getNews(): List<RedditNewsItem> =
-            items.filter { it.getViewType() == AdapterConstants.NEWS }
-                    .map { it as RedditNewsItem }
-
+    class NewsItemViewHolder(val binding: NewsItemBinding) : RecyclerView.ViewHolder(binding.root)
 }
