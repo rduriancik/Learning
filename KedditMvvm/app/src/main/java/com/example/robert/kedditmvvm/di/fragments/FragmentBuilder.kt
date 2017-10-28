@@ -1,6 +1,6 @@
 package com.example.robert.kedditmvvm.di.fragments
 
-import com.example.robert.kedditmvvm.NewsFragment
+import com.example.robert.kedditmvvm.news.view.NewsFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -9,6 +9,6 @@ import dagger.android.ContributesAndroidInjector
  */
 @Module
 abstract class FragmentBuilder {
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = arrayOf(NewsFragmentModule::class))
     abstract fun bindNewsFragment(): NewsFragment
 }

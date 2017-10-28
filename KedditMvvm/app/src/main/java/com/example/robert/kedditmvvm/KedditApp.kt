@@ -17,7 +17,9 @@ class KedditApp : Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
-        DaggerKedditAppComponent.create()
+        DaggerKedditAppComponent.builder()
+                .application(this)
+                .build()
                 .inject(this)
     }
 

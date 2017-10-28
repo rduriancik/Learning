@@ -17,12 +17,18 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
+
     androidExtensions {
         experimental = true
     }
@@ -36,6 +42,9 @@ project.ext {
     retrofit_version = '2.3.0'
     moshi_version = '2.3.0'
     dagger_version = '2.12'
+    dataBinding_version = '2.3.3'
+    arch_version = '1.0.0-rc1'
+    arch_paging_version = '1.0.0-alpha3'
 
     mockito_version = '2.10.0'
 }
@@ -46,7 +55,6 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation "com.android.support:design:$project.supportLib_version"
     implementation "com.android.support:support-v4:$project.supportLib_version"
-
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
@@ -67,6 +75,13 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$project.dagger_version"
     implementation "com.google.dagger:dagger-android-support:$project.dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$project.dagger_version"
+
+    // DataBinding
+    kapt "com.android.databinding:compiler:$project.dataBinding_version"
+
+    // Architecture Components
+    implementation "android.arch.lifecycle:extensions:$project.arch_version"
+    implementation "android.arch.paging:runtime:$project.arch_paging_version"
 
     /** Tests */
     testImplementation 'junit:junit:4.12'

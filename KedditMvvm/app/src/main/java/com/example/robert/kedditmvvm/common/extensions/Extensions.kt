@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import com.example.robert.kedditmvvm.R
 import com.squareup.picasso.Picasso
 
 /**
@@ -17,7 +16,7 @@ fun ViewGroup.inflate(layoutId: Int, attachToRoot: Boolean = false): View =
 
 fun ImageView.load(imageUrl: String) {
     if (TextUtils.isEmpty(imageUrl)) {
-        Picasso.with(context).load(R.mipmap.ic_launcher).into(this)
+        Picasso.with(context).load(android.R.drawable.ic_menu_gallery).into(this)
     } else {
         Picasso.with(context).load(imageUrl).into(this)
     }

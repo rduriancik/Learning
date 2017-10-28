@@ -2,4 +2,5 @@
     <string name="app_name">KedditMvvm</string>
     <string name="action_settings">Settings</string>
     <string name="news_item_img_thumbnail_desc">Image thumbnail</string>
+    <string name="news_item_comments_txt">%d comments</string>
 </resources>
