@@ -9,6 +9,6 @@ import dagger.android.ContributesAndroidInjector
  */
 @Module
 abstract class FragmentBuilder {
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = arrayOf(NewsFragmentModule::class))
     abstract fun bindNewsFragment(): NewsFragment
 }

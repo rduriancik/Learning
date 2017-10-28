@@ -1,5 +1,6 @@
 package com.example.robert.kedditmvvm.di.fragments
 
+import com.example.robert.kedditmvvm.NewsDataSource
 import com.example.robert.kedditmvvm.api.NewsAPI
 import com.example.robert.kedditmvvm.api.NewsRestAPI
 import com.example.robert.kedditmvvm.api.RedditApi
@@ -32,4 +33,9 @@ class NewsModule {
     @Singleton
     fun provideNewsAPI(redditApi: RedditApi): NewsAPI =
             NewsRestAPI(redditApi)
+
+    @Provides
+    @Singleton
+    fun provideNewsDataSource(newsAPI: NewsAPI): NewsDataSource =
+            NewsDataSource(newsAPI)
 }
