@@ -1,4 +1,4 @@
-package com.example.robert.kedditmvvm
+package com.example.robert.kedditmvvm.news.view
 
 
 import android.arch.lifecycle.Observer
@@ -10,8 +10,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.robert.kedditmvvm.adapter.NewsAdapter
+import com.example.robert.kedditmvvm.R
 import com.example.robert.kedditmvvm.common.extensions.inflate
+import com.example.robert.kedditmvvm.news.adapter.NewsAdapter
+import com.example.robert.kedditmvvm.news.viewmodel.NewsViewModel
+import com.example.robert.kedditmvvm.news.viewmodel.NewsViewModelFactory
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_news.*
 import javax.inject.Inject

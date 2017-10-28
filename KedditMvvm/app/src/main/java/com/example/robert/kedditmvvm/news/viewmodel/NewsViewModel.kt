@@ -1,9 +1,10 @@
-package com.example.robert.kedditmvvm
+package com.example.robert.kedditmvvm.news.viewmodel
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.paging.LivePagedListProvider
 import android.arch.paging.PagedList
+import com.example.robert.kedditmvvm.model.entities.RedditNewsItem
 
 /**
  * Created by robert on 24.10.2017.

@@ -1,4 +1,4 @@
-package com.example.robert.kedditmvvm.adapter
+package com.example.robert.kedditmvvm.news.adapter
 
 import android.arch.paging.PagedListAdapter
 import android.databinding.DataBindingUtil
@@ -7,8 +7,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.robert.kedditmvvm.R
-import com.example.robert.kedditmvvm.RedditNewsItem
 import com.example.robert.kedditmvvm.databinding.NewsItemBinding
+import com.example.robert.kedditmvvm.model.entities.RedditNewsItem
 
 /**
  * Created by robert on 12.10.2017.

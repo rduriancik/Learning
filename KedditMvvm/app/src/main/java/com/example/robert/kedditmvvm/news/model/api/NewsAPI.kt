@@ -1,5 +1,6 @@
-package com.example.robert.kedditmvvm.api
+package com.example.robert.kedditmvvm.model.api
 
+import com.example.robert.kedditmvvm.api.RedditNewsResponse
 import retrofit2.Call
 
 /**

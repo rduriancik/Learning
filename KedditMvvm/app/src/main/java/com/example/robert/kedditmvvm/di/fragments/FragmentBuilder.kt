@@ -1,6 +1,6 @@
 package com.example.robert.kedditmvvm.di.fragments
 
-import com.example.robert.kedditmvvm.NewsFragment
+import com.example.robert.kedditmvvm.news.view.NewsFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

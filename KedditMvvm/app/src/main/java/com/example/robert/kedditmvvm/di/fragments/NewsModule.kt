@@ -1,9 +1,9 @@
 package com.example.robert.kedditmvvm.di.fragments
 
-import com.example.robert.kedditmvvm.NewsDataSource
-import com.example.robert.kedditmvvm.api.NewsAPI
-import com.example.robert.kedditmvvm.api.NewsRestAPI
-import com.example.robert.kedditmvvm.api.RedditApi
+import com.example.robert.kedditmvvm.model.NewsDataSource
+import com.example.robert.kedditmvvm.model.api.NewsAPI
+import com.example.robert.kedditmvvm.model.api.NewsRestAPI
+import com.example.robert.kedditmvvm.model.api.RedditApi
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit

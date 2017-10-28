@@ -3,9 +3,9 @@ package com.example.robert.kedditmvvm.di.fragments
 import android.app.Application
 import android.arch.paging.DataSource
 import android.arch.paging.LivePagedListProvider
-import com.example.robert.kedditmvvm.NewsDataSource
-import com.example.robert.kedditmvvm.NewsViewModelFactory
-import com.example.robert.kedditmvvm.RedditNewsItem
+import com.example.robert.kedditmvvm.model.NewsDataSource
+import com.example.robert.kedditmvvm.model.entities.RedditNewsItem
+import com.example.robert.kedditmvvm.news.viewmodel.NewsViewModelFactory
 import dagger.Module
 import dagger.Provides
 

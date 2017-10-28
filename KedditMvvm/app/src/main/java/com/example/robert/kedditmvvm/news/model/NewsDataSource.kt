@@ -1,9 +1,10 @@
-package com.example.robert.kedditmvvm
+package com.example.robert.kedditmvvm.model
 
 import android.arch.paging.KeyedDataSource
-import com.example.robert.kedditmvvm.api.NewsAPI
 import com.example.robert.kedditmvvm.api.RedditDataResponse
 import com.example.robert.kedditmvvm.api.RedditNewsResponse
+import com.example.robert.kedditmvvm.model.api.NewsAPI
+import com.example.robert.kedditmvvm.model.entities.RedditNewsItem
 import retrofit2.Response
 
 /**

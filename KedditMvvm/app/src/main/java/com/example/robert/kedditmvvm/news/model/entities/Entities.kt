@@ -1,4 +1,4 @@
-package com.example.robert.kedditmvvm
+package com.example.robert.kedditmvvm.model.entities
 
 import android.os.Parcel
 import android.os.Parcelable
