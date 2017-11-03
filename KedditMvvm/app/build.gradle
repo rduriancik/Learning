@@ -91,4 +91,7 @@ dependencies {
 
     // Mockito
     testImplementation "org.mockito:mockito-core:$project.mockito_version"
+
+    // Kotlin JUnit
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }
