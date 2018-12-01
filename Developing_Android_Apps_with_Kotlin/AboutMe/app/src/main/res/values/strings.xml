@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AboutMe</string>
+    <string name="name">Robert Duriancik</string>
+    <string name="yellow_start">Yellow start</string>
+    <string name="bio">Hi, my name is Robert. I\'m interest in Android development so, that\'s probably the reason why I\'m going through this course.</string>
+    <string name="what_is_your_nickname">What is your Nickname?</string>
+    <string name="done">Done</string>
+</resources>
