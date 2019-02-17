@@ -1,0 +1,28 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+StringFormatting.py	../StringFormatting.py	1;"	kind:file	line:1
+__author__	../StringFormatting.py	/^__author__ = "Robert Duriancik"$/;"	kind:variable	line:1
+age	../StringFormatting.py	/^age = 24$/;"	kind:variable	line:3
+VariablesAndStrings.py	../VariablesAndStrings.py	1;"	kind:file	line:1
+__author__	../VariablesAndStrings.py	/^__author__= 'Robert Duriancik'$/;"	kind:variable	line:1
+a	../VariablesAndStrings.py	/^a = 12$/;"	kind:variable	line:2
+b	../VariablesAndStrings.py	/^b = 3$/;"	kind:variable	line:3
+c	../VariablesAndStrings.py	/^c = a + b$/;"	kind:variable	line:15
+d	../VariablesAndStrings.py	/^d = c \/ 3$/;"	kind:variable	line:16
+e	../VariablesAndStrings.py	/^e = d - 4$/;"	kind:variable	line:17
+parrot	../VariablesAndStrings.py	/^parrot = "Norwegian Blue"$/;"	kind:variable	line:20
+number	../VariablesAndStrings.py	/^number = "9,223,372,036,854,775,807"$/;"	kind:variable	line:31
+numbers	../VariablesAndStrings.py	/^numbers = "1, 2, 3, 4, 5, 6, 7, 8, 9"$/;"	kind:variable	line:33
+today	../VariablesAndStrings.py	/^today = "Friday"$/;"	kind:variable	line:40
+ifprogramflow.py	../ifprogramflow.py	1;"	kind:file	line:1
+__author__	../ifprogramflow.py	/^__author__= 'Robert Duriancik'$/;"	kind:variable	line:1
+name	../ifprogramflow.py	/^name = input("Please enter your name: ")$/;"	kind:variable	line:3
+age	../ifprogramflow.py	/^age = int(input("How old are you, {}? ".format(name)))$/;"	kind:variable	line:4
+HelloWorld.py	../HelloWorld.py	1;"	kind:file	line:1
+__author__	../HelloWorld.py	/^__author__= 'Robert Duriancik'$/;"	kind:variable	line:1
+greeting	../HelloWorld.py	/^greeting = 'Hello'$/;"	kind:variable	line:2
+splitString	../HelloWorld.py	/^splitString = 'This string has been\\nsplit over\\nseverl\\nlines'$/;"	kind:variable	line:6
