@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">To-Do List</string>
+    <string name="item_task_button_content_description">Edit task button</string>
+    <string name="main_enter_task_hint">Enter task…</string>
+    <string name="main_btn_add">Add</string>
+    <string name="main_btn_add_content_desc">Add new task button</string>
+</resources>
