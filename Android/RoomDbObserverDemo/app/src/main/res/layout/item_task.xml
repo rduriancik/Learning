@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="data"
+            type="com.android.roomdbobserverdemo.Task" />
+    </data>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,14 +36,15 @@
                 android:paddingStart="@dimen/medium_spacing"
                 android:paddingEnd="@dimen/medium_spacing"
                 android:textSize="18sp"
+                android:text="@{data.description}"
                 tools:text="Task title\nlong task text" />
 
             <ImageButton
                 android:id="@+id/task_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_edit"
                 android:contentDescription="@string/item_task_button_content_description"
+                android:src="@drawable/ic_edit"
                 android:tint="@android:color/tertiary_text_dark"
                 app:backgroundTint="@android:color/transparent" />
 
