@@ -12,32 +12,48 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/task_input"
+            app:layout_constraintBottom_toTopOf="@+id/task_input_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/item_task" />
 
-        <EditText
-            android:id="@+id/task_input"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/medium_spacing"
-            android:layout_marginEnd="@dimen/very_small_spacing"
-            android:hint="@string/main_enter_task_hint"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/task_btn_add"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@drawable/top_shadow_gradient"
+            app:layout_constraintBottom_toTopOf="@+id/task_input_layout"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/task_btn_add"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/task_input_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/medium_spacing"
-            android:contentDescription="@string/main_btn_add_content_desc"
-            android:text="@string/main_btn_add"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/medium_spacing"
+            android:paddingTop="@dimen/medium_spacing"
+            android:paddingEnd="@dimen/medium_spacing"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/task_input" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <EditText
+                android:id="@+id/task_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/very_small_spacing"
+                android:layout_weight="1"
+                android:hint="@string/main_enter_task_hint" />
+
+            <Button
+                android:id="@+id/task_btn_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:backgroundTint="@color/colorAccent"
+                android:contentDescription="@string/main_btn_add_content_desc"
+                android:text="@string/main_btn_add"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
