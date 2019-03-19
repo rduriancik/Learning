@@ -10,13 +10,41 @@
         tools:context=".MainActivity">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_task"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@+id/task_input_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/item_task" />
+            tools:listitem="@layout/item_task"
+            tools:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/image_no_tasks"
+            android:layout_width="@dimen/image_no_task_size"
+            android:layout_height="@dimen/image_no_task_size"
+            android:layout_marginBottom="@dimen/medium_spacing"
+            android:src="@drawable/ic_no_tasks"
+            android:tint="@android:color/tertiary_text_dark"
+            app:layout_constraintBottom_toTopOf="@+id/empty_task"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.45"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/empty_task"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/main_no_tasks"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_no_tasks" />
 
         <View
             android:layout_width="match_parent"
@@ -50,10 +78,10 @@
                 android:id="@+id/task_btn_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:backgroundTint="@color/colorAccent"
                 android:contentDescription="@string/main_btn_add_content_desc"
                 android:text="@string/main_btn_add"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                app:backgroundTint="@color/colorAccent" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

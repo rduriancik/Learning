@@ -4,4 +4,9 @@
     <string name="main_enter_task_hint">Enter task…</string>
     <string name="main_btn_add">Add</string>
     <string name="main_btn_add_content_desc">Add new task button</string>
+    <string name="edit_task_dialog_title">Edit task</string>
+    <string name="edit_task_dialog_save">Save</string>
+    <string name="edit_task_dialog_cancel">Cancel</string>
+    <string name="edit_task_dialog_delete">Delete</string>
+    <string name="main_no_tasks">No Tasks Found</string>
 </resources>

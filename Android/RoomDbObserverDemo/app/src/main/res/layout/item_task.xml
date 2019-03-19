@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="listener"
+            type="com.android.roomdbobserverdemo.TaskAdapter.TaskItemListener" />
+
+        <variable
             name="data"
             type="com.android.roomdbobserverdemo.Task" />
     </data>
@@ -39,6 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/item_task_button_content_description"
+            android:onClick="@{() -> listener.onEditTaskClick(data)}"
             android:src="@drawable/ic_edit"
             android:tint="@android:color/tertiary_text_dark"
             app:backgroundTint="@android:color/transparent" />
