@@ -20,7 +20,7 @@ class EditTaskDialog : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val factory = MainViewModelFactory(requireContext())
+        val factory = MainViewModelFactory(requireActivity().application)
         mViewModel = ViewModelProviders.of(requireActivity(), factory).get(MainViewModel::class.java)
     }
 

@@ -35,6 +35,7 @@
             android:paddingStart="@dimen/medium_spacing"
             android:paddingEnd="@dimen/medium_spacing"
             android:text="@{data.description}"
+            app:textStrikeThrough="@{data.isDone}"
             android:textSize="18sp"
             tools:text="Task title\nlong task text" />
 
@@ -45,6 +46,7 @@
             android:contentDescription="@string/item_task_button_content_description"
             android:onClick="@{() -> listener.onEditTaskClick(data)}"
             android:src="@drawable/ic_edit"
+            android:visibility="@{!data.isDone}"
             android:tint="@android:color/tertiary_text_dark"
             app:backgroundTint="@android:color/transparent" />
 

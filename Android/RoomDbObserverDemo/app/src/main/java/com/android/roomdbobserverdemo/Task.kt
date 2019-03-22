@@ -10,4 +10,9 @@ import kotlinx.android.parcel.Parcelize
  */
 @Parcelize
 @Entity
-data class Task(@PrimaryKey(autoGenerate = true) val id: Int, var description: String) : Parcelable
+data class Task(
+    var description: String,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    val created: Long = System.currentTimeMillis(),
+    var isDone: Boolean = false
+) : Parcelable

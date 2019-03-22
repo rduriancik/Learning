@@ -3,11 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.android.roomdbobserverdemo.MainViewModel" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/medium_spacing"
         tools:context=".MainActivity">
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="empty_task, image_no_tasks" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_task"
@@ -58,6 +72,7 @@
             android:id="@+id/task_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/white"
             android:orientation="horizontal"
             android:paddingStart="@dimen/medium_spacing"
             android:paddingTop="@dimen/medium_spacing"
@@ -72,16 +87,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/very_small_spacing"
                 android:layout_weight="1"
-                android:hint="@string/main_enter_task_hint" />
+                android:hint="@string/main_enter_task_hint"
+                android:text="@={viewModel.newTaskDescription}" />
 
             <Button
                 android:id="@+id/task_btn_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/main_btn_add_content_desc"
+                android:onClick="@{() -> viewModel.addTask()}"
                 android:text="@string/main_btn_add"
                 android:textColor="@android:color/white"
                 app:backgroundTint="@color/colorAccent" />
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

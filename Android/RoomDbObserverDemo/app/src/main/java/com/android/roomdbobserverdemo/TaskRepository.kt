@@ -8,8 +8,21 @@ import androidx.room.Room
  */
 class TaskRepository private constructor(context: Context) {
 
-    val taskDb = Room.databaseBuilder(context, TaskDatabase::class.java, "task-database").build()
+    private val mTaskDao = Room.databaseBuilder(context, TaskDatabase::class.java, "task-database")
+        .build()
+        .taskDao()
 
+    fun addTask(task: Task) {
+        mTaskDao.insertTask(task)
+    }
+
+    fun deleteTask(task: Task) {
+
+    }
+
+    fun updateTask(task: Task) {
+
+    }
 
     companion object {
         @Volatile
@@ -17,7 +30,7 @@ class TaskRepository private constructor(context: Context) {
 
         fun getInstance(context: Context): TaskRepository {
             return instance ?: synchronized(this) {
-                instance ?: TaskRepository(context.applicationContext)
+                instance ?: TaskRepository(context.applicationContext).also { instance = it }
             }
         }
     }
