@@ -17,7 +17,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/small_spacing"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="@dimen/small_spacing">
@@ -25,6 +24,7 @@
         <CheckBox
             android:id="@+id/task_checkbox"
             android:layout_width="wrap_content"
+            android:checked="@{data.isDone}"
             android:layout_height="wrap_content" />
 
         <TextView
@@ -47,6 +47,16 @@
             android:onClick="@{() -> listener.onEditTaskClick(data)}"
             android:src="@drawable/ic_edit"
             android:visibility="@{!data.isDone}"
+            android:tint="@android:color/tertiary_text_dark"
+            app:backgroundTint="@android:color/transparent" />
+
+        <ImageButton
+            android:id="@+id/task_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/item_task_button_content_description"
+            android:onClick="@{() -> listener.onDeleteTaskClick(data)}"
+            android:src="@drawable/ic_delete"
             android:tint="@android:color/tertiary_text_dark"
             app:backgroundTint="@android:color/transparent" />
 

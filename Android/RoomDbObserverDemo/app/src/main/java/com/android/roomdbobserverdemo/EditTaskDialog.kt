@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProviders
 import com.android.roomdbobserverdemo.databinding.EditItemDialogBinding
@@ -39,21 +40,20 @@ class EditTaskDialog : DialogFragment() {
                 mViewModel.updateTask(task)
                 dialog.dismiss()
             }
-            .setNegativeButton(getString(R.string.edit_task_dialog_delete)) { dialog, _ ->
-                mViewModel.deleteTask(task)
-                dialog.dismiss()
-            }
-            .setNeutralButton(getString(R.string.edit_task_dialog_cancel)) { dialog, _ -> dialog.dismiss() }
+            .setNegativeButton(getString(R.string.edit_task_dialog_cancel)) { dialog, _ -> dialog.dismiss() }
             .create()
         dialog.setOnShowListener {
-
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                .setTextColor(ContextCompat.getColor(requireContext(), R.color.colorSubmit))
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+                .setTextColor(ContextCompat.getColor(requireContext(), android.R.color.darker_gray))
         }
         return dialog
     }
 
     companion object {
-        fun newInstance(task: Task): DialogFragment {
-            return DialogFragment().apply {
+        fun newInstance(task: Task): EditTaskDialog {
+            return EditTaskDialog().apply {
                 arguments = Bundle().apply {
                     putParcelable(Task::class.java.simpleName, task)
                 }

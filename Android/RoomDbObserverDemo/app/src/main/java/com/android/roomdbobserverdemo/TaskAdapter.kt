@@ -13,14 +13,6 @@ class TaskAdapter(private val mListener: TaskItemListener) : RecyclerView.Adapte
 
     private val mTasks = mutableListOf<Task>()
 
-    private val mComparator = Comparator<Task> { o1, o2 ->
-        if (o1.isDone != o2.isDone) {
-            if (o1.isDone) 1 else -1
-        } else {
-            (o1.created - o2.created).toInt()
-        }
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val binding = DataBindingUtil.inflate<ItemTaskBinding>(
             LayoutInflater.from(parent.context),
@@ -57,23 +49,20 @@ class TaskAdapter(private val mListener: TaskItemListener) : RecyclerView.Adapte
 
     fun isEmpty(): Boolean = mTasks.isEmpty()
 
-    private fun sortItems() {
-        mTasks.sortWith(mComparator)
-        notifyDataSetChanged()
-    }
-
     inner class TaskViewHolder(private val binding: ItemTaskBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(task: Task) {
+            binding.taskCheckbox.setOnCheckedChangeListener(null)
             binding.data = task
-            binding.taskCheckbox.setOnCheckedChangeListener { _, isChecked ->
-                binding.data?.isDone = isChecked
-                sortItems()
-            }
             binding.executePendingBindings()
+            binding.taskCheckbox.setOnCheckedChangeListener { _, isChecked ->
+                mListener.onTaskCheckedChanged(task, isChecked)
+            }
         }
     }
 
     interface TaskItemListener {
+        fun onTaskCheckedChanged(task: Task, isChecked: Boolean)
         fun onEditTaskClick(task: Task)
+        fun onDeleteTaskClick(task: Task)
     }
 }
