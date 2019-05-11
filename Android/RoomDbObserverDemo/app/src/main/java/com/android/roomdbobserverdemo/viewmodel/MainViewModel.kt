@@ -1,4 +1,4 @@
-package com.android.roomdbobserverdemo
+package com.android.roomdbobserverdemo.viewmodel
 
 import android.app.Application
 import android.util.Log
@@ -6,6 +6,10 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.android.roomdbobserverdemo.model.utility.DatabaseEvent
+import com.android.roomdbobserverdemo.R
+import com.android.roomdbobserverdemo.model.task.Task
+import com.android.roomdbobserverdemo.model.task.TaskRepository
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

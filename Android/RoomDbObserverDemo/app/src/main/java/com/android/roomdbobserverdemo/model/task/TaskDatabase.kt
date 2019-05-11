@@ -1,4 +1,4 @@
-package com.android.roomdbobserverdemo
+package com.android.roomdbobserverdemo.model.task
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

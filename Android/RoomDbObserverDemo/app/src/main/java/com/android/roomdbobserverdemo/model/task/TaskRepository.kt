@@ -1,7 +1,9 @@
-package com.android.roomdbobserverdemo
+package com.android.roomdbobserverdemo.model.task
 
 import android.content.Context
 import androidx.room.Room
+import com.android.roomdbobserverdemo.model.utility.DatabaseEvent
+import com.android.roomdbobserverdemo.model.utility.DatabaseEventType
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
@@ -19,23 +21,43 @@ class TaskRepository private constructor(context: Context) {
 
     fun addTask(task: Task): Completable {
         return mTaskDao.insertTask(task)
-            .doOnComplete { mObserverSubject.onNext(DatabaseEvent(DatabaseEventType.INSERTED, task)) }
+            .doOnComplete { mObserverSubject.onNext(
+                DatabaseEvent(
+                    DatabaseEventType.INSERTED,
+                    task
+                )
+            ) }
     }
 
     fun deleteTask(task: Task): Completable {
         return mTaskDao.deleteTask(task)
-            .doOnComplete { mObserverSubject.onNext(DatabaseEvent(DatabaseEventType.REMOVED, task)) }
+            .doOnComplete { mObserverSubject.onNext(
+                DatabaseEvent(
+                    DatabaseEventType.REMOVED,
+                    task
+                )
+            ) }
     }
 
     fun updateTask(task: Task): Completable {
         return mTaskDao.updateTask(task)
-            .doOnComplete { mObserverSubject.onNext(DatabaseEvent(DatabaseEventType.UPDATED, task)) }
+            .doOnComplete { mObserverSubject.onNext(
+                DatabaseEvent(
+                    DatabaseEventType.UPDATED,
+                    task
+                )
+            ) }
     }
 
     fun observeTasks(): Observable<DatabaseEvent<Task>> {
         return mTaskDao.getAll()
             .flatMapObservable { Observable.fromIterable(it) }
-            .map { DatabaseEvent(DatabaseEventType.INSERTED, it) }
+            .map {
+                DatabaseEvent(
+                    DatabaseEventType.INSERTED,
+                    it
+                )
+            }
             .concatWith(mObserverSubject)
     }
 
@@ -45,7 +67,8 @@ class TaskRepository private constructor(context: Context) {
 
         fun getInstance(context: Context): TaskRepository {
             return instance ?: synchronized(this) {
-                instance ?: TaskRepository(context.applicationContext).also { instance = it }
+                instance
+                    ?: TaskRepository(context.applicationContext).also { instance = it }
             }
         }
     }

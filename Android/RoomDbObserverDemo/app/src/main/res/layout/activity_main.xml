@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.android.roomdbobserverdemo.MainViewModel" />
+            type="com.android.roomdbobserverdemo.viewmodel.MainViewModel" />
 
     </data>
 
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/medium_spacing"
-        tools:context=".MainActivity">
+        tools:context=".view.MainActivity">
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/group_empty"

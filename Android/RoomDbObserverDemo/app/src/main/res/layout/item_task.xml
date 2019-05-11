@@ -7,11 +7,11 @@
 
         <variable
             name="listener"
-            type="com.android.roomdbobserverdemo.TaskAdapter.TaskItemListener" />
+            type="com.android.roomdbobserverdemo.view.adapter.TaskAdapter" />
 
         <variable
             name="data"
-            type="com.android.roomdbobserverdemo.Task" />
+            type="com.android.roomdbobserverdemo.model.task.Task" />
     </data>
 
     <LinearLayout

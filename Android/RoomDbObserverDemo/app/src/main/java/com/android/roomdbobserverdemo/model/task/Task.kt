@@ -1,4 +1,4 @@
-package com.android.roomdbobserverdemo
+package com.android.roomdbobserverdemo.model.task
 
 import android.os.Parcelable
 import androidx.room.Entity

@@ -1,4 +1,4 @@
-package com.android.roomdbobserverdemo
+package com.android.roomdbobserverdemo.view
 
 import android.app.Dialog
 import android.os.Bundle
@@ -8,6 +8,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProviders
+import com.android.roomdbobserverdemo.viewmodel.MainViewModel
+import com.android.roomdbobserverdemo.viewmodel.MainViewModelFactory
+import com.android.roomdbobserverdemo.R
+import com.android.roomdbobserverdemo.model.task.Task
 import com.android.roomdbobserverdemo.databinding.EditItemDialogBinding
 
 /**
@@ -44,7 +48,9 @@ class EditTaskDialog : DialogFragment() {
             .create()
         dialog.setOnShowListener {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-                .setTextColor(ContextCompat.getColor(requireContext(), R.color.colorSubmit))
+                .setTextColor(ContextCompat.getColor(requireContext(),
+                    R.color.colorSubmit
+                ))
             dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
                 .setTextColor(ContextCompat.getColor(requireContext(), android.R.color.darker_gray))
         }

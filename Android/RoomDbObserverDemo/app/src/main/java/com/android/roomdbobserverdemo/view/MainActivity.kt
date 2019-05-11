@@ -1,4 +1,4 @@
-package com.android.roomdbobserverdemo
+package com.android.roomdbobserverdemo.view
 
 import android.app.Activity
 import android.os.Bundle
@@ -12,7 +12,13 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.roomdbobserverdemo.*
 import com.android.roomdbobserverdemo.databinding.ActivityMainBinding
+import com.android.roomdbobserverdemo.model.utility.DatabaseEventType
+import com.android.roomdbobserverdemo.model.task.Task
+import com.android.roomdbobserverdemo.view.adapter.TaskAdapter
+import com.android.roomdbobserverdemo.viewmodel.MainViewModel
+import com.android.roomdbobserverdemo.viewmodel.MainViewModelFactory
 import io.reactivex.disposables.Disposable
 
 class MainActivity : AppCompatActivity(), TaskAdapter.TaskItemListener {

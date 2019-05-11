@@ -1,9 +1,11 @@
-package com.android.roomdbobserverdemo
+package com.android.roomdbobserverdemo.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.android.roomdbobserverdemo.R
+import com.android.roomdbobserverdemo.model.task.Task
 import com.android.roomdbobserverdemo.databinding.ItemTaskBinding
 
 /**

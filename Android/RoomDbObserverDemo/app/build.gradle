@@ -34,7 +34,7 @@ androidExtensions {
 
 dependencies {
     // Room
-    def room_version = "2.1.0-alpha05"
+    def room_version = "2.1.0-beta01"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-rxjava2:$room_version"

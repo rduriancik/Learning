@@ -1,4 +1,4 @@
-package com.android.roomdbobserverdemo
+package com.android.roomdbobserverdemo.view.utility
 
 import android.graphics.Paint
 import android.view.View
