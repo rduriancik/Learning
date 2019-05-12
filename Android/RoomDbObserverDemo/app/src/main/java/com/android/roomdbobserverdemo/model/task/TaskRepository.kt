@@ -1,12 +1,13 @@
 package com.android.roomdbobserverdemo.model.task
 
 import android.content.Context
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
 import com.android.roomdbobserverdemo.model.utility.DatabaseEvent
 import com.android.roomdbobserverdemo.model.utility.DatabaseEventType
-import io.reactivex.Completable
 import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * Created by Robert Duriancik on 3/12/19.
@@ -17,36 +18,27 @@ class TaskRepository private constructor(context: Context) {
         .build()
         .taskDao()
 
-    private val mObserverSubject = PublishSubject.create<DatabaseEvent<Task>>()
+    private val _databaseObserver = MutableLiveData<DatabaseEvent<Task>>()
 
-    fun addTask(task: Task): Completable {
-        return mTaskDao.insertTask(task)
-            .doOnComplete { mObserverSubject.onNext(
-                DatabaseEvent(
-                    DatabaseEventType.INSERTED,
-                    task
-                )
-            ) }
+    suspend fun addTask(task: Task) {
+        withContext(Dispatchers.IO) {
+            mTaskDao.insertTask(task)
+            _databaseObserver.postValue(DatabaseEvent(DatabaseEventType.INSERTED, task))
+        }
     }
 
-    fun deleteTask(task: Task): Completable {
-        return mTaskDao.deleteTask(task)
-            .doOnComplete { mObserverSubject.onNext(
-                DatabaseEvent(
-                    DatabaseEventType.REMOVED,
-                    task
-                )
-            ) }
+    suspend fun deleteTask(task: Task) {
+        withContext(Dispatchers.IO) {
+            mTaskDao.deleteTask(task)
+            _databaseObserver.postValue(DatabaseEvent(DatabaseEventType.REMOVED, task))
+        }
     }
 
-    fun updateTask(task: Task): Completable {
-        return mTaskDao.updateTask(task)
-            .doOnComplete { mObserverSubject.onNext(
-                DatabaseEvent(
-                    DatabaseEventType.UPDATED,
-                    task
-                )
-            ) }
+    suspend fun updateTask(task: Task) {
+        withContext(Dispatchers.IO) {
+            mTaskDao.updateTask(task)
+            _databaseObserver.postValue(DatabaseEvent(DatabaseEventType.UPDATED, task))
+        }
     }
 
     fun observeTasks(): Observable<DatabaseEvent<Task>> {

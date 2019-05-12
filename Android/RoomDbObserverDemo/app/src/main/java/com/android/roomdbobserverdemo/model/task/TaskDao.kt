@@ -1,9 +1,7 @@
 package com.android.roomdbobserverdemo.model.task
 
 import androidx.room.*
-import io.reactivex.Completable
 import io.reactivex.Maybe
-import io.reactivex.Single
 
 /**
  * Created by Robert Duriancik on 3/5/19.
@@ -11,17 +9,17 @@ import io.reactivex.Single
 @Dao
 interface TaskDao {
     @Insert
-    fun insertTask(task: Task): Completable
+    suspend fun insertTask(task: Task)
 
     @Update
-    fun updateTask(task: Task): Completable
+    suspend fun updateTask(task: Task)
 
     @Query("SELECT * FROM Task WHERE id = :id")
-    fun getTask(id: Int): Maybe<Task>
+    suspend fun getTask(id: Int): Maybe<Task>
 
     @Query("SELECT * FROM Task")
-    fun getAll(): Single<List<Task>>
+    suspend fun getAll(): List<Task>
 
     @Delete
-    fun deleteTask(task: Task): Completable
+    suspend fun deleteTask(task: Task)
 }

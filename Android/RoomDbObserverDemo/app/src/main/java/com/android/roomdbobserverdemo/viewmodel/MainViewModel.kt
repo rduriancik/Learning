@@ -6,14 +6,15 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.android.roomdbobserverdemo.model.utility.DatabaseEvent
 import com.android.roomdbobserverdemo.R
 import com.android.roomdbobserverdemo.model.task.Task
 import com.android.roomdbobserverdemo.model.task.TaskRepository
+import com.android.roomdbobserverdemo.model.utility.DatabaseEvent
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.*
 
 /**
  * Created by Robert Duriancik on 3/5/19.
@@ -24,6 +25,10 @@ private const val TAG = "MainViewModel"
 class MainViewModel(application: Application, private val mTaskRepository: TaskRepository) :
     AndroidViewModel(application) {
 
+    private val viewModelJob = SupervisorJob()
+
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+
     private val mCompositeDisposable = CompositeDisposable()
 
     val newTaskDescription = ObservableField<String>()
@@ -33,14 +38,16 @@ class MainViewModel(application: Application, private val mTaskRepository: TaskR
         get() = _toastText
 
     fun deleteTask(task: Task) {
-        val disposable = mTaskRepository.deleteTask(task)
-            .subscribeOn(Schedulers.io())
-            .subscribe({ Log.d(TAG, "Task $task deleted") }, { throwable ->
+        uiScope.launch {
+            try {
+                mTaskRepository.deleteTask(task)
+                Log.d(TAG, "Task $task deleted")
+            } catch (e: Exception) {
                 val errMsg = "Error while deleting tasks $task"
                 showToast(errMsg)
-                Log.e(TAG, errMsg, throwable)
-            })
-        mCompositeDisposable.add(disposable)
+                Log.e(TAG, errMsg, e)
+            }
+        }
     }
 
     fun taskCheckedChanged(task: Task, isChecked: Boolean) {
@@ -48,14 +55,16 @@ class MainViewModel(application: Application, private val mTaskRepository: TaskR
     }
 
     fun updateTask(task: Task) {
-        val disposable = mTaskRepository.updateTask(task)
-            .subscribeOn(Schedulers.io())
-            .subscribe({ Log.d(TAG, "Task $task updated") }, { throwable ->
+        uiScope.launch {
+            try {
+                mTaskRepository.updateTask(task)
+                Log.d(TAG, "Task $task updated")
+            } catch (e: Exception) {
                 val errMsg = "Error while updating tasks $task"
                 showToast(errMsg)
-                Log.e(TAG, errMsg, throwable)
-            })
-        mCompositeDisposable.add(disposable)
+                Log.e(TAG, errMsg, e)
+            }
+        }
     }
 
     fun addTask() {
@@ -68,14 +77,16 @@ class MainViewModel(application: Application, private val mTaskRepository: TaskR
     }
 
     private fun addTask(task: Task) {
-        val disposable = mTaskRepository.addTask(task)
-            .subscribeOn(Schedulers.io())
-            .subscribe({ Log.d(TAG, "Task $task added") }, { throwable ->
+        uiScope.launch {
+            try {
+                mTaskRepository.addTask(task)
+                Log.d(TAG, "Task $task added")
+            } catch (e: Exception) {
                 val errMsg = "Error while adding tasks $task"
                 showToast(errMsg)
-                Log.e(TAG, errMsg, throwable)
-            })
-        mCompositeDisposable.add(disposable)
+                Log.e(TAG, errMsg, e)
+            }
+        }
     }
 
     fun observeTasks(): Observable<DatabaseEvent<Task>> {
@@ -94,6 +105,7 @@ class MainViewModel(application: Application, private val mTaskRepository: TaskR
     }
 
     override fun onCleared() {
+        uiScope.cancel()
         mCompositeDisposable.dispose()
         super.onCleared()
     }
