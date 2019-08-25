@@ -7,7 +7,7 @@
 
         <variable
             name="listener"
-            type="com.android.roomdbobserverdemo.view.adapter.TaskAdapter" />
+            type="com.android.roomdbobserverdemo.view.adapter.TaskAdapter.TaskItemListener" />
 
         <variable
             name="data"

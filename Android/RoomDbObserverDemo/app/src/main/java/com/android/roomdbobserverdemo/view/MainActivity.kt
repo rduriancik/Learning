@@ -12,16 +12,21 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.roomdbobserverdemo.*
+import com.android.roomdbobserverdemo.R
 import com.android.roomdbobserverdemo.databinding.ActivityMainBinding
-import com.android.roomdbobserverdemo.model.utility.DatabaseEventType
 import com.android.roomdbobserverdemo.model.task.Task
+import com.android.roomdbobserverdemo.model.utility.DatabaseEventType
 import com.android.roomdbobserverdemo.view.adapter.TaskAdapter
 import com.android.roomdbobserverdemo.viewmodel.MainViewModel
 import com.android.roomdbobserverdemo.viewmodel.MainViewModelFactory
-import io.reactivex.disposables.Disposable
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class MainActivity : AppCompatActivity(), TaskAdapter.TaskItemListener {
+class MainActivity : AppCompatActivity(), TaskAdapter.TaskItemListener, CoroutineScope {
 
     private lateinit var mBinding: ActivityMainBinding
 
@@ -29,12 +34,16 @@ class MainActivity : AppCompatActivity(), TaskAdapter.TaskItemListener {
 
     private lateinit var mViewModel: MainViewModel
 
-    private var mTasksDisposable: Disposable? = null
+    private lateinit var job: Job
+
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.Main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         val factory = MainViewModelFactory(application)
+        job = Job()
         mViewModel = ViewModelProviders.of(this, factory).get(MainViewModel::class.java)
         mBinding.viewModel = mViewModel
         setupTaskRecycler()
@@ -42,7 +51,7 @@ class MainActivity : AppCompatActivity(), TaskAdapter.TaskItemListener {
     }
 
     override fun onDestroy() {
-        mTasksDisposable?.dispose()
+        job.cancel()
         super.onDestroy()
     }
 
@@ -51,7 +60,12 @@ class MainActivity : AppCompatActivity(), TaskAdapter.TaskItemListener {
         mBinding.recyclerTask.apply {
             adapter = mAdapter
             layoutManager = LinearLayoutManager(this@MainActivity)
-            addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
+            addItemDecoration(
+                DividerItemDecoration(
+                    this@MainActivity,
+                    DividerItemDecoration.VERTICAL
+                )
+            )
             itemAnimator = DefaultItemAnimator()
             setHasFixedSize(true)
         }
@@ -61,32 +75,37 @@ class MainActivity : AppCompatActivity(), TaskAdapter.TaskItemListener {
         mViewModel.toastText.observe(this, Observer { text ->
             Toast.makeText(this@MainActivity, text, Toast.LENGTH_SHORT).show()
         })
-        mTasksDisposable = mViewModel.observeTasks()
-            .subscribe({ databaseEvent ->
-                when (databaseEvent.eventType) {
-                    DatabaseEventType.INSERTED -> {
-                        mAdapter.addItem(databaseEvent.value)
-                        hideKeyboard()
+        launch {
+            mViewModel.observeTasks()
+                .collect { databaseEvent ->
+                    when (databaseEvent.eventType) {
+                        DatabaseEventType.INSERTED -> {
+                            mAdapter.addItem(databaseEvent.value)
+                            hideKeyboard()
+                        }
+                        DatabaseEventType.UPDATED -> mAdapter.updateItem(databaseEvent.value)
+                        DatabaseEventType.REMOVED -> mAdapter.removeItem(databaseEvent.value)
                     }
-                    DatabaseEventType.UPDATED -> mAdapter.updateItem(databaseEvent.value)
-                    DatabaseEventType.REMOVED -> mAdapter.removeItem(databaseEvent.value)
+                    setTaskRecyclerVisibility(!mAdapter.isEmpty())
                 }
-                setTaskRecyclerVisibility(!mAdapter.isEmpty())
-            }, {})
+        }
     }
 
     private fun setTaskRecyclerVisibility(isVisible: Boolean) {
         if (isVisible) {
             mBinding.recyclerTask.visibility = View.VISIBLE
-            mBinding.groupEmpty.visibility = View.GONE
+            mBinding.imageNoTasks.visibility = View.GONE
+            mBinding.emptyTask.visibility = View.GONE
         } else {
             mBinding.recyclerTask.visibility = View.GONE
-            mBinding.groupEmpty.visibility = View.VISIBLE
+            mBinding.imageNoTasks.visibility = View.VISIBLE
+            mBinding.emptyTask.visibility = View.VISIBLE
         }
     }
 
     private fun hideKeyboard() {
-        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         val view = currentFocus ?: View(this)
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }

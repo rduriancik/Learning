@@ -3,36 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.android.roomdbobserverdemo.viewmodel.MainViewModel" />
-
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/medium_spacing"
         tools:context=".view.MainActivity">
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/group_empty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:constraint_referenced_ids="empty_task, image_no_tasks" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_task"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/task_input_layout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/item_task"
-            tools:visibility="gone" />
 
         <ImageView
             android:id="@+id/image_no_tasks"
@@ -47,6 +22,39 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.45"
             app:layout_constraintVertical_chainStyle="packed" />
+
+        <LinearLayout
+            android:id="@+id/task_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/medium_spacing"
+            android:paddingTop="@dimen/medium_spacing"
+            android:paddingEnd="@dimen/medium_spacing"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <Button
+                android:id="@+id/task_btn_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/main_btn_add_content_desc"
+                android:onClick="@{() -> viewModel.addTask()}"
+                android:text="@string/main_btn_add"
+                android:textColor="@android:color/white"
+                app:backgroundTint="@color/colorAccent" />
+
+            <EditText
+                android:id="@+id/task_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/very_small_spacing"
+                android:layout_weight="1"
+                android:hint="@string/main_enter_task_hint"
+                android:text="@={viewModel.newTaskDescription}" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/empty_task"
@@ -68,38 +76,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/task_input_layout"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_task"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:orientation="horizontal"
-            android:paddingStart="@dimen/medium_spacing"
-            android:paddingTop="@dimen/medium_spacing"
-            android:paddingEnd="@dimen/medium_spacing"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/task_input_layout"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <EditText
-                android:id="@+id/task_input"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/very_small_spacing"
-                android:layout_weight="1"
-                android:hint="@string/main_enter_task_hint"
-                android:text="@={viewModel.newTaskDescription}" />
-
-            <Button
-                android:id="@+id/task_btn_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/main_btn_add_content_desc"
-                android:onClick="@{() -> viewModel.addTask()}"
-                android:text="@string/main_btn_add"
-                android:textColor="@android:color/white"
-                app:backgroundTint="@color/colorAccent" />
-        </LinearLayout>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item_task"
+            tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.android.roomdbobserverdemo.viewmodel.MainViewModel" />
+
+    </data>
 </layout>

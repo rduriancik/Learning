@@ -10,11 +10,8 @@ import com.android.roomdbobserverdemo.R
 import com.android.roomdbobserverdemo.model.task.Task
 import com.android.roomdbobserverdemo.model.task.TaskRepository
 import com.android.roomdbobserverdemo.model.utility.DatabaseEvent
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Created by Robert Duriancik on 3/5/19.
@@ -29,14 +26,12 @@ class MainViewModel(application: Application, private val mTaskRepository: TaskR
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val mCompositeDisposable = CompositeDisposable()
-
     val newTaskDescription = ObservableField<String>()
 
     private val _toastText = MutableLiveData<String>()
-    val toastText: LiveData<String>
-        get() = _toastText
+    val toastText: LiveData<String> = _toastText
 
+    @ExperimentalCoroutinesApi
     fun deleteTask(task: Task) {
         uiScope.launch {
             try {
@@ -50,10 +45,12 @@ class MainViewModel(application: Application, private val mTaskRepository: TaskR
         }
     }
 
+    @ExperimentalCoroutinesApi
     fun taskCheckedChanged(task: Task, isChecked: Boolean) {
         updateTask(task.apply { isDone = isChecked })
     }
 
+    @ExperimentalCoroutinesApi
     fun updateTask(task: Task) {
         uiScope.launch {
             try {
@@ -67,15 +64,18 @@ class MainViewModel(application: Application, private val mTaskRepository: TaskR
         }
     }
 
+    @ExperimentalCoroutinesApi
     fun addTask() {
         newTaskDescription.get()
             ?.takeIf { it.isNotEmpty() }
             ?.let { description ->
                 addTask(Task(description))
                 newTaskDescription.set("")
-            } ?: showToast(getApplication<Application>().getString(R.string.main_description_not_entered))
+            }
+            ?: showToast(getApplication<Application>().getString(R.string.main_description_not_entered))
     }
 
+    @ExperimentalCoroutinesApi
     private fun addTask(task: Task) {
         uiScope.launch {
             try {
@@ -89,15 +89,9 @@ class MainViewModel(application: Application, private val mTaskRepository: TaskR
         }
     }
 
-    fun observeTasks(): Observable<DatabaseEvent<Task>> {
+    @ExperimentalCoroutinesApi
+    suspend fun observeTasks(): Flow<DatabaseEvent<Task>> {
         return mTaskRepository.observeTasks()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnError { throwable ->
-                val errMsg = "Error while observing tasks"
-                showToast(errMsg)
-                Log.e(TAG, errMsg, throwable)
-            }
     }
 
     private fun showToast(text: String) {
@@ -106,7 +100,6 @@ class MainViewModel(application: Application, private val mTaskRepository: TaskR
 
     override fun onCleared() {
         uiScope.cancel()
-        mCompositeDisposable.dispose()
         super.onCleared()
     }
 }
