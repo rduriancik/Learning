@@ -97,39 +97,82 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  List<Widget> _buildLanscapeContent(double screenHeight, Widget txListWidget) {
+    return [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            "Show chart",
+            style: Theme.of(context).textTheme.title,
+          ),
+          Switch.adaptive(
+              activeColor: Theme.of(context).accentColor,
+              value: _showChart,
+              onChanged: (val) {
+                setState(() => _showChart = val);
+              }),
+        ],
+      ),
+      _showChart
+          ? Container(
+              height: screenHeight * 0.7,
+              child: Chart(_recentTransactions),
+            )
+          : txListWidget
+    ];
+  }
+
+  List<Widget> _buildPortraitContent(double screenHeight, Widget txListWidget) {
+    return [
+      Container(
+        height: screenHeight * 0.3,
+        child: Chart(_recentTransactions),
+      ),
+      txListWidget
+    ];
+  }
+
+  PreferredSizeWidget _buildIosAppBar() {
+    return CupertinoNavigationBar(
+      middle: Text(
+        'Personal Expenses',
+      ),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          GestureDetector(
+            onTap: () => _startAddNewTransaction(context),
+            child: Icon(CupertinoIcons.add),
+          )
+        ],
+      ),
+    );
+  }
+
+  PreferredSizeWidget _buildAndroidAppBar() {
+    return AppBar(
+      title: Text(
+        'Personal Expenses',
+      ),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+          onPressed: () => _startAddNewTransaction(context),
+        )
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
-    final PreferredSizeWidget appBar = Platform.isIOS
-        ? CupertinoNavigationBar(
-            middle: Text(
-              'Personal Expenses',
-            ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () => _startAddNewTransaction(context),
-                  child: Icon(CupertinoIcons.add),
-                )
-              ],
-            ),
-          )
-        : AppBar(
-            title: Text(
-              'Personal Expenses',
-            ),
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                ),
-                onPressed: () => _startAddNewTransaction(context),
-              )
-            ],
-          );
+    final PreferredSizeWidget appBar =
+        Platform.isIOS ? _buildIosAppBar() : _buildAndroidAppBar();
     final screenHeight = mediaQuery.size.height -
         appBar.preferredSize.height -
         mediaQuery.padding.top;
@@ -141,35 +184,9 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          if (isLandscape)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  "Show chart",
-                  style: Theme.of(context).textTheme.title,
-                ),
-                Switch.adaptive(
-                    activeColor: Theme.of(context).accentColor,
-                    value: _showChart,
-                    onChanged: (val) {
-                      setState(() => _showChart = val);
-                    }),
-              ],
-            ),
+          if (isLandscape) ..._buildLanscapeContent(screenHeight, txListWidget),
           if (!isLandscape)
-            Container(
-              height: screenHeight * 0.3,
-              child: Chart(_recentTransactions),
-            ),
-          if (!isLandscape) txListWidget,
-          if (isLandscape)
-            _showChart
-                ? Container(
-                    height: screenHeight * 0.7,
-                    child: Chart(_recentTransactions),
-                  )
-                : txListWidget,
+            ..._buildPortraitContent(screenHeight, txListWidget),
         ],
       ),
     );
