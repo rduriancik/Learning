@@ -75,8 +75,8 @@ class MealItem extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  bottom: 20,
-                  right: 10,
+                  bottom: 0,
+                  right: 0,
                   child: Container(
                     width: 300,
                     color: Colors.black54,
