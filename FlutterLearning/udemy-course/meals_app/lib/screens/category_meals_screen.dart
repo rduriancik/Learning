@@ -52,13 +52,13 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
         itemBuilder: (ctx, index) {
           final meal = displayedMeals[index];
           return MealItem(
-              id: meal.id,
-              title: meal.title,
-              imageUrl: meal.imageUrl,
-              duration: meal.duration,
-              complexity: meal.complexity,
-              affordability: meal.affordability,
-              removeItem: _removeMeal);
+            id: meal.id,
+            title: meal.title,
+            imageUrl: meal.imageUrl,
+            duration: meal.duration,
+            complexity: meal.complexity,
+            affordability: meal.affordability,
+          );
         },
         itemCount: displayedMeals.length,
       ),
