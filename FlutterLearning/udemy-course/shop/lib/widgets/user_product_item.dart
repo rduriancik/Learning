@@ -6,8 +6,9 @@ class UserProductItem extends StatelessWidget {
   final String id;
   final String title;
   final String imageUrl;
+  final Function deleteFunction;
 
-  UserProductItem(this.id, this.title, this.imageUrl);
+  UserProductItem(this.id, this.title, this.imageUrl, this.deleteFunction);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,9 @@ class UserProductItem extends StatelessWidget {
             ),
             IconButton(
               icon: const Icon(Icons.delete),
-              onPressed: () {},
+              onPressed: () {
+                deleteFunction(id);
+              },
               color: Theme.of(context).errorColor,
             ),
           ],
