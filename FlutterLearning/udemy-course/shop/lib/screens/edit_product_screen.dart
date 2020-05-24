@@ -46,37 +46,33 @@ class _EditProductScreenState extends State<EditProductScreen> {
       setState(() {
         _isLoading = true;
       });
-      final provider = Provider.of<ProductsProvider>(context, listen: false);
-      if (_editedProduct.id != null) {
-        provider.updateProduct(_editedProduct.id, _editedProduct);
+      try {
+        final provider = Provider.of<ProductsProvider>(context, listen: false);
+        if (_editedProduct.id != null) {
+          await provider.updateProduct(_editedProduct.id, _editedProduct);
+        } else {
+          await provider.addProduct(_editedProduct);
+        }
+      } catch (error) {
+        await showDialog(
+            context: context,
+            builder: (ctx) => AlertDialog(
+                  title: const Text('An error occured!'),
+                  content: const Text('Something went wrong!'),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.of(ctx).pop();
+                      },
+                      child: const Text('Okay'),
+                    )
+                  ],
+                ));
+      } finally {
         setState(() {
           _isLoading = false;
         });
         Navigator.of(context).pop();
-      } else {
-        try {
-          await provider.addProduct(_editedProduct);
-        } catch (error) {
-          await showDialog(
-              context: context,
-              builder: (ctx) => AlertDialog(
-                    title: const Text('An error occured!'),
-                    content: const Text('Something went wrong!'),
-                    actions: <Widget>[
-                      FlatButton(
-                        onPressed: () {
-                          Navigator.of(ctx).pop();
-                        },
-                        child: const Text('Okay'),
-                      )
-                    ],
-                  ));
-        } finally {
-          setState(() {
-            _isLoading = true;
-          });
-          Navigator.of(context).pop();
-        }
       }
     }
   }
