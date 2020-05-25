@@ -48,7 +48,7 @@ class Orders with ChangeNotifier {
           );
           loadedOrders.add(orderItem);
         });
-        _orders.addAll(loadedOrders.reversed.toList());
+        _orders = loadedOrders.reversed.toList();
         notifyListeners();
       }
     } catch (error) {
