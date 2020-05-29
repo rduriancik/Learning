@@ -42,8 +42,9 @@ class ProductsProvider with ChangeNotifier {
   ];
 
   final String _authToken;
+  final String _userId;
 
-  ProductsProvider(this._authToken, this._items);
+  ProductsProvider(this._authToken, this._userId, this._items);
 
   List<Product> get items {
     return [..._items];
@@ -58,24 +59,27 @@ class ProductsProvider with ChangeNotifier {
   }
 
   Future<void> fetchAndSetProducts() async {
-    final url =
+    var url =
         'https://shop-flutter-ad563.firebaseio.com/products.json?auth=$_authToken';
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       if (extractedData != null) {
+        url =
+            'https://shop-flutter-ad563.firebaseio.com/users/$_userId/favorites.json?auth=$_authToken';
+        final favoriteResponse = await http.get(url);
+        final favoritesData = json.decode(favoriteResponse.body);
         final List<Product> loadedProducts = [];
         extractedData.forEach((prodId, prodData) {
-          loadedProducts.add(
-            Product(
-              id: prodId,
-              title: prodData['title'],
-              description: prodData['description'],
-              price: prodData['price'],
-              imageUrl: prodData['imageUrl'],
-              isFavorite: prodData['isFavorite'],
-            ),
-          );
+          loadedProducts.add(Product(
+            id: prodId,
+            title: prodData['title'],
+            description: prodData['description'],
+            price: prodData['price'],
+            imageUrl: prodData['imageUrl'],
+            isFavorite:
+                favoritesData == null ? false : favoritesData[prodId] ?? false,
+          ));
         });
         _items = loadedProducts;
         notifyListeners();
@@ -96,7 +100,6 @@ class ProductsProvider with ChangeNotifier {
           'description': product.description,
           'imageUrl': product.imageUrl,
           'price': product.price,
-          'isFavorite': product.isFavorite,
         }),
       );
       final newProduct = Product(
