@@ -41,6 +41,10 @@ class ProductsProvider with ChangeNotifier {
     // ),
   ];
 
+  final String _authToken;
+
+  ProductsProvider(this._authToken, this._items);
+
   List<Product> get items {
     return [..._items];
   }
@@ -54,7 +58,8 @@ class ProductsProvider with ChangeNotifier {
   }
 
   Future<void> fetchAndSetProducts() async {
-    const url = 'https://shop-flutter-ad563.firebaseio.com/products.json';
+    final url =
+        'https://shop-flutter-ad563.firebaseio.com/products.json?auth=$_authToken';
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
@@ -81,7 +86,8 @@ class ProductsProvider with ChangeNotifier {
   }
 
   Future<void> addProduct(Product product) async {
-    const url = 'https://shop-flutter-ad563.firebaseio.com/products.json';
+    final url =
+        'https://shop-flutter-ad563.firebaseio.com/products.json?auth=$_authToken';
     try {
       final response = await http.post(
         url,
@@ -111,7 +117,8 @@ class ProductsProvider with ChangeNotifier {
   Future<void> updateProduct(String id, Product newProduct) async {
     final prodIndex = _items.indexWhere((prod) => prod.id == id);
     if (prodIndex >= 0) {
-      final url = 'https://shop-flutter-ad563.firebaseio.com/products/$id.json';
+      final url =
+          'https://shop-flutter-ad563.firebaseio.com/products/$id.json?auth=$_authToken';
       try {
         await http.patch(
           url,
@@ -132,7 +139,8 @@ class ProductsProvider with ChangeNotifier {
   }
 
   Future<void> deleteProduct(String id) async {
-    final url = 'https://shop-flutter-ad563.firebaseio.com/products/$id.json';
+    final url =
+        'https://shop-flutter-ad563.firebaseio.com/products/$id.json?auth=$_authToken';
     try {
       final existingProdIndex = _items.indexWhere((prod) => prod.id == id);
       var existingProd = _items[existingProdIndex];
