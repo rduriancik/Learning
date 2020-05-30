@@ -58,9 +58,11 @@ class ProductsProvider with ChangeNotifier {
     return _items.firstWhere((prod) => prod.id == id);
   }
 
-  Future<void> fetchAndSetProducts() async {
+  Future<void> fetchAndSetProducts([bool filterByUser = false]) async {
+    final filterString =
+        filterByUser ? 'orderBy="creatorId"&equalTo="$_userId"' : '';
     var url =
-        'https://shop-flutter-ad563.firebaseio.com/products.json?auth=$_authToken';
+        'https://shop-flutter-ad563.firebaseio.com/products.json?auth=$_authToken&$filterString';
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
@@ -100,6 +102,7 @@ class ProductsProvider with ChangeNotifier {
           'description': product.description,
           'imageUrl': product.imageUrl,
           'price': product.price,
+          'creatorId': _userId,
         }),
       );
       final newProduct = Product(
