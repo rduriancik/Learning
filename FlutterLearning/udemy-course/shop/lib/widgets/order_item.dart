@@ -13,8 +13,23 @@ class OrderItem extends StatefulWidget {
   _OrderItemState createState() => _OrderItemState();
 }
 
-class _OrderItemState extends State<OrderItem> {
+class _OrderItemState extends State<OrderItem>
+    with SingleTickerProviderStateMixin {
   var _expanded = false;
+  AnimationController _animationController;
+  Animation<double> _opacityAnim;
+
+  @override
+  void initState() {
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 300),
+    );
+    _opacityAnim = Tween(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeIn),
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +45,29 @@ class _OrderItemState extends State<OrderItem> {
             trailing: IconButton(
               icon: Icon(_expanded ? Icons.expand_less : Icons.expand_more),
               onPressed: () {
-                setState(() {
-                  _expanded = !_expanded;
-                });
+                if (_expanded) {
+                  _animationController.reverse();
+                  setState(() {
+                    _expanded = false;
+                  });
+                } else {
+                  _animationController.forward();
+                  setState(() {
+                    _expanded = true;
+                  });
+                }
               },
             ),
           ),
-          if (_expanded)
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-              height: min(widget.order.products.length * 20.0 + 16, 100),
+          AnimatedContainer(
+            duration: Duration(milliseconds: 300),
+            curve: Curves.easeIn,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+            height: _expanded
+                ? min(widget.order.products.length * 20.0 + 16, 100)
+                : 0,
+            child: FadeTransition(
+              opacity: _opacityAnim,
               child: ListView(
                 children: widget.order.products
                     .map((prod) => Row(
@@ -63,7 +91,8 @@ class _OrderItemState extends State<OrderItem> {
                         ))
                     .toList(),
               ),
-            )
+            ),
+          )
         ],
       ),
     );
