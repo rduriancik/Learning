@@ -19,27 +19,36 @@ class PlacesListScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Consumer<GreatPlacesProvider>(
-        child: Center(
-          child: const Text("Got no places yet, start adding some!"),
-        ),
-        builder: (ctx, greatPlaces, ch) => greatPlaces.items.length <= 0
-            ? ch
-            : ListView.builder(
-                itemCount: greatPlaces.items.length,
-                itemBuilder: (ctx, i) {
-                  final place = greatPlaces.items[i];
-                  print(place);
-                  return ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: FileImage(place.image),
-                    ),
-                    title: Text(place.title),
-                    onTap: () {
-                      // todo
-                    },
-                  );
-                },
+      body: FutureBuilder(
+        future: Provider.of<GreatPlacesProvider>(context, listen: false)
+            .fetchAndSetPlaces(),
+        builder: (ctx, snapshot) => snapshot.connectionState ==
+                ConnectionState.waiting
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : Consumer<GreatPlacesProvider>(
+                child: Center(
+                  child: const Text("Got no places yet, start adding some!"),
+                ),
+                builder: (ctx, greatPlaces, ch) => greatPlaces.items.length <= 0
+                    ? ch
+                    : ListView.builder(
+                        itemCount: greatPlaces.items.length,
+                        itemBuilder: (ctx, i) {
+                          final place = greatPlaces.items[i];
+                          print(place);
+                          return ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: FileImage(place.image),
+                            ),
+                            title: Text(place.title),
+                            onTap: () {
+                              // todo
+                            },
+                          );
+                        },
+                      ),
               ),
       ),
     );
