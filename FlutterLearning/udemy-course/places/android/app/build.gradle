@@ -43,6 +43,8 @@ android {
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+        manifestPlaceholders = [googleApiKey: "$System.env.GOOGLE_API_KEY"]
     }
 
     buildTypes {
