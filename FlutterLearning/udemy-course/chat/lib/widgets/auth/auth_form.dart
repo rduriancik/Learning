@@ -19,9 +19,9 @@ class AuthForm extends StatefulWidget {
 class _AuthFormState extends State<AuthForm> {
   final _formKey = GlobalKey<FormState>();
   var _isLogin = true;
-  String _userEmail;
-  String _userName;
-  String _userPassword;
+  String _userEmail = "";
+  String _userName = "";
+  String _userPassword = "";
 
   void _trySubmit() {
     FocusScope.of(context).unfocus();
